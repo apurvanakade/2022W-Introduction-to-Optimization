@@ -1,8 +1,6 @@
 # Introduction to Linear Programming
 
-Linear programming is a technique for the optimization of a linear objective function, subject to linear equality and linear inequality constraints. Linear programs are problems defined as follows.
-
-A *linear program* or a *linear programming problem* is a problem of the following form:
+Linear programming is a technique for the optimization of a linear objective function, subject to linear equality and linear inequality constraints. A *linear program* or a *linear programming problem* is a problem of the following form:
 
 \begin{equation}
   \begin{aligned}
@@ -19,11 +17,35 @@ where the symbol $\lesseqgtr$ stands for $\leq$ or $=$ or $\geq$, $a_{ij}, b_i, 
 
 The variables $x_1, \dots, x_n$ are called *decision variables*. The linear combination $\zeta := c_1 x_1 + \dots + c_n x_n$ is called the *objective function*. Each of the equalities/inequalities $a_{i1} x_1 + \dots + a_{in} x_n \lesseqgtr b_i$ is called a *(linear) constraint*. Our goal is to either *minimize* or *maximize* the objective function subject to the constraints.
 
-A proposal of specific values for the decision variables is called a *solution*. A solution is said to be *feasible* if it satisfies all the constraints. A feasible solution is said to be *optimal* if $\zeta$ attains the optimal value at the solution. Thus, to solve a linear program means to *find an optimal solution* to the problem. If a problem has no feasible solution, then the problem is called *infeasible*. If a problem has feasible solutions with arbitrarily large objective values then the problem is called *unbounded*.
+A proposal of specific values for the decision variables is called a *solution*. A solution is said to be *feasible* if it satisfies all the constraints. A feasible solution is said to be *optimal* if $\zeta$ attains the optimal value at the solution. Thus, to solve a linear program means to *find an optimal solution* to the problem. If a problem has no feasible solutions, then the problem is called *infeasible*. If a problem has feasible solutions with arbitrarily large or small objective values then the problem is called *unbounded*.
+
+:::{.remark}
+We do not allow strict inequalities $<$ or $>$ in a linear program. This is because linear functions do not always achieve maxima/minima on open sets. Consider the following simple example.
+\begin{align*}
+  \mbox{maximize: } && x & \\
+  \mbox{subject to: } && x & < 1 \\
+  && x & \ge 0
+\end{align*}
+The feasible set is $[0, 1)$ on which the function $\zeta(x) = x$ never attains absolute maxima.
+Changing the inequality $<$ to $\leq$ gives us an optimal feasible solution $x = 1$. When all the inequalities are either $\le$, $=$, or $\ge$, the set of feasible solutions is closed. If, in addition, the LP is bounded then the set of feasible solutions is compact. On compact sets a continuous (in particular, linear) function, always attains a maxima and a minima by the [extreme value theorem](https://en.wikipedia.org/wiki/Extreme_value_theorem) for higher dimensions.
+
+
+:::
+
 
 ::: {.example #lp-intro}
 Example of a LP.
+
+```{r, echo=FALSE}
+source("Rscripts/01-example-lp.R", local = knitr::knit_global())
+```
+
 :::
+
+::: {.example #lp-intro}
+It is useful to think of the objective function as the *profit* function, the decision variable $x_j$ as the amount of a physical quantity of type $j$, the coefficients $c_j$ as being the profit made from selling a unit quantity of type $j$, and each constraint corresponding to the production of an intermediate quantity.
+:::
+
 
 ## Standard form of a linear program
 It is difficult to work with a linear program in the form described in Equation \@ref(eq:intro-lp), mainly because of the presence of all three kinds of constraints $\leq$, $=$, and $\geq$. A linear program of the following form is said to be in a *standard form*:
@@ -39,9 +61,8 @@ It is difficult to work with a linear program in the form described in Equation 
   \end{aligned}
   (\#eq:intro-standardized-lp)
 \end{equation}
-It is useful to think of the objective function as the *profit* function, the decision variable $x_j$ as the amount of a physical quantity of type $j$, the coefficients $c_j$ as being the profit made from selling a unit quantity of type $j$, and each constraint corresponding to the production of an intermediate quantity.
 
-An LP in a standard form can be written more succinctly as follows.
+An LP in a standard form can be written more succinctly using vectors and matrices as follows.
 \begin{equation}
   \begin{aligned}
     \mbox{maximize: } && c^T x & \\
@@ -53,15 +74,43 @@ An LP in a standard form can be written more succinctly as follows.
 \end{equation}
 where now $x$ is the vector of decision variables, $c$ and $b$ are vectors of real numbers, and $A$ is the matrix of constraint coefficients. This enables us to use tools from Linear Algebra to solve LP problems.
 
+
+
 ## Converting LP to standard form
-Notice that maximizing the objective function $\zeta$ is equivalent to minimizing the negative of the objective function $-\zeta$. From now on, we will assume that we are always trying to maximize the objective function.
+Notice that maximizing the objective function $\zeta$ is equivalent to minimizing the negative of the objective function $-\zeta$. **From now on, we will assume that we are always trying to maximize the objective function.**
 
 Two linear programs LP and LP' are said to be *equivalent* if for any feasible solution $(x_1, \dots, x_n)$ to LP, there exists a feasible solution $(x'_1, x'_2, \dots, x'_{n'})$ to LP' such that $\zeta(x_1, \dots, x_n) = \zeta'(x'_1, x'_2, \dots, x'_{n'})$ and vice versa. Thus solving LP is equivalent to LP'.
+
+::: {.remark #lp-equiv-definition}
+
+1. LP and LP' can have a different number of decision variables i.e. it is not necessarily true that $n = n'.$
+2. We do not require a one-to-one correspondence between the solutions of LP and LP' i.e. for a feasible solution $(x_1, \dots, x_n)$ to LP there could potentially be multiple feasible solutions $(x_1', \dots, x_n')$ to LP' satisfying $\zeta(x_1, \dots, x_n) = \zeta'(x'_1, x'_2, \dots, x'_{n'})$. Similarly, in the other direction.
+
+:::
 
 ::: {.theorem #lp-equiv-to-standard-form}
 Every linear program is equivalent to a linear program in the standard form.
 :::
 
 ::: {.proof}
-test
+The proof is by explicit construction. Consider the LP in \@ref(eq:intro-lp). If LP is in the standard form, then we're done. If not, then one of the following conditions about the constraints must be true:
+
+1. One of the linear constraints is an upper bound and has the form $$a_{i1} x_1 + \dots + a_{in} x_n \geq b_i.$$
+2. One of the linear constraints is an equality and has the form $$a_{i1} x_1 + \dots + a_{in} x_n = b_i.$$
+3. A "positivity constraint" $x_j \geq 0$ is missing.
+
+Note that we're already assuming that the objective function is "fixed" i.e. that our goal is to maximize $\zeta$. We "fix" each of the above errors sequentially:
+
+**Case 1**: We multiply both sides by $-1$ giving us the desired inequality $$-a_{i1} x_1 + \dots + -a_{in} x_n \leq -b_i.$$
+
+**Case 2**: We replace $a_{i1} x_1 + \dots + a_{in} x_n = b_i$ with two inequalities
+\begin{align*}
+a_{i1} x_1 + \dots + a_{in} x_n &\leq b_i \\
+a_{i1} x_1 + \dots + a_{in} x_n &\geq b_i
+\end{align*}
+which reduces the problem to Case 1.
+
+**Case 3**: We let $x_j = x_j' - x_j''$ for two new decision variables $x_j'$ and $x_j''$ where $x_j', x_j'' \geq 0$. We can do this because any real number can written as a difference of two positive real numbers.
+
+One can see that in each step the modified LP is equivalent to the original LP.
 :::
