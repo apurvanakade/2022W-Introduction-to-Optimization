@@ -1,0 +1,8 @@
+eq:intro-lp
+exm:lp-intro
+eq:intro-standardized-lp
+eq:intro-standardized-lp-matrix-form
+thm:lp-equiv-to-standard-form
+introduction-to-linear-programming
+standard-form-of-a-linear-program
+converting-lp-to-standard-form
