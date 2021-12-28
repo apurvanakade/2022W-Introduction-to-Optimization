@@ -8,6 +8,10 @@ export default function print_monomial(coefficient, variable, with_addition = fa
       str += "\\color{white}{ 0 }"  + variable + "}";
   }
   else if(coefficient == 1){
+    if (with_addition) {
+      console.log("with_addition");
+      str += " + ";
+    }
     str += variable;
   }
   else if(coefficient == -1){
@@ -18,6 +22,7 @@ export default function print_monomial(coefficient, variable, with_addition = fa
   }
   else if(coefficient > 0){
     if (with_addition) {
+      console.log("with_addition");
       str += " + ";
     }
     str += coefficient + variable;

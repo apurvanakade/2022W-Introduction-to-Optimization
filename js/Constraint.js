@@ -1,5 +1,7 @@
 import print_linear_combination from './print_linear_combination.js';
 
+const possible_inequalities = ["\\leq", "\\geq", "=", "<", ">"];
+
 export default class Constraint{
   constructor(coefficients, inequality,constant, variable_names){ 
     this.coefficients = coefficients;
@@ -19,7 +21,7 @@ export default class Constraint{
     if (len == undefined)
       len = Math.floor(Math.random() * 10) + 1;
 
-    this.inequality = Math.floor(Math.random() * 3);
+    this.inequality = possible_inequalities[Math.floor(Math.random() * 3)]; 
     this.constant = Math.floor(Math.random() * (upper_bound - lower_bound + 1) + lower_bound);
 
     let all_zero = true;
@@ -39,28 +41,7 @@ export default class Constraint{
 
   // Print the constraint
   print(){
-    var str = "";
-
-    str += print_linear_combination(this.coefficients, this.variable_names);
-
-    switch (this.inequality){
-      case 0:
-        str += " & \\leq " + this.constant;
-        break;
-      case 1:
-        str += " & \\geq " + this.constant;
-        break;
-      case 2:
-        str += " & = " + this.constant;
-        break;
-      case 3:
-        str += " & < " + this.constant;
-        break;
-      case 4:
-        str += " & > " + this.constant;
-        break;
-    }
-    return str;
+    return(print_linear_combination(this.coefficients, this.variable_names) + " & " + this.inequality + this.constant);
   }
 }
 

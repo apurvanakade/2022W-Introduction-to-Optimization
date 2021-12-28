@@ -3,6 +3,10 @@ import { Constraint } from './Constraint.js';
 
 export default class LinearProgram {
   constructor(constraints, objective_function, is_maximizing){
+    if (constraints == undefined){
+      this.randomize();
+      return;
+    }
     this.constraints = constraints;
     this.objective_function = objective_function;
     this.is_maximizing = is_maximizing;
@@ -11,10 +15,10 @@ export default class LinearProgram {
   // Randomly populate the linear program
   randomize(num_constraints, num_variables, is_maximizing, upper_bound = 10, lower_bound = -10){
     if(num_constraints == undefined)
-      num_constraints = Math.floor(Math.random() * 5) + 1;
+      num_constraints = Math.floor(Math.random() * 3) + 1;
     
     if(num_variables == undefined)
-      num_variables = Math.floor(Math.random() * 5) + 1;
+      num_variables = Math.floor(Math.random() * 2) + 2;
     
     if(is_maximizing == undefined)
       this.is_maximizing = Math.random() >= 0.5;
@@ -35,13 +39,12 @@ export default class LinearProgram {
 
   // Print the linear program
   print(){
-    var str = "\\begin{aligned} \n";
+    var str = "";
     str += this.is_maximizing ? "\\mbox{maximize: } && " : "\\mbox{minimize: } && ";
     str += this.objective_function.print() + " \\\\ \n \\mbox{subject to: }";
     for(var i = 0; i < this.constraints.length; i++){
       str += " && " + this.constraints[i].print() + " \\\\ \n";
     }
-    str += "\\end{aligned}";
     return str;
   }
 }
