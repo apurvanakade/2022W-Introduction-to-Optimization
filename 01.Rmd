@@ -32,10 +32,10 @@ Changing the inequality $<$ to $\leq$ gives us an optimal feasible solution $x_1
 import LinearProgram from "./js/LinearProgram.js";
 import Constraint from "./js/Constraint.js";
 import ObjectiveFunction from "./js/ObjectiveFunction.js";
-const objective_function = new ObjectiveFunction(1, [1]);
-const constraint1 = new Constraint(1, [1], 3, 1)
-const constraint2 = new Constraint(1, [1], 1, 0)
-const lp1 = new LinearProgram(2, 1, [constraint1, constraint2], objective_function, true);
+const objective_function = new ObjectiveFunction([1]);
+const constraint1 = new Constraint([1], 3, 1)
+const constraint2 = new Constraint([1], 1, 0)
+const lp1 = new LinearProgram([constraint1, constraint2], objective_function, true);
 
 document.getElementById("js-generated-strict-inequality").innerHTML = lp1.print();
 </script>
@@ -109,7 +109,8 @@ The proof is by explicit construction. Consider the LP in \@ref(eq:intro-lp). If
 
 1. One of the linear constraints is an upper bound and has the form $$a_{i1} x_1 + \dots + a_{in} x_n \geq b_i.$$
 2. One of the linear constraints is an equality and has the form $$a_{i1} x_1 + \dots + a_{in} x_n = b_i.$$
-3. A "positivity constraint" $x_j \geq 0$ is missing.
+3. One of the variables has a "negativity constraint" $x_j \leq 0$.
+4. A "positivity constraint" $x_j \geq 0$ is missing.
 
 Note that we're already assuming that the objective function is "fixed" i.e. that our goal is to maximize $\zeta$. We "fix" each of the above errors sequentially:
 
@@ -122,7 +123,9 @@ a_{i1} x_1 + \dots + a_{in} x_n &\geq b_i
 \end{align*}
 which reduces the problem to Case 1.
 
-**Case 3**: We let $x_j = x_j' - x_j''$ for two new decision variables $x_j'$ and $x_j''$ where $x_j', x_j'' \geq 0$. We can do this because any real number can written as a difference of two positive real numbers.
+**Case 3**: We simply replace $x_j$ with $-x_j$ everywhere.
+
+**Case 4**: We let $x_j = x_j' - x_j''$ for two new decision variables $x_j'$ and $x_j''$ where $x_j', x_j'' \geq 0$. We can do this because any real number can written as a difference of two positive real numbers.
 
 One can see that in each step the modified LP is equivalent to the original LP.
 :::
