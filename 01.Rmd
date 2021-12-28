@@ -21,28 +21,40 @@ A proposal of specific values for the decision variables is called a *solution*.
 
 :::{.remark}
 We do not allow strict inequalities $<$ or $>$ in a linear program. This is because linear functions do not always achieve maxima/minima on open sets. Consider the following simple example.
-\begin{align*}
-  \mbox{maximize: } && x & \\
-  \mbox{subject to: } && x & < 1 \\
-  && x & \ge 0
-\end{align*}
-The feasible set is $[0, 1)$ on which the function $\zeta(x) = x$ never attains absolute maxima.
-Changing the inequality $<$ to $\leq$ gives us an optimal feasible solution $x = 1$. When all the inequalities are either $\le$, $=$, or $\ge$, the set of feasible solutions is closed. If, in addition, the LP is bounded then the set of feasible solutions is compact. On compact sets a continuous (in particular, linear) function, always attains a maxima and a minima by the [extreme value theorem](https://en.wikipedia.org/wiki/Extreme_value_theorem) for higher dimensions.
 
+<span class="math display" id="js-generated-strict-inequality"></span>
 
+The feasible set is $[0, 1)$ on which the function $\zeta(x_1) = x_1$ never attains absolute maxima.
+Changing the inequality $<$ to $\leq$ gives us an optimal feasible solution $x_1 = 1$. When all the inequalities are either $\le$, $=$, or $\ge$, the set of feasible solutions is closed. If, in addition, the LP is bounded then the set of feasible solutions is compact. On compact sets a continuous (in particular, linear) function, always attains a maxima and a minima by the [extreme value theorem](https://en.wikipedia.org/wiki/Extreme_value_theorem) for higher dimensions.
 :::
+
+<script type="module">
+import LinearProgram from "./js/LinearProgram.js";
+import Constraint from "./js/Constraint.js";
+import ObjectiveFunction from "./js/ObjectiveFunction.js";
+const objective_function = new ObjectiveFunction(1, [1]);
+const constraint1 = new Constraint(1, [1], 3, 1)
+const constraint2 = new Constraint(1, [1], 1, 0)
+const lp1 = new LinearProgram(2, 1, [constraint1, constraint2], objective_function, true);
+
+document.getElementById("js-generated-strict-inequality").innerHTML = lp1.print();
+</script>
 
 
 ::: {.example #lp-intro}
 Example of a LP.
-
-```{r, echo=FALSE}
-source("Rscripts/01-example-lp.R", local = knitr::knit_global())
-```
-
+<span class = "math display" id="js-generated-lp-intro"></span>
 :::
 
-::: {.example #lp-intro}
+
+<script type="module">
+import LinearProgram from "./js/LinearProgram.js";
+const lp2 = new LinearProgram();
+lp2.randomize();
+document.getElementById("js-generated-lp-intro").innerHTML = lp2.print();
+</script>
+
+::: {.example #word-problem}
 It is useful to think of the objective function as the *profit* function, the decision variable $x_j$ as the amount of a physical quantity of type $j$, the coefficients $c_j$ as being the profit made from selling a unit quantity of type $j$, and each constraint corresponding to the production of an intermediate quantity.
 :::
 
