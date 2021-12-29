@@ -1,3 +1,20 @@
-# Simplex Method Continued
+# Simplex Method
 
-test
+In a first course in Linear Algebra, you learn to solve equations of the form $A x = b$. In LP, we are increasing the complexity on two levels.
+
+1. We are replacing $Ax = b$ with $Ax \leq b$ and $x \ge 0$. Solving these equations will give us the set of all feasible solutions. 
+2. Among all the feasible solutions we then need to find an optimal feasible solution.
+
+As it turns out, unlike in the Linear Algebra case, where the solutions to $Ax = b$ forms an affine space of a finite dimension and can be described by a basis, it is not easy to describe the solutions to $Ax \leq b$ and $x \ge 0$ succinctly. So, we abandon the quest for finding all feasible solutions, for now. Instead, we will directly try to find optimal feasible solutions. The strategy for solving LP, which is mostly brute force, is called the *simplex method*. Implementation details of the simplex method vary a lot, but the general idea is the following.
+
+- Guess a feasible solution.
+- Check if there is a direction along which the objective value increases while staying feasible.
+    - If yes, then perturb the guess as much as possible in that direction and repeat.
+    - If no, then we have found a local maxima.
+
+
+Because all our functions are linear, a local maxima will also be a global maxima and the solution will be a feasible solution.
+
+::: {.exercise}
+What would be some of the difficulties in running the above algorithm?
+:::

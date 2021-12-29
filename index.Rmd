@@ -43,11 +43,12 @@ description: "Introduction to Optimization."
 ---
 
 #  Preface {-}
-The question of optimization is the very general question of deciding at what point a function $g(x_1, \dots, x_n)$ attain its maximum or minimum value on a domain $D$ in $\mathbb{R^n}$. 
+The question of optimization is the very general question of deciding when a function $g(x_1, \dots, x_n)$ attain its maximum or minimum value on a domain $D$ in $\mathbb{R^n}$. 
 \begin{align}
 \mbox{optimize: } && g(x_1, \dots, x_n) & \\
 \mbox{subject to: } && (x_1, \dots, x_n) &\in D.
 \end{align}
-It is impossible to analyze the question at this level of generality without making any further assumptions on $g$ and $D$. 
+These questions show up frequently in almost every quantitative field.
+But it is nigh impossible to analyze the question at this level of generality without making any further assumptions on $g$ and $D$. 
 
-We will start with the simplest interesting functions i.e. linear functions. We'll let $g$ be a linear function and let $D$ be a region cut out by linear inequalities. This is the field of Linear Programming. In spite of the simplicity of the Linear Programming setup, or perhaps because of it, LP is one of the most common used models for real world optimization questions. 
+We will start with the simplest interesting functions i.e. linear functions. We'll let $g$ be a linear function and let $D$ be a region cut out by linear inequalities. The study of this problem is called Linear Programming. In spite of the simplicity of the Linear Programming setup, or perhaps because of it, LP is one of the most common used models for real world optimization questions. 

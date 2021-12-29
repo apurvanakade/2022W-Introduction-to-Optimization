@@ -2,6 +2,11 @@
 
 # Introduction to Linear Programming
 
+```{r, results = 'asis', echo = FALSE}
+source("R/01.R", local = knitr::knit_global())
+```
+
+
 Linear programming is a technique for the optimization of a linear objective function, subject to linear equality and linear inequality constraints. A *linear program* or a *linear programming problem* is a problem of the following form:
 
 \begin{equation}
@@ -15,8 +20,7 @@ Linear programming is a technique for the optimization of a linear objective fun
   \end{aligned}
   (\#eq:intro-lp)
 \end{equation}
-where the symbol $\lesseqgtr$ stands for $\leq$ or $=$ or $\geq$, $a_{ij}, b_i, c_j$ are real numbers, and $x_j$ are variables. Here's a concrete example:
-<span class = "math display" id="js-generated-lp-intro"></span>
+where the symbol $\lesseqgtr$ stands for $\leq$ or $=$ or $\geq$, $a_{ij}, b_i, c_j$ are real numbers, and $x_j$ are variables.
 
 The variables $x_1, \dots, x_n$ are called *decision variables*. The linear combination $\zeta := c_1 x_1 + \dots + c_n x_n$ is called the *objective function*. Each of the equalities/inequalities $a_{i1} x_1 + \dots + a_{in} x_n \lesseqgtr b_i$ is called a *(linear) constraint*. Our goal is to either *minimize* or *maximize* the objective function subject to the constraints.
 
@@ -25,91 +29,22 @@ A proposal of specific values for the decision variables is called a *solution*.
 :::{.remark}
 
 We do not allow strict inequalities $<$ or $>$ in a linear program as linear functions do not always achieve maxima/minima on open sets. Consider the following simple example.
-<span class="math display" id="js-generated-open-constraint"></span>
-On the feasible set $[0, 1)$, the function $\zeta(x_1) = x_1$ never attains absolute maxima.
-Changing the inequality $<$ to $\leq$ gives us an optimal feasible solution $x_1 = 1$. When all the inequalities are either $\le$, $=$, or $\ge$, the set of feasible solutions is closed. If, in addition, the LP is bounded then the set of feasible solutions is compact. On compact sets a continuous (in particular, linear) function, always attains a maxima and a minima by a generalization of the [extreme value theorem](https://en.wikipedia.org/wiki/Extreme_value_theorem) for [higher dimensions](https://math.stackexchange.com/a/881569).
+
+```{r, results = 'asis', echo = FALSE}
+ob <- new_linear_combination(10)
+c1 <- new_constraint(ob, "<", 20)
+c2 <- new_constraint(new_linear_combination(5), "\\geq", 0)
+cat(str_math(new_linear_program(ob, list(c1, c2))))
+```
+
+On the feasible set $[0, 2)$, the function $\zeta(x_1) = x_1$ never attains absolute maxima.
+Changing the inequality $<$ to $\leq$ gives us an optimal feasible solution $x_1 = 2$. When all the inequalities are either $\le$, $=$, or $\ge$, the set of feasible solutions is closed. If, in addition, the LP is bounded then the set of feasible solutions is compact. On compact sets a continuous (in particular, linear) function, always attains a maxima and a minima by a generalization of the [extreme value theorem](https://en.wikipedia.org/wiki/Extreme_value_theorem) for [higher dimensions](https://math.stackexchange.com/a/881569).
 
 :::
-
-## Standard form of a linear program
-It is difficult to work with a linear program in the form described in Equation \@ref(eq:intro-lp) because of the presence of all three kinds of constraints $\leq$, $=$, and $\geq$. A linear program of the following form is said to be in a *standard form*:
-\begin{equation}
-  \begin{aligned}
-    \mbox{maximize: } && c_1 x_1 + \dots + c_n x_n & \\
-    \mbox{subject to: } 
-      && a_{11} x_1 + \dots + a_{1n} x_n & \leq b_1 \\
-      && a_{21} x_1 + \dots + a_{2n} x_n & \leq b_2 \\
-      && \vdots &  \\
-      && a_{m1} x_1 + \dots + a_{mn} x_n & \leq b_m \\
-      && x_1, \dots, x_n & \geq 0.
-  \end{aligned}
-  (\#eq:intro-standardized-lp)
-\end{equation}
-THe last line is a compact way of writing the $n$ different inequalities $x_j \geq 0$ for $j = 1, \dots, n$. A linear program in a standard form can be written more succinctly using vectors and matrices as follows.
-\begin{equation}
-  \begin{aligned}
-    \mbox{maximize: } && c^T x & \\
-    \mbox{subject to: } 
-      && A x & \leq b \\
-      && x & \geq 0.
-  \end{aligned}
-  (\#eq:intro-standardized-lp-matrix-form)
-\end{equation}
-where now $x$ is the vector of decision variables, $c$ and $b$ are vectors of real numbers, and $A$ is the matrix of constraint coefficients. This enables us to use tools from Linear Algebra to solve LP problems.
 
 ## Resource allocation problem
 It is useful to think of the objective function as the *profit* function, the decision variable $x_j$ as the amount of a physical quantity of type $j$, the coefficients $c_j$ as being the profit made from selling a unit quantity of type $j$, and each constraint as describing an upper bound on the production of an intermediate quantity. This is called a *resource allocation problem*.
 
-Consider the following situation. You want to buy shares of two companies, let's call them $A$ and $B$. You predict that in a year you'll make $15\%$ profit on $A$ and $10\%$ profit on $B$. Assuming you want to make the most profit, your optimization function becomes:
+Consider the following situation. Suppose you want to buy shares in two mutual funds, let's call them $A$ and $B$, currently priced at \$100 and \$75, respectively. Suppose you have a total of \$500 to invest. You predict that in a year you'll make $15\%$ profit on $A$ and $10\%$ profit on $B$. But there is a commission fee of 
 
-<span id="js-generated-resource-allocation-optimization-function"></span>
-
-The shares of $A$ and $B$ are priced at $100 and $75, respectively, and you only have a thousand dollars to spend. So your first constraint becomes:
-<span id="js-generated-resource-allocation-cost-constraint"></span>
-
-## Converting LP to standard form
-Notice that maximizing the objective function $\zeta$ is equivalent to minimizing the negative of the objective function $-\zeta$. 
-
-> **From now on, we will assume that we are always trying to maximize the objective function.**
-
-Two linear programs LP and LP' are said to be *equivalent* if for any feasible solution $(x_1, \dots, x_n)$ to LP, there exists a feasible solution $(x'_1, x'_2, \dots, x'_{n'})$ to LP' such that $\zeta(x_1, \dots, x_n) = \zeta'(x'_1, x'_2, \dots, x'_{n'})$ and vice versa. Thus solving LP is equivalent to LP'.
-
-::: {.remark #lp-equiv-definition}
-
-1. LP and LP' can have a different number of decision variables i.e. it is not necessarily true that $n = n'.$
-2. We do not require a one-to-one correspondence between the solutions of LP and LP' i.e. for a feasible solution $(x_1, \dots, x_n)$ to LP there could potentially be multiple feasible solutions $(x_1', \dots, x_n')$ to LP' satisfying $\zeta(x_1, \dots, x_n) = \zeta'(x'_1, x'_2, \dots, x'_{n'})$. Similarly, in the other direction.
-
-:::
-
-::: {.theorem #lp-equiv-to-standard-form}
-Every linear program is equivalent to a linear program in the standard form.
-:::
-
-::: {.proof}
-The proof is by explicit construction. Consider the LP in \@ref(eq:intro-lp). If LP is in the standard form, then we're done. If not, then one of the following conditions about the constraints must be true:
-
-1. One of the linear constraints is an upper bound and has the form $$a_{i1} x_1 + \dots + a_{in} x_n \geq b_i.$$
-2. One of the linear constraints is an equality and has the form $$a_{i1} x_1 + \dots + a_{in} x_n = b_i.$$
-3. One of the variables has a "negativity constraint" $x_j \leq 0$.
-4. A "positivity constraint" $x_j \geq 0$ is missing.
-
-Note that we're already assuming that the objective function is "fixed" i.e. that our goal is to maximize $\zeta$. We "fix" each of the above errors sequentially:
-
-**Case 1**: We multiply both sides by $-1$ giving us the desired inequality $$-a_{i1} x_1 + \dots + -a_{in} x_n \leq -b_i.$$
-
-**Case 2**: We replace $a_{i1} x_1 + \dots + a_{in} x_n = b_i$ with two inequalities
-\begin{align*}
-a_{i1} x_1 + \dots + a_{in} x_n &\leq b_i \\
-a_{i1} x_1 + \dots + a_{in} x_n &\geq b_i
-\end{align*}
-which reduces the problem to Case 1.
-
-**Case 3**: We simply replace $x_j$ with $-x_j$ everywhere.
-
-**Case 4**: We let $x_j = x_j' - x_j''$ for two new decision variables $x_j'$ and $x_j''$ where $x_j', x_j'' \geq 0$. We can do this because any real number can written as a difference of two positive real numbers.
-
-One can see that in each step the modified LP is equivalent to the original LP.
-:::
-
-
-<script type="module" src = "js/01.js"></script>
+Assuming you want to make the most profit, your optimization function becomes:

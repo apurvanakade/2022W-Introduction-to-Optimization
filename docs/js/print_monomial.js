@@ -1,22 +1,31 @@
-export default print_monomial = function(coefficient, index, with_addition = false) {
-  str = "";
+export default function print_monomial(coefficient, variable, with_addition = false) {
+  var str = "";
 
-  if (with_addition && coefficient >= 0) {
-    str += " + ";
+  if(coefficient == 0){
+    if(with_addition)
+      str += "\\color{white}{ + 0 " + variable + "}";
+    else
+      str += "\\color{white}{ 0 }"  + variable + "}";
   }
-
-  if (coefficient == 1) {
-    str += "x_{" + index + "}";
+  else if(coefficient == 1){
+    if (with_addition) {
+      console.log("with_addition");
+      str += " + ";
+    }
+    str += variable;
   }
-  else if (coefficient == -1) {
-    str += "- x_{" + index + "}";
+  else if(coefficient == -1){
+    str += "-" + variable;
   }
-  else if (coefficient == 0) {
-    str += "{\\color{white} 0 x_{" + index + "}}";
+  else if(coefficient < 0){
+    str += coefficient + variable;
   }
-  else {
-    str += coefficient + " x_{" + index + "}";
+  else if(coefficient > 0){
+    if (with_addition) {
+      console.log("with_addition");
+      str += " + ";
+    }
+    str += coefficient + variable;
   }
-
   return str;
 }
