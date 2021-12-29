@@ -3,7 +3,7 @@
 # Introduction to Linear Programming
 
 ```{r, results = 'asis', echo = FALSE}
-source("R/01.R", local = knitr::knit_global())
+source("R/linear_program_general.R", local = knitr::knit_global())
 ```
 
 
@@ -34,7 +34,7 @@ We do not allow strict inequalities $<$ or $>$ in a linear program as linear fun
 ob <- new_linear_combination(10)
 c1 <- new_constraint(ob, "<", 20)
 c2 <- new_constraint(new_linear_combination(5), "\\geq", 0)
-cat(str_math(new_linear_program(ob, list(c1, c2))))
+cat(str_math(new_linear_program_general(ob, list(c1, c2))))
 ```
 
 On the feasible set $[0, 2)$, the function $\zeta(x_1) = x_1$ never attains absolute maxima.
@@ -45,6 +45,7 @@ Changing the inequality $<$ to $\leq$ gives us an optimal feasible solution $x_1
 ## Resource allocation problem
 It is useful to think of the objective function as the *profit* function, the decision variable $x_j$ as the amount of a physical quantity of type $j$, the coefficients $c_j$ as being the profit made from selling a unit quantity of type $j$, and each constraint as describing an upper bound on the production of an intermediate quantity. This is called a *resource allocation problem*.
 
-Consider the following situation. Suppose you want to buy shares in two mutual funds, let's call them $A$ and $B$, currently priced at \$100 and \$75, respectively. Suppose you have a total of \$500 to invest. You predict that in a year you'll make $15\%$ profit on $A$ and $10\%$ profit on $B$. But there is a commission fee of 
+::: {.example #dunder-mifflin-lp-intro}
+Consider the following situation. Suppose you are the reginal manager of Dunder Mifflin Paper Company and you want to expand your branch. Given your office space restrictions, you can hire at most 5 new staff to your office. You can either hire some salespersons with a salary of 65K per month or trainees with a salary of 15K per month. You predict that your profits will go up by 45K for each salesperson and by 5k for each trainee. How many salespersons and trainees should you hire to maximize your predicted revenue if you can pay out total salaries of maximum 175K per month? 
 
-Assuming you want to make the most profit, your optimization function becomes:
+:::

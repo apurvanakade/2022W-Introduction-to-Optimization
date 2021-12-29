@@ -22,10 +22,10 @@ str.constraint <- function(x) {
 # 
 
 new_linear_program <- function(objective = linear_combination(), constraints = list(), maximize = TRUE) {
-  structure(list(objective = objective, constraints = constraints, maximize = maximize), class = "linear_program")
+  structure(list(objective = objective, constraints = constraints, maximize = maximize), class = "linear_program_general")
 }
 
-str.linear_program <- function(x) {
+str.linear_program_general <- function(x) {
   if (x$maximize) {
     paste("\\mbox{maximize: }&& ", str(x$objective), " & \\\\ \n \\mbox{subject to: } && ", paste(lapply(x$constraints, str), collapse = " \\\\ \n && "), sep = "")
   } else {
