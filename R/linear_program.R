@@ -1,16 +1,30 @@
-new_linear_program <- function(objective = list(), A = list(), b = list(), variable_names = list()) {
-  structure(list(objective = objective, A = A, b = b, variable_names = variable_names), class = "linear_program")
+new_linear_program <- function(obj = list(), A = list(),
+  b = list(), variables = list()) {
+  if (missing(variables)) {
+    variables <- paste("x", seq_along(obj), sep = "_")
+  }
+  structure(
+    list(obj = obj, A = A, b = b,
+      variables = variables),
+    class = "linear_program")
 }
 
 str.linear_program <- function(x) {
-  paste(
-    apply(
-      cbind(" && ", 
-        apply(matrix(paste0(x$A, x$variable_names), nrow = length(x$b)),1,paste,collapse=" + "), 
-        " & <=", x$b, " \\"), 
-      1, paste, collapse = ""), 
-    collapse = " ")
+  paste0(paste0("\\mbox{maximize: } && ",
+    paste0(x$obj, x$variables, collapse = " + "),
+    " & \\\\ \n\\mbox{subject to: }",
+    paste0(" && ", apply(
+      matrix(paste0(t(x$A), x$variables), nrow = length(x$b), byrow = TRUE), 1, paste,
+      collapse = " + "
+    ), " & \\le ", x$b, " \\\\ \n", collapse = ""),
+    collapse = " "
+  ), " && ", paste(x$variables, collapse = ", "), " & \\ge 0")
 }
 
-test <- new_linear_program(objective = c(1, 2, 3), A = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), b = c(7, 8), variable_names = c("x", "y", "z"))
-print(str(test))
+str_math <- function(math, inline = FALSE) {
+  if (inline) {
+    paste("$", str(math), "$", sep = "")
+  } else {
+    paste0("\\begin{align*} \n", str(math), "\\end{align*}")
+  }
+}
