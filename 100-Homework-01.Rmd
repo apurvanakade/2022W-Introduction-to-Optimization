@@ -1,0 +1,37 @@
+# Homework 01 {.unlisted .unnumbered}
+
+In the Exercises 1 - 5 below, you will prove for a bounded linear program in two variables, the objective functions attains the maximum value at one of the vertices of the feasible region.
+Consider the following linear program LP in two variables:
+\begin{equation}
+  \begin{aligned}
+    \mbox{optimize: } && c_1 x + c_2 y & \\
+    \mbox{subject to: } 
+      && a_{11} x + a_{12} y & \lesseqgtr b_1 \\
+      && a_{21} x + a_{22} y & \lesseqgtr b_2 \\
+      && \vdots &  \\
+      && a_{m1} x + a_{m2} y & \lesseqgtr b_m.
+  \end{aligned}
+  (\#eq:homework-01-lp)
+\end{equation}
+
+1. Let $P = (x_1, y_1)$ and $Q = (x_2, y_2)$ be points in $\mathbb{R}^2$. 
+  Let $R = (x_3, y_3)$ be point lying on the line segment between $P$ and $Q$. 
+  Show that if that both $P$ and $Q$ satisfy a constraint 
+  \begin{align}
+  a_{j1} x + a_{j2} \lesseqgtr b_j,
+  \end{align}
+  then so does $R$. For this problem you'll need to analyze the three cases $\leq$, $=$, and $\geq$ separately. 
+
+  A subset of $\mathbb{R}^2$ is called **convex** if for every points $P$ and $Q$ in set the entire line segment connecting $P$ to $Q$ also belongs to $S$.
+
+2. Show that the feasible set $\mathcal{S}$ of the LP \@ref(eq:homework-01-lp) is a convex subset of $\mathbb{R}^2$.
+
+For the the exercises below, assume that $S$ is a convex polygon.
+
+3. Let $R$ be a point in the interior of $\mathcal{S}$. Show that there is a point $P$ on the boundary of $\mathcal{S}$ such that $\zeta(R) \le \zeta(P)$.
+
+4. Let $R$ be a point in the interior of one of the edges of $\mathcal{S}$. Show that there is a vertex $\mathcal{S}$ on the boundary of $\mathcal{S}$ such that $\zeta(R) \le \zeta(P)$.
+
+5. Argue that $\zeta$ attains its maximum value at a vertex of $\mathcal{S}$.
+
+  In exercises 5-10, we will analyze the resource allocation problem from class.

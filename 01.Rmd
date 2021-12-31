@@ -1,5 +1,3 @@
-# (PART) Part I - Linear Programming {-}
-
 # Introduction to Linear Programming
 
 ```{r, results = 'asis', echo = FALSE}
@@ -44,17 +42,9 @@ Changing the inequality $<$ to $\leq$ gives us an optimal feasible solution $x_1
 :::
 
 ## Resource allocation problem
-It is useful to think of the objective function as the *profit* function, the decision variable $x_j$ as the amount of a physical quantity of type $j$, the coefficients $c_j$ as being the profit made from selling a unit quantity of type $j$, and each constraint as describing an upper bound on the production of an intermediate quantity. This is called a *resource allocation problem*.
+It is useful to think of the objective function as the *profit* function, the decision variable $x_j$ as the amount of a physical quantity of type $j$, the coefficients $c_j$ as being the profit made from selling a unit quantity of type $j$, and each constraint as describing an upper bound on the production of an intermediate quantity. This is called a *resource allocation problem*. Below is a more concrete example.
 
-::: {.example #resource-allocation-problem}
- You run a company that makes two products (say, $P_1$ and $P_2$) using two machines (say, $M_1$ and $M_2$). Each unit of $P_1$ that is produced requires 80 minutes processing time on machine $M_1$ and 25 minutes processing time on machine $M_2$. Each unit of $P_2$ that is produced requires 20 minutes processing time on machine $M_1$ and 75 minutes processing time on machine $M_2$. Both machines are available for a maximum of 200 minutes every day. The profit per unit of $P_1$ is 25 units and the profit per unit of $P_2$ is 30 units. Company policy is to determine the production quantity of each product in such a way as to maximize the total profit given that the available resources should not be exceeded.^[Problem from https://ocw.mit.edu/courses/sloan-school-of-management/15-053-optimization-methods-in-management-science-spring-2013/tutorials/MIT15_053S13_tut01.pdf]
-
-
-|  | $P_1$ | $P_2$ | Upper Bounds |
-|:--:|:----:|:----:|:--:|
-| $M1$ | 80   | 20   | 200 |
-| $M2$ | 25   | 75   | 200 |
-:::
+You run a company that makes two products (say, $P_1$ and $P_2$) using two machines (say, $M_1$ and $M_2$). Each unit of $P_1$ that is produced requires 80 minutes processing time on machine $M_1$ and 25 minutes processing time on machine $M_2$. Each unit of $P_2$ that is produced requires 20 minutes processing time on machine $M_1$ and 75 minutes processing time on machine $M_2$. Both machines are available for a maximum of 200 minutes every day. The profit per unit of $P_1$ is 25 units and the profit per unit of $P_2$ is 30 units. Company policy is to determine the production quantity of each product in such a way as to maximize the total profit given that the available resources should not be exceeded.^[Problem from https://ocw.mit.edu/courses/sloan-school-of-management/15-053-optimization-methods-in-management-science-spring-2013/tutorials/MIT15_053S13_tut01.pdf]
 
 ```{r, echo=FALSE, comment=NA}
 
@@ -63,9 +53,7 @@ df <- data.frame(
   P2 = c(25, 75),
   Upper_Bounds = c(200, 200)
 )
-
 rownames(df) <- c("M1", "M2")
-
 df
 ```
 
