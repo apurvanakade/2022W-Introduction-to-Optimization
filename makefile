@@ -1,6 +1,6 @@
-all: build
+all: html
 
-build:
+html:
 	Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
 
 clean:
