@@ -12,14 +12,14 @@ description: "Introduction to Optimization."
 ---
 
 #  Preface {-}
-The question of optimization is the very general question of deciding when a function $g(x_1, \dots, x_n)$ attain its maximum or minimum value on a domain $D$ in $\mathbb{R^n}$. 
+The question of optimization is the very general question of deciding when a function $g(x_1, \dots, x_n)$ attains its maximum or minimum value on a domain $D$ in $\mathbb{R^n}$. 
 \begin{align}
 \mbox{optimize: } && g(x_1, \dots, x_n) & \\
 \mbox{subject to: } && (x_1, \dots, x_n) &\in D.
 \end{align}
-These questions show up frequently in almost every quantitative field.
+These questions show up frequently in every quantitative field.
 But it is almost impossible to analyze the question at this level of generality without making any further assumptions on $g$ and $D$. 
 
 We will start with the simplest interesting functions, namely, linear functions. We'll let $g$ be a linear function and let $D$ be a region cut out by linear (in)equalities. The study of this problem is called Linear Programming. Despite the simplicity of the Linear Programming setup, or perhaps because of it, LP is one of the most commonly used models for real world optimization problems. 
 
-Most of this course is about Linear Programming. In the first half, we'll study the simplex method, which is an algorithm for solving linear programs, and the in the second half we'll study the theory behind linear programs using duality theory.
+Most of this course is about Linear Programming. In the first half, we'll study the simplex method, which is an algorithm for solving linear programs, and in the second half we'll study the theory behind linear programs using duality theory.

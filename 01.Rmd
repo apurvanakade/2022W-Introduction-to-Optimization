@@ -7,7 +7,7 @@ source("R/linear_program_general.R", local = knitr::knit_global())
 <script src="https://www.geogebra.org/apps/deployggb.js"></script>
 
 
-Linear programming is a technique for the optimization of a linear objective function, subject to linear equality and linear inequality constraints. A **linear program** or a **linear programming problem** is a problem of the following form:
+Linear programming is a technique for the optimization of a linear objective function, subject to linear (in)equality constraints. A **linear program** or a **linear programming problem** is a problem of the following form:
 
 \begin{equation}
   \begin{aligned}
@@ -22,7 +22,7 @@ Linear programming is a technique for the optimization of a linear objective fun
 \end{equation}
 where the symbol $\lesseqgtr$ stands for $\leq$ or $=$ or $\geq$, $a_{ij}, b_i, c_j$ are real numbers, and $x_j$ are variables.
 
-The variables $x_1, \dots, x_n$ are called **decision variables**. The linear combination $\zeta := c_1 x_1 + \dots + c_n x_n$ is called the **objective function**. Each of the equalities/inequalities $a_{i1} x_1 + \dots + a_{in} x_n \lesseqgtr b_i$ is called a **(linear) constraint**. Our goal is to either *minimize* or *maximize* the objective function subject to the constraints.
+The variables $x_1, \dots, x_n$ are called **decision variables**. The linear combination $\zeta := c_1 x_1 + \dots + c_n x_n$ is called the **objective function**. Each of the (in)equalities $a_{i1} x_1 + \dots + a_{in} x_n \lesseqgtr b_i$ is called a **(linear) constraint**. Our goal is to either *minimize* or *maximize* the objective function subject to the constraints.
 
 A proposal of specific values for the decision variables is called a **solution**. A solution is said to be **feasible** if it satisfies all the constraints. A feasible solution is said to be **optimal** if $\zeta$ attains the optimal value at it. Thus, to solve a linear program means to *find an optimal solution* to the problem. If a problem has no feasible solutions, then the problem is called **infeasible**. If a problem has feasible solutions with arbitrarily large or arbitrary small objective values then the problem is called **unbounded**.
 
@@ -37,8 +37,8 @@ c2 <- new_constraint(new_linear_combination(5), "\\geq", 0)
 cat(str_math(new_linear_program_general(ob, list(c1, c2))))
 ```
 
-On the feasible set $[0, 2)$, the function $\zeta(x_1) = x_1$ never attains absolute maxima.
-Changing the inequality $<$ to $\leq$ gives us an optimal feasible solution $x_1 = 2$. When all the inequalities are either $\le$, $=$, or $\ge$, the set of feasible solutions is closed. If, in addition, the LP is bounded then the set of feasible solutions is compact. On compact sets a continuous (in particular, linear) function, always attains a maxima and a minima by a generalization of the [extreme value theorem](https://en.wikipedia.org/wiki/Extreme_value_theorem) for [higher dimensions](https://math.stackexchange.com/a/881569).
+On the feasible set $[0, 2)$, the function $\zeta(x_1) = 10x_1$ never attains absolute maxima.
+Changing the inequality $<$ to $\leq$ gives us an optimal feasible solution $x_1 = 2$ and $\zeta = 20$. When all the (in)equalities are either $\le$, $=$, or $\ge$, the set of feasible solutions is closed. If, in addition, the LP is bounded then the set of feasible solutions is compact. On compact sets a continuous (in particular, linear) function, always attains a maxima and a minima by a generalization of the [extreme value theorem](https://en.wikipedia.org/wiki/Extreme_value_theorem) for [higher dimensions](https://math.stackexchange.com/a/881569).
 
 :::
 
@@ -47,7 +47,7 @@ The following is an example of a *resource allocation problem*, a very common ap
 The decision variables $x_j$ denote the amount of a certain resource/product $j$, the coefficients $c_j$ are the profit per unit quantity of $j$, and the constraints are certain upper bounds on the production of the resource/quantity.
 
 ::: {.example #resource-allocation-problem}
-You run a company that makes two products (say, $P_1$ and $P_2$) using two machines (say, $M_1$ and $M_2$). Each unit of $P_1$ that is produced requires 80 minutes processing time on machine $M_1$ and 25 minutes processing time on machine $M_2$. Each unit of $P_2$ that is produced requires 20 minutes processing time on machine $M_1$ and 75 minutes processing time on machine $M_2$. Both machines are available for a maximum of 200 minutes every day. The profit per unit of $P_1$ is 25 units and the profit per unit of $P_2$ is 30 units. Company policy is to determine the production quantity of each product in such a way as to maximize the total profit given that the available resources should not be exceeded.^[Problem from https://ocw.mit.edu/courses/sloan-school-of-management/15-053-optimization-methods-in-management-science-spring-2013/tutorials/MIT15_053S13_tut01.pdf]
+You run a company that makes two products (say, $P_1$ and $P_2$) using two machines (say, $M_1$ and $M_2$). Each unit of $P_1$ that is produced requires 80 minutes processing time on machine $M_1$ and 25 minutes processing time on machine $M_2$. Each unit of $P_2$ that is produced requires 20 minutes processing time on machine $M_1$ and 75 minutes processing time on machine $M_2$. Both machines are available for a maximum of 200 minutes every day. The profit per unit of $P_1$ is 25 units and the profit per unit of $P_2$ is 30 units. Company policy is to determine the production quantity of each product in such a way as to maximize the total profit given that the available resources should not be exceeded.
 
 ```{r, echo=FALSE, comment=NA}
 
@@ -76,12 +76,11 @@ cat(str_math(ex_1_1_lp))
 
 Here $x$, $y$ are the units of $P_1$ and $P_2$ produced each day. One way to attempt this problem is to assume that we'll use both the machines as much as possible i.e. that the two inequalities are in fact equalities. We can see then that the common solution to the two is $(x_1, x_2) = (2, 2)$. For this solution the total profit is $110$ units.
 
-```{r echo=FALSE}
+```{r, resource-allocation-problem-constraints, echo=FALSE, fig.cap = "Resource Allocation Problem Constraints"}
 
 library(ggplot2)
 
 ggplot() + 
-  labs(title = "Resource Allocation Problem Constraints") +
   xlim(0, 200/25) +
   ylim(0, 200/20) +
   geom_vline(xintercept=c(0)) +
@@ -109,7 +108,7 @@ Why is this the maximum profit possible? Is it possible to increase the profit b
 :::
 
 
-::: {.exercise}
+::: {.exercise #resource-allocation-problem-extra}
 Consider the setup in Example \@ref(resource-allocation-problem) again. Suppose in addition, you can only store a total of 3 units of $P_1$ and $P_2$ combined each day so your production quantity should not exceed that amount. What is the new LP and the new optimal solution?
 Note that the solution $(x, y) = (2, 2)$ is no longer possible. So, we cannot use both the machines to their maximum capacity.
 :::

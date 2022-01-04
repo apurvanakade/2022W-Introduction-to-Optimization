@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-03" />
+<meta name="date" content="2022-01-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="standard-form-of-a-linear-program.html"/>
+<link rel="next" href="linear-programs-in-two-variables.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -76,6 +76,7 @@
 <ul>
 <li class="chapter" data-level="1.1" data-path="introduction-to-linear-programming.html"><a href="introduction-to-linear-programming.html#resource-allocation-problem"><i class="fa fa-check"></i><b>1.1</b> Resource allocation problem</a></li>
 </ul></li>
+<li class="chapter" data-level="2" data-path="linear-programs-in-two-variables.html"><a href="linear-programs-in-two-variables.html"><i class="fa fa-check"></i><b>2</b> Linear programs in two variables</a></li>
 </ul>
 
       </nav>
@@ -96,7 +97,7 @@
 <div id="introduction-to-linear-programming" class="section level1" number="1">
 <h1><span class="header-section-number">Day 1</span> Introduction to Linear Programming</h1>
 <script src="https://www.geogebra.org/apps/deployggb.js"></script>
-<p>Linear programming is a technique for the optimization of a linear objective function, subject to linear equality and linear inequality constraints. A <strong>linear program</strong> or a <strong>linear programming problem</strong> is a problem of the following form:</p>
+<p>Linear programming is a technique for the optimization of a linear objective function, subject to linear (in)equality constraints. A <strong>linear program</strong> or a <strong>linear programming problem</strong> is a problem of the following form:</p>
 <p><span class="math display" id="eq:intro-lp">\[\begin{equation}
   \begin{aligned}
     \mbox{optimize: } &amp;&amp; c_1 x_1 + \dots + c_n x_n &amp; \\
@@ -109,7 +110,7 @@
   \tag{1.1}
 \end{equation}\]</span>
 where the symbol <span class="math inline">\(\lesseqgtr\)</span> stands for <span class="math inline">\(\leq\)</span> or <span class="math inline">\(=\)</span> or <span class="math inline">\(\geq\)</span>, <span class="math inline">\(a_{ij}, b_i, c_j\)</span> are real numbers, and <span class="math inline">\(x_j\)</span> are variables.</p>
-<p>The variables <span class="math inline">\(x_1, \dots, x_n\)</span> are called <strong>decision variables</strong>. The linear combination <span class="math inline">\(\zeta := c_1 x_1 + \dots + c_n x_n\)</span> is called the <strong>objective function</strong>. Each of the equalities/inequalities <span class="math inline">\(a_{i1} x_1 + \dots + a_{in} x_n \lesseqgtr b_i\)</span> is called a <strong>(linear) constraint</strong>. Our goal is to either <em>minimize</em> or <em>maximize</em> the objective function subject to the constraints.</p>
+<p>The variables <span class="math inline">\(x_1, \dots, x_n\)</span> are called <strong>decision variables</strong>. The linear combination <span class="math inline">\(\zeta := c_1 x_1 + \dots + c_n x_n\)</span> is called the <strong>objective function</strong>. Each of the (in)equalities <span class="math inline">\(a_{i1} x_1 + \dots + a_{in} x_n \lesseqgtr b_i\)</span> is called a <strong>(linear) constraint</strong>. Our goal is to either <em>minimize</em> or <em>maximize</em> the objective function subject to the constraints.</p>
 <p>A proposal of specific values for the decision variables is called a <strong>solution</strong>. A solution is said to be <strong>feasible</strong> if it satisfies all the constraints. A feasible solution is said to be <strong>optimal</strong> if <span class="math inline">\(\zeta\)</span> attains the optimal value at it. Thus, to solve a linear program means to <em>find an optimal solution</em> to the problem. If a problem has no feasible solutions, then the problem is called <strong>infeasible</strong>. If a problem has feasible solutions with arbitrarily large or arbitrary small objective values then the problem is called <strong>unbounded</strong>.</p>
 <div class="remark">
 <p><span id="unlabeled-div-1" class="remark"><em>Remark</em>. </span>We do not allow strict inequalities <span class="math inline">\(&lt;\)</span> or <span class="math inline">\(&gt;\)</span> in a linear program as linear functions do not always achieve maxima/minima on open sets. Consider the following simple example.</p>
@@ -118,15 +119,15 @@ where the symbol <span class="math inline">\(\lesseqgtr\)</span> stands for <spa
  \mbox{subject to: } &amp;&amp; 10 x_1 &amp; &lt; 20 \\ 
  &amp;&amp; 5 x_1 &amp; \geq 0
 \end{align*}\]</span></p>
-<p>On the feasible set <span class="math inline">\([0, 2)\)</span>, the function <span class="math inline">\(\zeta(x_1) = x_1\)</span> never attains absolute maxima.
-Changing the inequality <span class="math inline">\(&lt;\)</span> to <span class="math inline">\(\leq\)</span> gives us an optimal feasible solution <span class="math inline">\(x_1 = 2\)</span>. When all the inequalities are either <span class="math inline">\(\le\)</span>, <span class="math inline">\(=\)</span>, or <span class="math inline">\(\ge\)</span>, the set of feasible solutions is closed. If, in addition, the LP is bounded then the set of feasible solutions is compact. On compact sets a continuous (in particular, linear) function, always attains a maxima and a minima by a generalization of the <a href="https://en.wikipedia.org/wiki/Extreme_value_theorem">extreme value theorem</a> for <a href="https://math.stackexchange.com/a/881569">higher dimensions</a>.</p>
+<p>On the feasible set <span class="math inline">\([0, 2)\)</span>, the function <span class="math inline">\(\zeta(x_1) = 10x_1\)</span> never attains absolute maxima.
+Changing the inequality <span class="math inline">\(&lt;\)</span> to <span class="math inline">\(\leq\)</span> gives us an optimal feasible solution <span class="math inline">\(x_1 = 2\)</span> and <span class="math inline">\(\zeta = 20\)</span>. When all the (in)equalities are either <span class="math inline">\(\le\)</span>, <span class="math inline">\(=\)</span>, or <span class="math inline">\(\ge\)</span>, the set of feasible solutions is closed. If, in addition, the LP is bounded then the set of feasible solutions is compact. On compact sets a continuous (in particular, linear) function, always attains a maxima and a minima by a generalization of the <a href="https://en.wikipedia.org/wiki/Extreme_value_theorem">extreme value theorem</a> for <a href="https://math.stackexchange.com/a/881569">higher dimensions</a>.</p>
 </div>
 <div id="resource-allocation-problem" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Resource allocation problem</h2>
 <p>The following is an example of a <em>resource allocation problem</em>, a very common application of linear programming.
 The decision variables <span class="math inline">\(x_j\)</span> denote the amount of a certain resource/product <span class="math inline">\(j\)</span>, the coefficients <span class="math inline">\(c_j\)</span> are the profit per unit quantity of <span class="math inline">\(j\)</span>, and the constraints are certain upper bounds on the production of the resource/quantity.</p>
 <div class="example">
-<p><span id="exm:resource-allocation-problem" class="example"><strong>Example 1.1  </strong></span>You run a company that makes two products (say, <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span>) using two machines (say, <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>). Each unit of <span class="math inline">\(P_1\)</span> that is produced requires 80 minutes processing time on machine <span class="math inline">\(M_1\)</span> and 25 minutes processing time on machine <span class="math inline">\(M_2\)</span>. Each unit of <span class="math inline">\(P_2\)</span> that is produced requires 20 minutes processing time on machine <span class="math inline">\(M_1\)</span> and 75 minutes processing time on machine <span class="math inline">\(M_2\)</span>. Both machines are available for a maximum of 200 minutes every day. The profit per unit of <span class="math inline">\(P_1\)</span> is 25 units and the profit per unit of <span class="math inline">\(P_2\)</span> is 30 units. Company policy is to determine the production quantity of each product in such a way as to maximize the total profit given that the available resources should not be exceeded.<a href="simplex-method.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p><span id="exm:resource-allocation-problem" class="example"><strong>Example 1.1  </strong></span>You run a company that makes two products (say, <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span>) using two machines (say, <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>). Each unit of <span class="math inline">\(P_1\)</span> that is produced requires 80 minutes processing time on machine <span class="math inline">\(M_1\)</span> and 25 minutes processing time on machine <span class="math inline">\(M_2\)</span>. Each unit of <span class="math inline">\(P_2\)</span> that is produced requires 20 minutes processing time on machine <span class="math inline">\(M_1\)</span> and 75 minutes processing time on machine <span class="math inline">\(M_2\)</span>. Both machines are available for a maximum of 200 minutes every day. The profit per unit of <span class="math inline">\(P_1\)</span> is 25 units and the profit per unit of <span class="math inline">\(P_2\)</span> is 30 units. Company policy is to determine the production quantity of each product in such a way as to maximize the total profit given that the available resources should not be exceeded.</p>
 <pre><code>   P1 P2 Upper_Bounds
 M1 80 25          200
 M2 20 75          200</code></pre>
@@ -139,12 +140,17 @@ M2 20 75          200</code></pre>
  &amp;&amp; x, y &amp; \ge 0
 \end{align*}\]</span></p>
 <p>Here <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> are the units of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> produced each day. One way to attempt this problem is to assume that we’ll use both the machines as much as possible i.e. that the two inequalities are in fact equalities. We can see then that the common solution to the two is <span class="math inline">\((x_1, x_2) = (2, 2)\)</span>. For this solution the total profit is <span class="math inline">\(110\)</span> units.</p>
-<p><img src="Introduction-to-Optimization_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:resource-allocation-problem-constraints"></span>
+<img src="Introduction-to-Optimization_files/figure-html/resource-allocation-problem-constraints-1.png" alt="Resource Allocation Problem Constraints" width="672" />
+<p class="caption">
+Figure 1.1: Resource Allocation Problem Constraints
+</p>
+</div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 1.1  </strong></span>Why is this the maximum profit possible? Is it possible to increase the profit by not using either of the two machines at their full capacity?</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 1.2  </strong></span>Consider the setup in Example <a href="introduction-to-linear-programming.html#resource-allocation-problem">1.1</a> again. Suppose in addition, you can only store a total of 3 units of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> combined each day so your production quantity should not exceed that amount. What is the new LP and the new optimal solution?
+<p><span id="exr:resource-allocation-problem-extra" class="exercise"><strong>Exercise 1.2  </strong></span>Consider the setup in Example <a href="introduction-to-linear-programming.html#resource-allocation-problem">1.1</a> again. Suppose in addition, you can only store a total of 3 units of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> combined each day so your production quantity should not exceed that amount. What is the new LP and the new optimal solution?
 Note that the solution <span class="math inline">\((x, y) = (2, 2)\)</span> is no longer possible. So, we cannot use both the machines to their maximum capacity.</p>
 </div>
 
@@ -156,7 +162,7 @@ Note that the solution <span class="math inline">\((x, y) = (2, 2)\)</span> is n
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="standard-form-of-a-linear-program.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="linear-programs-in-two-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,80 +1,118 @@
-# Standard form of a linear program
-It is inconvenient to work with a linear program in the form described in Equation \@ref(eq:intro-lp) because each of the three kinds of constraints $\leq$, $=$, and $\geq$ require different manipulations. A linear program of the following form is said to be in a *standard form*:
+# Linear programs in two variables
+
+Continuing Example \@ref(resource-allocation-problem), here is one way to see that (2, 2) is indeed the optimal solution. For any constant $c$, the equation 
 \begin{equation}
-  \begin{aligned}
-    \mbox{maximize: } && c_1 x_1 + \dots + c_n x_n & \\
-    \mbox{subject to: } 
-      && a_{11} x_1 + \dots + a_{1n} x_n & \leq b_1 \\
-      && a_{21} x_1 + \dots + a_{2n} x_n & \leq b_2 \\
-      && \vdots &  \\
-      && a_{m1} x_1 + \dots + a_{mn} x_n & \leq b_m \\
-      && x_1, \dots, x_n & \geq 0.
-  \end{aligned}
-  (\#eq:intro-standardized-lp)
+  c = 25x + 30y
+  (\#eq:objective-function)
 \end{equation}
-The last line is a succinct way of writing the $n$ different inequalities $x_j \geq 0$ for $j = 1, \dots, n$. A linear program in a standard form can be written more succinctly using vectors and matrices as follows.
-\begin{equation}
-  \begin{aligned}
-    \mbox{maximize: } && c^T x & \\
-    \mbox{subject to: } 
-      && A x & \leq b \\
-      && x & \geq 0.
-  \end{aligned}
-  (\#eq:intro-standardized-lp-matrix-form)
-\end{equation}
-where now $x$ is the vector of decision variables, $c$ and $b$ are vectors of real numbers, and $A$ is the matrix of constraint coefficients. This enables us to use tools from Linear Algebra to solve LP problems.
+describes a line in $\mathbb{R}^2$. The points "below" this line have an objective value less than $c$ and the points "above" this line have an objective value greater than $c$. To see that $(2, 2)$ is the optimal solution, we simply need to check that the line of the form \@ref(eq:objective-function), namely, $110 = 25x + 30y$ lies above the feasible region as seen in the following figure.
 
+```{r, resource-allocation-problem-graph, echo=FALSE, warning=FALSE, fig.cap="Objective function graph"}
 
-### Converting LP to standard form
-Notice that maximizing the objective function $\zeta$ is equivalent to minimizing the negative of the objective function $-\zeta$. 
+library(ggplot2)
 
-> **From now on, we will assume that we are always trying to maximize the objective function.**
+ggplot() + 
+  xlim(0, 200/25) +
+  ylim(0, 200/20) +
+  geom_vline(xintercept=c(0)) +
+  geom_hline(yintercept=c(0)) +
+  theme_bw() + 
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 200/80, Inf),
+        y = c(0, 200/20, 0, 0)),
+      aes(x = x, y = y, fill = "1: 80x + 20y <= 200"),
+      inherit.aes = FALSE, alpha = 0.4) + 
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 200/25, Inf),
+        y = c(0, 200/75, 0, 0)),
+      aes(x = x, y = y, fill = "2: 25x + 75y <= 200"),
+      inherit.aes = TRUE, alpha = 0.4) +
+  scale_fill_discrete(name = "Constraints") +
+  geom_point(aes(x=2, y=2), color = "black") +
+  geom_text(aes(x=2, y=2), label="(2, 2)", vjust=-.5, hjust=0) +
+  stat_function(fun = function(x) {(110 - 25*x)/30}, color = "black")
+```
 
-Two linear programs LP and LP' are said to be *equivalent* if for any feasible solution $(x_1, \dots, x_n)$ to LP, there exists a feasible solution $(x'_1, x'_2, \dots, x'_{n'})$ to LP' such that $\zeta(x_1, \dots, x_n) = \zeta'(x'_1, x'_2, \dots, x'_{n'})$ and vice versa. Thus solving LP is equivalent to LP'.
+We can use the same reasoning to solve Exercise \@ref(exr:resource-allocation-problem-extra). 
 
-::: {.remark #lp-equiv-definition}
+```{r, resource-allocation-problem-extra, results = 'asis', echo = FALSE}
+ex_1_1_lp <- new_linear_program(
+  obj = c(25, 30),
+  A = matrix(c(80, 20, 25, 75, 1, 1), nrow = 2, byrow = TRUE),
+  b = c(200, 200, 3),
+  variables = c('x', 'y')
+)
 
-1. LP and LP' can have a different number of decision variables i.e. it is not necessarily true that $n = n'.$
-2. We do not require a one-to-one correspondence between the solutions of LP and LP' i.e. for a feasible solution $(x_1, \dots, x_n)$ to LP there could potentially be multiple feasible solutions $(x_1', \dots, x_n')$ to LP' satisfying $\zeta(x_1, \dots, x_n) = \zeta'(x'_1, x'_2, \dots, x'_{n'})$. Similarly, in the other direction.
+cat(str_math(ex_1_1_lp))
+```
+for which the constraints look like 
 
-:::
+```{r, resource-allocation-problem-extra-constraints, echo=FALSE, fig.cap = "Resource allocation problem with an added constraint"}
 
-::: {.theorem #lp-to-standard-form}
-Every linear program is equivalent to a linear program in the standard form.
-:::
+library(ggplot2)
 
-::: {.proof}
-The proof is by explicit construction. Consider the LP in \@ref(eq:intro-lp). If LP is in the standard form, then we're done. If not, then one of the following conditions about the constraints must be true:
+ggplot() + 
+  xlim(0, 200/25) +
+  ylim(0, 200/20) +
+  geom_vline(xintercept=c(0)) +
+  geom_hline(yintercept=c(0)) +
+  theme_bw() + 
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 200/80, Inf),
+        y = c(0, 200/20, 0, 0)),
+      aes(x = x, y = y, fill = "1: 80x + 20y <= 200"),
+      inherit.aes = FALSE, alpha = 0.4) + 
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 200/25, Inf),
+        y = c(0, 200/75, 0, 0)),
+      aes(x = x, y = y, fill = "2: 25x + 75y <= 200"),
+      inherit.aes = TRUE, alpha = 0.4) +
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 3, Inf),
+        y = c(0, 3, 0, 0)),
+      aes(x = x, y = y, fill = "3: x + y <= 3"),
+      inherit.aes = TRUE, alpha = 0.4) +
+  scale_fill_discrete(name = "Constraints")
+```
+In this case, the equation for 
 
-1. One of the linear constraints is an upper bound and has the form $$a_{i1} x_1 + \dots + a_{in} x_n \geq b_i.$$
-2. One of the linear constraints is an equality and has the form $$a_{i1} x_1 + \dots + a_{in} x_n = b_i.$$
-3. One of the variables has a "negativity constraint" $x_j \leq 0$.
-4. A "positivity constraint" $x_j \geq 0$ is missing.
+```{r, resource-allocation-problem-extra-graph, echo=FALSE, warning=FALSE, fig.cap = "Optimal solution for the resource allocation problem with an added constraint"}
 
-Note that we're already assuming that the objective function is "fixed" i.e. that our goal is to maximize $\zeta$. We "fix" each of the above errors sequentially:
+library(ggplot2)
 
-**Case 1**: We multiply both sides by $-1$ giving us the desired inequality $$-a_{i1} x_1 + \dots + -a_{in} x_n \leq -b_i.$$
+ggplot() + 
+  xlim(0, 200/25) +
+  ylim(0, 200/20) +
+  geom_vline(xintercept=c(0)) +
+  geom_hline(yintercept=c(0)) +
+  theme_bw() + 
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 200/80, Inf),
+        y = c(0, 200/20, 0, 0)),
+      aes(x = x, y = y, fill = "1: 80x + 20y <= 200"),
+      inherit.aes = FALSE, alpha = 0.4) + 
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 200/25, Inf),
+        y = c(0, 200/75, 0, 0)),
+      aes(x = x, y = y, fill = "2: 25x + 75y <= 200"),
+      inherit.aes = TRUE, alpha = 0.4) +
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 3, Inf),
+        y = c(0, 3, 0, 0)),
+      aes(x = x, y = y, fill = "3: x + y <= 3"),
+      inherit.aes = TRUE, alpha = 0.4) +
+  scale_fill_discrete(name = "Constraints") + 
+  stat_function(fun = function(x) {((0.5 * 25 + 2.5 * 30) - 25*x)/30}, color = "black") +
+  geom_point(aes(x=0.5, y=2.5), color = "black") +
+  geom_text(aes(x=0.5, y=2.5), label="(0.5, 2.5)", vjust=-.5, hjust=0)
+```
 
-**Case 2**: We replace $a_{i1} x_1 + \dots + a_{in} x_n = b_i$ with two inequalities
-\begin{align*}
-a_{i1} x_1 + \dots + a_{in} x_n &\leq b_i \\
-a_{i1} x_1 + \dots + a_{in} x_n &\geq b_i
-\end{align*}
-which reduces the problem to Case 1.
-
-**Case 3**: We simply replace $x_j$ with $-x_j$ everywhere.
-
-**Case 4**: We let $x_j = x_j' - x_j''$ for two new decision variables $x_j'$ and $x_j''$ where $x_j', x_j'' \geq 0$. We can do this because any real number can written as a difference of two positive real numbers.
-
-One can show that in each step the modified LP is equivalent to the original LP (Exercise \@ref(exr:lp-to-standard-form)).
-:::
-
-## Exercises {-}
-
-::: {.exercise}
-Prove that the equivalence of linear programs is an equivalence relation.
-:::
-
-:::{.exercise #lp-to-standard-form}
-Prove that the algorithm in the proof of Theorem \@ref(thm:lp-to-standard-form) produces a linear program that is equivalent to the original linear program.
-:::
+Surprisingly, there is no way to do this systematically using algebra! And so there is no efficient algorithm to implement this method.
