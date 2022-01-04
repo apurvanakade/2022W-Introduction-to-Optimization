@@ -1,12 +1,13 @@
 eq:intro-lp
+exm:resource-allocation-problem
+exr:unlabeled-div-2
+exr:unlabeled-div-3
 eq:intro-standardized-lp
 eq:intro-standardized-lp-matrix-form
 thm:lp-to-standard-form
-exr:unlabeled-div-3
+exr:unlabeled-div-5
 exr:lp-to-standard-form
-exr:unlabeled-div-4
+exr:unlabeled-div-6
 introduction-to-linear-programming
 resource-allocation-problem
-standard-form-of-a-linear-program
 converting-lp-to-standard-form
-simplex-method

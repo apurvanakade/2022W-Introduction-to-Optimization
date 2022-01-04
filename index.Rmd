@@ -7,37 +7,6 @@ documentclass: book
 link-citations: yes
 github-repo: apurvanakade/Introduction-to-optimization
 url: 'https\://apurvanakade.github.io/Introduction-to-optimization/'
-output:
-  bookdown::gitbook:
-    config:
-      toc:
-        collapse: subsection
-        scroll_highlight: true
-        before: null
-        after: null
-      toolbar:
-        position: fixed
-      edit : null
-      download: null
-      search:
-        engine: lunr
-        options: null
-      fontsettings:
-        theme: white
-        family: sans
-        size: 2
-      sharing:
-        facebook: false
-        github: true
-        twitter: false
-        linkedin: false
-        weibo: false
-        instapaper: false
-        vk: false
-        whatsapp: false
-        all: ['github']
-      info: true
-  
 description: "Introduction to Optimization."
 
 ---
@@ -49,6 +18,8 @@ The question of optimization is the very general question of deciding when a fun
 \mbox{subject to: } && (x_1, \dots, x_n) &\in D.
 \end{align}
 These questions show up frequently in almost every quantitative field.
-But it is nigh impossible to analyze the question at this level of generality without making any further assumptions on $g$ and $D$. 
+But it is almost impossible to analyze the question at this level of generality without making any further assumptions on $g$ and $D$. 
 
-We will start with the simplest interesting functions i.e. linear functions. We'll let $g$ be a linear function and let $D$ be a region cut out by linear inequalities. The study of this problem is called Linear Programming. In spite of the simplicity of the Linear Programming setup, or perhaps because of it, LP is one of the most common used models for real world optimization questions. 
+We will start with the simplest interesting functions, namely, linear functions. We'll let $g$ be a linear function and let $D$ be a region cut out by linear (in)equalities. The study of this problem is called Linear Programming. Despite the simplicity of the Linear Programming setup, or perhaps because of it, LP is one of the most commonly used models for real world optimization problems. 
+
+Most of this course is about Linear Programming. In the first half, we'll study the simplex method, which is an algorithm for solving linear programs, and the in the second half we'll study the theory behind linear programs using duality theory.
