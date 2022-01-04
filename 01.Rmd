@@ -91,13 +91,13 @@ ggplot() +
       data = data.frame(
         x = c(0, 0, 200/80, Inf),
         y = c(0, 200/20, 0, 0)),
-      aes(x = x, y = y, fill = "Constraint 1: 80x + 20y <= 200"),
+      aes(x = x, y = y, fill = "1: 80x + 20y <= 200"),
       inherit.aes = FALSE, alpha = 0.4) + 
   geom_polygon(
       data = data.frame(
         x = c(0, 0, 200/25, Inf),
         y = c(0, 200/75, 0, 0)),
-      aes(x = x, y = y, fill = "Constraint 2: 25x + 75y <= 200"),
+      aes(x = x, y = y, fill = "2: 25x + 75y <= 200"),
       inherit.aes = TRUE, alpha = 0.4) +
   scale_fill_discrete(name = "Constraints") +
   geom_point(aes(x=2, y=2), color = "black") +
