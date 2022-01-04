@@ -105,13 +105,13 @@ ggplot() +
 ```
 
 ::: {.exercise}
-How to we know that this is the maximum profit possible? Is it possible to increase the profit by not using either of the two machines at their full capacity?
+Why is this the maximum profit possible? Is it possible to increase the profit by not using either of the two machines at their full capacity?
 :::
 
 
 ::: {.exercise}
 Consider the setup in Example \@ref(resource-allocation-problem) again. Suppose in addition, you can only store a total of 3 units of $P_1$ and $P_2$ combined each day so your production quantity should not exceed that amount. What is the new LP and the new optimal solution?
-Note that the solution $(x, y) = (2, 2)$ is no longer possible as $x + y > 3$. So, we cannot use both the machines to their maximum capacity.
+Note that the solution $(x, y) = (2, 2)$ is no longer possible. So, we cannot use both the machines to their maximum capacity.
 :::
 
 
