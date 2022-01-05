@@ -5,3 +5,4 @@ html:
 
 clean:
 	rm -rf docs/*
+	rm -rf _bookdown_files/*
