@@ -52,8 +52,8 @@ You run a company that makes two products (say, $P_1$ and $P_2$) using two machi
 ```{r, table-resource-allocation, echo=FALSE, comment=NA}
 
 df <- data.frame(
-  P1 = c(80, 20),
-  P2 = c(25, 75),
+  P1 = c(80, 25),
+  P2 = c(20, 75),
   Upper_Bounds = c(200, 200)
 )
 rownames(df) <- c("M1", "M2")
@@ -64,14 +64,14 @@ df
 We can formulate the above problem as the following linear program.
 
 ```{r, latex-resource-allocation, results = 'asis', echo = FALSE}
-ex_1_1_lp <- new_linear_program(
+ex_1_lp <- new_linear_program(
   obj = c(25, 30),
   A = matrix(c(80, 20, 25, 75), nrow = 2, byrow = TRUE),
   b = c(200, 200),
   variables = c('x', 'y')
 )
 
-cat(str_math(ex_1_1_lp))
+cat(str_math(ex_1_lp))
 ```
 
 Here $x$, $y$ are the units of $P_1$ and $P_2$ produced each day. One way to attempt this problem is to assume that we'll use both the machines as much as possible i.e. that the two inequalities are in fact equalities. We can see then that the common solution to the two is $(x_1, x_2) = (2, 2)$. For this solution the total profit is $110$ units.

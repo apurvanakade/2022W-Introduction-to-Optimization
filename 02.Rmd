@@ -1,12 +1,12 @@
-# Geometry, Equivalence, Standard form {.unnumbered .unlisted}
+# Geometry, Equivalence, Standard form 
 
 ## Using geometry to solve linear programs
-Continuing Example \@ref(resource-allocation-problem), here is one way to see that (2, 2) is indeed the optimal solution. For any constant $c$, the equation 
+Here is one way to see that $(2, 2)$ is the optimal solution to Example \@ref(resource-allocation-problem). For any constant $c$, the equation 
 \begin{equation}
   c = 25x + 30y
   (\#eq:objective-function)
 \end{equation}
-describes a line in $\mathbb{R}^2$. The points below this line have an objective value less than $c$ and the points above this line have an objective value greater than $c$. To see that $(2, 2)$ is the optimal solution, we simply need to check that the line of the form \@ref(eq:objective-function) that passes through $(2, 2)$, namely, $110 = 25x + 30y$ lies above the feasible region as seen in the following figure.
+describes a line in $\mathbb{R}^2$. The points below this line have an objective value less than $c$ and the points above this line have an objective value greater than $c$. To see that $(2, 2)$ is the optimal solution, we simply need to see that the line of the form \@ref(eq:objective-function) that passes through it, namely $110 = 25x + 30y$, lies above the feasible region as seen in the following figure.
 
 ```{r, fig-resource-allocation-line, echo=FALSE, warning=FALSE, fig.cap="The feasible region lies below the line $110 = 25x + 30y$ and intersects it at $(2, 2)$."}
 
@@ -41,7 +41,7 @@ Find an objective function $\zeta$ for which the point $(2, 2)$ is no longer an 
 
 :::
 
-We can use the same reasoning to solve Exercise \@ref(exr:resource-allocation-problem-extra). Here, the linear program is:
+We can use the same reasoning to solve Exercise \@ref(exr:resource-allocation-problem-extra), which is modelled by the following linear program.
 
 ```{r, latex-resource-allocation-extra, results = 'asis', echo = FALSE}
 ex_1_1_lp <- new_linear_program(
@@ -90,7 +90,43 @@ ggplot() +
   geom_text(aes(x=0.5, y=2.5), label="(0.5, 2.5)", vjust=-.5, hjust=0)
 ```
 
-In both the problems above, we simply found the line *by inspection*. There is no systematic way to do this using algebra! As a consequence, there is no way to create a useful algorithm out of this method. We'll see a completely new way of approaching this problem using the simplex method. 
+In both the problems above, we found the line *by inspection*. There is no efficient way to do this purely algebraically! As a consequence, there is no way to create a useful algorithm out of this method. We'll see a completely new way of approaching this problem using the simplex method. Instead of trying to find the optimal hyperplane, the simplex method jumps from vertex to vertex searching for the optimal solution. The existence of the optimal solution at a vertex is guaranteed by the following theorem.
+
+::: {.theorem #fundamental-theorem-of-LP}
+Suppose the solution set of a linear program in two variables is non-empty and bounded. Then, 
+
+1. The feasible set is a [convex polygon](https://en.wikipedia.org/wiki/Convex_polygon).
+2. The optimal value is attained at a vertex of the feasible set.
+
+:::
+This theorem also holds in more than two variables, in which case instead of a convex polygon we get a [convex polytope](https://en.wikipedia.org/wiki/Convex_polytope). The proof is in the following exercises.
+
+::: {.exercise #proof-of-fundamental-theorem-of-LP}
+Consider the following linear program 
+
+\begin{align*}
+\mbox{maximize: } && c_1 x + c_2 y & =: \zeta(x,y) \\
+\mbox{subject to: } 
+  && a_{11} x + a_{12} y & \lesseqgtr b_1 \\
+  && a_{21} x + a_{22} y & \lesseqgtr b_2 \\
+  && \vdots &  \\
+  && a_{m1} x + a_{m2} y & \lesseqgtr b_m. 
+\end{align*}
+
+Let $\mathcal{S}$ denote the feasible set. *Assume that $\mathcal{S}$ is bounded and non-empty.*   Let $P = (x_1, y_1)$ and $Q = (x_2, y_2)$ be two distinct points in $\mathbb{R}^2$. Let $R = (x_3, y_3)$ be a point lying on the line segment between $P$ and $Q$. 
+
+1. Show that $R = tP + (1-t)Q$ for some $t$ in $(0, 1)$.
+2. Show that if that both $P$ and $Q$ satisfy the constraints above, then $R$ also satisfies the constraints. 
+   Conclude that if $P$ and $Q$ are in $\mathcal{S}$ then so is $R$.
+
+  A subset of $\mathbb{R}^n$ is called **convex** if, given any two points in the subset, the subset contains the whole line segment that joins them. The above exercises show that $\mathcal{S}$ is a convex subset of $\mathbb{R}^2$. Furthermore, because it is bounded and defined using linear equations, it is a \href{https://en.wikipedia.org/wiki/Convex_polygon}{convex polygon}.
+
+3. Show that $\zeta(R) = t\zeta(P) + (1-t)\zeta(Q)$ for some $t$ in $ (0,1) $.    
+4. Show that either $\zeta(R) \le \zeta(P)$ or $\zeta(R) \le \zeta(Q)$ (or both).
+5. Let $R'$ be a point in the interior of $\mathcal{S}$. Argue that there is a point $P'$ on the boundary of $\mathcal{S}$ such that $\zeta(R') \le \zeta(P')$.
+6. Let $R''$ be a point in the interior of one of the edges of $\mathcal{S}$. Argue that there is a vertex $P''$ of $\mathcal{S}$ such that $\zeta(R'') \le \zeta(P'')$. Conclude that $\zeta$ attains its maximum value at a vertex of $\mathcal{S}$.
+
+:::  
 
 ## Equivalence of linear programs 
 
@@ -113,11 +149,59 @@ Two (maximizing) linear programs LP and LP' are said to be *equivalent* if for a
 
 :::{.remark}
 
-Even though equivalence of linear programs only requires the existence of an abstract correspondence between the feasible sets of LP and LP', in practice, one constructs linear transformations $T: \mathbb{R}^n \to \mathbb{R}^{n'}$ and $S: \mathbb{R}^{n'} \to \mathbb{R}^{n}$ which map the feasible set of LP to LP' and the feasible set of LP' to LP, respectively. These linear transformations need not be inverses of each other, or even isomorphisms. However, they do need to preserve the objective values.
+Even though equivalence of linear programs only requires the existence of an abstract correspondence between the feasible sets of LP and LP', in practice, one constructs linear transformations $T: \mathbb{R}^n \to \mathbb{R}^{n'}$ and $S: \mathbb{R}^{n'} \to \mathbb{R}^{n}$ which map the feasible set of LP to LP' and the feasible set of LP' to LP, respectively. These linear transformations need not be inverses of each other, or even isomorphisms. They only need to preserve the objective values.
 
 :::
 
-<p class="todo"> Add examples here. </p>
+::: {.example}
+The following linear programs are all equivalent to the linear program in Example \@ref(resource-allocation-problem).
+
+```{r, equiv-lp-1, results = 'asis', echo = FALSE}
+equiv_lp_1 <- new_linear_program(
+  obj = c(25, 30),
+  A = matrix(c(800, 200, 25, 75), nrow = 2, byrow = TRUE),
+  b = c(2000, 200),
+  variables = c('x', 'y')
+)
+
+equiv_lp_2 <- new_linear_program(
+  obj = c(250, 300),
+  A = matrix(c(80, 20, 25, 75), nrow = 2, byrow = TRUE),
+  b = c(20, 20),
+  variables = c('x', 'y')
+)
+
+equiv_lp_3 <- new_linear_program(
+  obj = c(25, 30),
+  A = matrix(c(80, 20, 25, 75, 2, 2), nrow = 2, byrow = TRUE),
+  b = c(200, 200, 200),
+  variables = c('x', 'y')
+)
+
+cat(str_math(equiv_lp_2))
+cat(str_math(equiv_lp_1))
+cat(str_math(equiv_lp_3))
+```
+
+:::
+
+::: {.example}
+The following two linear programs are equivalent to each other
+\begin{align*}
+\begin{aligned}
+\mbox{maximize: } && x + y & \\
+\mbox{subject to: } && 0 \le x &\le 1 \\
+ && 0 \le y &\le 1 
+\end{aligned}
+&&
+\begin{aligned}
+\mbox{maximize: } && z & \\
+\mbox{subject to: } && 0 \le z &\le 1
+\end{aligned}
+\end{align*}
+via the transformations $T(x, y) = x + y$ and $S(t) = (z/2, z/2)$.
+
+:::
 
 
 ## Standard form of linear programs
@@ -147,34 +231,30 @@ Such a linear program can be written more succinctly using vectors and matrices 
 \end{equation}
 where $x$ is now the vector of decision variables, $c$ and $b$ are vectors of real numbers, and $A$ is the matrix of constraint coefficients. This enables us to use tools from Linear Algebra to solve linear programs.
 
-<p class="todo"> Properties of the standard form.</p>
-
 ::: {.theorem #lp-to-standard-form}
 Every linear program is equivalent to a linear program in the standard form.
 :::
 
 ::: {.proof}
-The proof is by explicit construction. Consider the linear program in \@ref(eq:intro-lp), where we're assuming that the goal is to maximize the objective function. If it is in the standard form, then we're done. If not, then there must be "errors" of the following forms:
+The proof is by an explicit algorithm. Consider the linear program in \@ref(eq:intro-lp), where we're assuming that the goal is to maximize the objective function. If it is in the standard form, then we're done. If not, then there must be a finite number of *errors* of the following types:
 
 1. A linear constraint is an upper bound and has the form $$a_{i1} x_1 + \dots + a_{in} x_n \geq b_i.$$
 2. A linear constraint is an equality and has the form $$a_{i1} x_1 + \dots + a_{in} x_n = b_i.$$
-3. A variable $x_j$ has a "negativity constraint" $x_j \leq 0$.
-4. A variable $x_j$ is missing a "positivity constraint" $x_j \geq 0$.
+3. A variable $x_j$ has a *negativity constraint* $x_j \leq 0$.
+4. A variable $x_j$ is missing a *sign constraint*.
 
-**Case 1**: We multiply both sides by $-1$ giving us the constraint \[ -a_{i1} x_1 + \dots + -a_{in} x_n \leq -b_i. \]
+We *fix each error* sequentially while making sure that no new errors are introduced, thereby ensuring termination of the algorithm.
 
-**Case 2**: We replace $a_{i1} x_1 + \dots + a_{in} x_n = b_i$ with two inequalities
-\begin{align*}
-a_{i1} x_1 + \dots + a_{in} x_n &\leq b_i \\
-a_{i1} x_1 + \dots + a_{in} x_n &\geq b_i
-\end{align*}
-which reduces the problem to Case 1.
+1. We replace the constraint with \[ -a_{i1} x_1 + \dots + -a_{in} x_n \leq -b_i. \]
+2. We replace the constraint with two constraints
+  \begin{align*}
+  a_{i1} x_1 + \dots + a_{in} x_n &\leq b_i \\
+  -a_{i1} x_1 - \dots - a_{in} x_n &\leq -b_i,
+  \end{align*}
+3. We let $y_j = -x_j$ and create a new linear program using the variables $x_1$, $\dots$, $x_{j-1}$, $y_j$, $x_{j+1}$, $\dots$, $x_n$ by replacing $x_j$ with $-y_j$ everywhere.
+4. We let $x_j = y_j - z_j$ for two new decision variables $y_j$ and $z_j$ with $y_j, z_j \geq 0$ and create a new linear program using the variables $x_1$, $\dots$, $x_{j-1}$, $y_j$, $z_j$, $x_{j+1}$, $\dots$, $x_n$ by replacing $x_j$ with $y_j - z_j$ everywhere. We can do this because any real number can written as a difference of two positive real numbers.
 
-**Case 3**: We let $y_j = -x_j$ and create a new linear program using the variables $x_1$, $\dots$, $x_{j-1}$, $y_j$, $x_{j+1}$, $\dots$, $x_n.$
-
-**Case 4**: We let $x_j = x_j' - x_j''$ for two new decision variables $x_j'$ and $x_j''$ where $x_j', x_j'' \geq 0$. We can do this because any real number can written as a difference of two positive real numbers.
-
-One can show that in each step the modified LP is equivalent to the original LP (Exercise \@ref(exr:lp-to-standard-form)).
+One can show that in each step the modified LP is equivalent to the original LP.
 :::
 
 :::{.exercise #lp-to-standard-form}

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Day 2 Geometry, Equivalence, Standard form | Introduction to Optimization</title>
+  <meta name="description" content="Day 2 Geometry, Equivalence, Standard form | Introduction to Optimization." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Day 2 Geometry, Equivalence, Standard form | Introduction to Optimization" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://apurvanakade.github.io/Introduction-to-optimization/" />
+  
+  <meta property="og:description" content="Day 2 Geometry, Equivalence, Standard form | Introduction to Optimization." />
+  <meta name="github-repo" content="apurvanakade/Introduction-to-optimization" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Day 2 Geometry, Equivalence, Standard form | Introduction to Optimization" />
+  
+  <meta name="twitter:description" content="Day 2 Geometry, Equivalence, Standard form | Introduction to Optimization." />
+  
+
+<meta name="author" content="Apurva Nakade" />
+
+
+<meta name="date" content="2022-01-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-linear-programming.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-linear-programming.html"><a href="introduction-to-linear-programming.html"><i class="fa fa-check"></i><b>1</b> Introduction to Linear Programming</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-linear-programming.html"><a href="introduction-to-linear-programming.html#resource-allocation-problem"><i class="fa fa-check"></i><b>1.1</b> Resource allocation problem</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html"><i class="fa fa-check"></i><b>2</b> Geometry, Equivalence, Standard form</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#using-geometry-to-solve-linear-programs"><i class="fa fa-check"></i><b>2.1</b> Using geometry to solve linear programs</a></li>
+<li class="chapter" data-level="2.2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#equivalence-of-linear-programs"><i class="fa fa-check"></i><b>2.2</b> Equivalence of linear programs</a></li>
+<li class="chapter" data-level="2.3" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#standard-form-of-linear-programs"><i class="fa fa-check"></i><b>2.3</b> Standard form of linear programs</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Optimization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="geometry-equivalence-standard-form" class="section level1" number="2">
+<h1><span class="header-section-number">Day 2</span> Geometry, Equivalence, Standard form</h1>
+<div id="using-geometry-to-solve-linear-programs" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Using geometry to solve linear programs</h2>
+<p>Here is one way to see that <span class="math inline">\((2, 2)\)</span> is the optimal solution to Example <a href="introduction-to-linear-programming.html#resource-allocation-problem">1.1</a>. For any constant <span class="math inline">\(c\)</span>, the equation
+<span class="math display" id="eq:objective-function">\[\begin{equation}
+  c = 25x + 30y
+  \tag{2.1}
+\end{equation}\]</span>
+describes a line in <span class="math inline">\(\mathbb{R}^2\)</span>. The points below this line have an objective value less than <span class="math inline">\(c\)</span> and the points above this line have an objective value greater than <span class="math inline">\(c\)</span>. To see that <span class="math inline">\((2, 2)\)</span> is the optimal solution, we simply need to see that the line of the form <a href="geometry-equivalence-standard-form.html#eq:objective-function">(2.1)</a> that passes through it, namely <span class="math inline">\(110 = 25x + 30y\)</span>, lies above the feasible region as seen in the following figure.</p>
+<div class="figure"><span style="display:block;" id="fig:fig-resource-allocation-line"></span>
+<img src="Introduction-to-Optimization_files/figure-html/fig-resource-allocation-line-1.png" alt="The feasible region lies below the line $110 = 25x + 30y$ and intersects it at $(2, 2)$." width="672" />
+<p class="caption">
+Figure 2.1: The feasible region lies below the line <span class="math inline">\(110 = 25x + 30y\)</span> and intersects it at <span class="math inline">\((2, 2)\)</span>.
+</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 2.1  </strong></span>Find an objective function <span class="math inline">\(\zeta\)</span> for which the point <span class="math inline">\((2, 2)\)</span> is no longer an optimal solution.</p>
+</div>
+<p>We can use the same reasoning to solve Exercise <a href="introduction-to-linear-programming.html#exr:resource-allocation-problem-extra">1.2</a>, which is modelled by the following linear program.</p>
+<p><span class="math display">\[\begin{align*}
+\mbox{maximize: } &amp;&amp; 25x + 30y &amp; \\ 
+\mbox{subject to: } &amp;&amp; 80x + 20y &amp; \le 200 \\ 
+ &amp;&amp; 25x + 75y &amp; \le 200 \\ 
+ &amp;&amp; 1x + 1y &amp; \le 3 \\ 
+ &amp;&amp; x, y &amp; \ge 0
+\end{align*}\]</span></p>
+<p>The line of the form <a href="geometry-equivalence-standard-form.html#eq:objective-function">(2.1)</a> for which the entire feasible region lies below it and which intersects the feasible region is <span class="math inline">\(87.5 = 25x + 30y\)</span> and it passes through <span class="math inline">\((0.5, 2.5)\)</span>. Here, instead of maximizing the time spend on each machine, we’re maximizing the amount of resources produced and the time spent on the second machine <span class="math inline">\(M_2\)</span>. As a result, our profit dropped from <span class="math inline">\(110\)</span> to <span class="math inline">\(87.5\)</span>.</p>
+<div class="figure"><span style="display:block;" id="fig:fig-resource-allocation-extra-line"></span>
+<img src="Introduction-to-Optimization_files/figure-html/fig-resource-allocation-extra-line-1.png" alt="The feasible region lies below the line $87.5 = 25x + 30y$ and intersects it at $(0.5, 2.5)$." width="672" />
+<p class="caption">
+Figure 2.2: The feasible region lies below the line <span class="math inline">\(87.5 = 25x + 30y\)</span> and intersects it at <span class="math inline">\((0.5, 2.5)\)</span>.
+</p>
+</div>
+<p>In both the problems above, we found the line <em>by inspection</em>. There is no efficient way to do this purely algebraically! As a consequence, there is no way to create a useful algorithm out of this method. We’ll see a completely new way of approaching this problem using the simplex method. Instead of trying to find the optimal hyperplane, the simplex method jumps from vertex to vertex searching for the optimal solution. The existence of the optimal solution at a vertex is guaranteed by the following theorem.</p>
+<div class="theorem">
+<p><span id="thm:fundamental-theorem-of-LP" class="theorem"><strong>Theorem 2.1  </strong></span>Suppose the solution set of a linear program in two variables is non-empty and bounded. Then,</p>
+<ol style="list-style-type: decimal">
+<li>The feasible set is a <a href="https://en.wikipedia.org/wiki/Convex_polygon">convex polygon</a>.</li>
+<li>The optimal value is attained at a vertex of the feasible set.</li>
+</ol>
+</div>
+<p>This theorem also holds in more than two variables, in which case instead of a convex polygon we get a <a href="https://en.wikipedia.org/wiki/Convex_polytope">convex polytope</a>. The proof is in the following exercises.</p>
+<div class="exercise">
+<p><span id="exr:proof-of-fundamental-theorem-of-LP" class="exercise"><strong>Exercise 2.2  </strong></span>Consider the following linear program</p>
+<p><span class="math display">\[\begin{align*}
+\mbox{maximize: } &amp;&amp; c_1 x + c_2 y &amp; =: \zeta(x,y) \\
+\mbox{subject to: } 
+  &amp;&amp; a_{11} x + a_{12} y &amp; \lesseqgtr b_1 \\
+  &amp;&amp; a_{21} x + a_{22} y &amp; \lesseqgtr b_2 \\
+  &amp;&amp; \vdots &amp;  \\
+  &amp;&amp; a_{m1} x + a_{m2} y &amp; \lesseqgtr b_m. 
+\end{align*}\]</span></p>
+<p>Let <span class="math inline">\(\mathcal{S}\)</span> denote the feasible set. <em>Assume that <span class="math inline">\(\mathcal{S}\)</span> is bounded and non-empty.</em> Let <span class="math inline">\(P = (x_1, y_1)\)</span> and <span class="math inline">\(Q = (x_2, y_2)\)</span> be two distinct points in <span class="math inline">\(\mathbb{R}^2\)</span>. Let <span class="math inline">\(R = (x_3, y_3)\)</span> be a point lying on the line segment between <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>Show that <span class="math inline">\(R = tP + (1-t)Q\)</span> for some <span class="math inline">\(t\)</span> in <span class="math inline">\((0, 1)\)</span>.</li>
+<li>Show that if that both <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> satisfy the constraints above, then <span class="math inline">\(R\)</span> also satisfies the constraints.
+Conclude that if <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are in <span class="math inline">\(\mathcal{S}\)</span> then so is <span class="math inline">\(R\)</span>.</li>
+</ol>
+<p>A subset of <span class="math inline">\(\mathbb{R}^n\)</span> is called <strong>convex</strong> if, given any two points in the subset, the subset contains the whole line segment that joins them. The above exercises show that <span class="math inline">\(\mathcal{S}\)</span> is a convex subset of <span class="math inline">\(\mathbb{R}^2\)</span>. Furthermore, because it is bounded and defined using linear equations, it is a .</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Show that <span class="math inline">\(\zeta(R) = t\zeta(P) + (1-t)\zeta(Q)\)</span> for some <span class="math inline">\(t\)</span> in $ (0,1) $.<br />
+</li>
+<li>Show that either <span class="math inline">\(\zeta(R) \le \zeta(P)\)</span> or <span class="math inline">\(\zeta(R) \le \zeta(Q)\)</span> (or both).</li>
+<li>Let <span class="math inline">\(R&#39;\)</span> be a point in the interior of <span class="math inline">\(\mathcal{S}\)</span>. Argue that there is a point <span class="math inline">\(P&#39;\)</span> on the boundary of <span class="math inline">\(\mathcal{S}\)</span> such that <span class="math inline">\(\zeta(R&#39;) \le \zeta(P&#39;)\)</span>.</li>
+<li>Let <span class="math inline">\(R&#39;&#39;\)</span> be a point in the interior of one of the edges of <span class="math inline">\(\mathcal{S}\)</span>. Argue that there is a vertex <span class="math inline">\(P&#39;&#39;\)</span> of <span class="math inline">\(\mathcal{S}\)</span> such that <span class="math inline">\(\zeta(R&#39;&#39;) \le \zeta(P&#39;&#39;)\)</span>. Conclude that <span class="math inline">\(\zeta\)</span> attains its maximum value at a vertex of <span class="math inline">\(\mathcal{S}\)</span>.</li>
+</ol>
+</div>
+</div>
+<div id="equivalence-of-linear-programs" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Equivalence of linear programs</h2>
+<p>Before we get to the simplex method, we’ll need to <em>standardize</em> our linear programs.</p>
+<p>The first step is to notice that every linear program can be changed to a <em>maximization problem</em> as minimizing a function <span class="math inline">\(\zeta\)</span> is the same as maximizing the function <span class="math inline">\(-\zeta\)</span>.</p>
+<blockquote>
+<p><strong>From now on, we’ll assume that the goal of our linear programs is to <em>maximize</em> the objective function.</strong></p>
+</blockquote>
+<p>Two (maximizing) linear programs LP and LP’ are said to be <em>equivalent</em> if for any feasible solution <span class="math inline">\((x_1, \dots, x_n)\)</span> to LP, there exists a feasible solution <span class="math inline">\((x&#39;_1, x&#39;_2, \dots, x&#39;_{n&#39;})\)</span> to LP’ with the same objective value <span class="math display">\[ \zeta(x_1, \dots, x_n) = \zeta&#39;(x&#39;_1, x&#39;_2, \dots, x&#39;_{n&#39;}), \]</span> and vice versa. Thus solving LP is equivalent to LP’.</p>
+<div class="remark">
+<p><span id="lp-equiv-definition" class="remark"><em>Remark</em>. </span> </p>
+<ol style="list-style-type: decimal">
+<li>LP and LP’ can have a different number of decision variables i.e. we do not require <span class="math inline">\(n = n&#39;.\)</span></li>
+<li>There need not be a one-to-one correspondence between the feasible sets of LP and LP’ i.e. for a feasible solution to LP there could be multiple feasible solutions with the same objective value. Similarly, in the other direction.</li>
+</ol>
+</div>
+<div class="remark">
+<p><span id="unlabeled-div-4" class="remark"><em>Remark</em>. </span>Even though equivalence of linear programs only requires the existence of an abstract correspondence between the feasible sets of LP and LP’, in practice, one constructs linear transformations <span class="math inline">\(T: \mathbb{R}^n \to \mathbb{R}^{n&#39;}\)</span> and <span class="math inline">\(S: \mathbb{R}^{n&#39;} \to \mathbb{R}^{n}\)</span> which map the feasible set of LP to LP’ and the feasible set of LP’ to LP, respectively. These linear transformations need not be inverses of each other, or even isomorphisms. They only need to preserve the objective values.</p>
+</div>
+<div class="example">
+<p><span id="exm:unlabeled-div-5" class="example"><strong>Example 2.1  </strong></span>The following linear programs are all equivalent to the linear program in Example <a href="introduction-to-linear-programming.html#resource-allocation-problem">1.1</a>.</p>
+<p><span class="math display">\[\begin{align*}
+\mbox{maximize: } &amp;&amp; 250x + 300y &amp; \\ 
+\mbox{subject to: } &amp;&amp; 80x + 20y &amp; \le 20 \\ 
+ &amp;&amp; 25x + 75y &amp; \le 20 \\ 
+ &amp;&amp; x, y &amp; \ge 0
+\end{align*}\]</span><span class="math display">\[\begin{align*}
+\mbox{maximize: } &amp;&amp; 25x + 30y &amp; \\ 
+\mbox{subject to: } &amp;&amp; 800x + 200y &amp; \le 2000 \\ 
+ &amp;&amp; 25x + 75y &amp; \le 200 \\ 
+ &amp;&amp; x, y &amp; \ge 0
+\end{align*}\]</span><span class="math display">\[\begin{align*}
+\mbox{maximize: } &amp;&amp; 25x + 30y &amp; \\ 
+\mbox{subject to: } &amp;&amp; 80x + 20y &amp; \le 200 \\ 
+ &amp;&amp; 25x + 75y &amp; \le 200 \\ 
+ &amp;&amp; 2x + 2y &amp; \le 200 \\ 
+ &amp;&amp; x, y &amp; \ge 0
+\end{align*}\]</span></p>
+</div>
+<div class="example">
+<p><span id="exm:unlabeled-div-6" class="example"><strong>Example 2.2  </strong></span>The following two linear programs are equivalent to each other
+<span class="math display">\[\begin{align*}
+\begin{aligned}
+\mbox{maximize: } &amp;&amp; x + y &amp; \\
+\mbox{subject to: } &amp;&amp; 0 \le x &amp;\le 1 \\
+ &amp;&amp; 0 \le y &amp;\le 1 
+\end{aligned}
+&amp;&amp;
+\begin{aligned}
+\mbox{maximize: } &amp;&amp; z &amp; \\
+\mbox{subject to: } &amp;&amp; 0 \le z &amp;\le 1
+\end{aligned}
+\end{align*}\]</span>
+via the transformations <span class="math inline">\(T(x, y) = x + y\)</span> and <span class="math inline">\(S(t) = (z/2, z/2)\)</span>.</p>
+</div>
+</div>
+<div id="standard-form-of-linear-programs" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Standard form of linear programs</h2>
+<p>A linear program of the following form is said to be in a <em>standard form</em>:
+<span class="math display" id="eq:intro-standardized-lp">\[\begin{equation}
+  \begin{aligned}
+    \mbox{maximize: } &amp;&amp; c_1 x_1 + \dots + c_n x_n &amp; \\
+    \mbox{subject to: } 
+      &amp;&amp; a_{11} x_1 + \dots + a_{1n} x_n &amp; \leq b_1 \\
+      &amp;&amp; a_{21} x_1 + \dots + a_{2n} x_n &amp; \leq b_2 \\
+      &amp;&amp; \vdots &amp;  \\
+      &amp;&amp; a_{m1} x_1 + \dots + a_{mn} x_n &amp; \leq b_m \\
+      &amp;&amp; x_1, \dots, x_n &amp; \geq 0.
+  \end{aligned}
+  \tag{2.2}
+\end{equation}\]</span>
+Such a linear program can be written more succinctly using vectors and matrices as follows.
+<span class="math display" id="eq:intro-standardized-lp-matrix-form">\[\begin{equation}
+  \begin{aligned}
+    \mbox{maximize: } &amp;&amp; c^T x &amp; \\
+    \mbox{subject to: } 
+      &amp;&amp; A x &amp; \leq b \\
+      &amp;&amp; x &amp; \geq 0.
+  \end{aligned}
+  \tag{2.3}
+\end{equation}\]</span>
+where <span class="math inline">\(x\)</span> is now the vector of decision variables, <span class="math inline">\(c\)</span> and <span class="math inline">\(b\)</span> are vectors of real numbers, and <span class="math inline">\(A\)</span> is the matrix of constraint coefficients. This enables us to use tools from Linear Algebra to solve linear programs.</p>
+<div class="theorem">
+<p><span id="thm:lp-to-standard-form" class="theorem"><strong>Theorem 2.2  </strong></span>Every linear program is equivalent to a linear program in the standard form.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-7" class="proof"><em>Proof</em>. </span>The proof is by an explicit algorithm. Consider the linear program in <a href="introduction-to-linear-programming.html#eq:intro-lp">(1.1)</a>, where we’re assuming that the goal is to maximize the objective function. If it is in the standard form, then we’re done. If not, then there must be a finite number of <em>errors</em> of the following types:</p>
+<ol style="list-style-type: decimal">
+<li>A linear constraint is an upper bound and has the form <span class="math display">\[a_{i1} x_1 + \dots + a_{in} x_n \geq b_i.\]</span></li>
+<li>A linear constraint is an equality and has the form <span class="math display">\[a_{i1} x_1 + \dots + a_{in} x_n = b_i.\]</span></li>
+<li>A variable <span class="math inline">\(x_j\)</span> has a <em>negativity constraint</em> <span class="math inline">\(x_j \leq 0\)</span>.</li>
+<li>A variable <span class="math inline">\(x_j\)</span> is missing a <em>sign constraint</em>.</li>
+</ol>
+<p>We <em>fix each error</em> sequentially while making sure that no new errors are introduced, thereby ensuring termination of the algorithm.</p>
+<ol style="list-style-type: decimal">
+<li>We replace the constraint with <span class="math display">\[ -a_{i1} x_1 + \dots + -a_{in} x_n \leq -b_i. \]</span></li>
+<li>We replace the constraint with two constraints
+<span class="math display">\[\begin{align*}
+  a_{i1} x_1 + \dots + a_{in} x_n &amp;\leq b_i \\
+  -a_{i1} x_1 - \dots - a_{in} x_n &amp;\leq -b_i,
+  \end{align*}\]</span></li>
+<li>We let <span class="math inline">\(y_j = -x_j\)</span> and create a new linear program using the variables <span class="math inline">\(x_1\)</span>, <span class="math inline">\(\dots\)</span>, <span class="math inline">\(x_{j-1}\)</span>, <span class="math inline">\(y_j\)</span>, <span class="math inline">\(x_{j+1}\)</span>, <span class="math inline">\(\dots\)</span>, <span class="math inline">\(x_n\)</span> by replacing <span class="math inline">\(x_j\)</span> with <span class="math inline">\(-y_j\)</span> everywhere.</li>
+<li>We let <span class="math inline">\(x_j = y_j - z_j\)</span> for two new decision variables <span class="math inline">\(y_j\)</span> and <span class="math inline">\(z_j\)</span> with <span class="math inline">\(y_j, z_j \geq 0\)</span> and create a new linear program using the variables <span class="math inline">\(x_1\)</span>, <span class="math inline">\(\dots\)</span>, <span class="math inline">\(x_{j-1}\)</span>, <span class="math inline">\(y_j\)</span>, <span class="math inline">\(z_j\)</span>, <span class="math inline">\(x_{j+1}\)</span>, <span class="math inline">\(\dots\)</span>, <span class="math inline">\(x_n\)</span> by replacing <span class="math inline">\(x_j\)</span> with <span class="math inline">\(y_j - z_j\)</span> everywhere. We can do this because any real number can written as a difference of two positive real numbers.</li>
+</ol>
+<p>One can show that in each step the modified LP is equivalent to the original LP.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:lp-to-standard-form" class="exercise"><strong>Exercise 2.3  </strong></span>Prove that the algorithm in the proof of Theorem <a href="geometry-equivalence-standard-form.html#thm:lp-to-standard-form">2.2</a> produces a linear program that is equivalent to the original linear program.</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-linear-programming.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": "github"
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
