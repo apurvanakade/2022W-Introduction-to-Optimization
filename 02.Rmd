@@ -12,25 +12,7 @@ describes a line in $\mathbb{R}^2$. The points below this line have an objective
 
 library(ggplot2)
 
-ggplot() + 
-  xlim(0, 200/25) +
-  ylim(0, 200/20) +
-  geom_vline(xintercept=c(0), alpha = 0.4) +
-  geom_hline(yintercept=c(0), alpha = 0.4) +
-  theme_bw() + 
-  geom_polygon(
-      data = data.frame(
-        x = c(0, 0, 200/80, Inf),
-        y = c(0, 200/20, 0, 0)),
-      aes(x = x, y = y, fill = "1: 80x + 20y <= 200"),
-      inherit.aes = FALSE, alpha = 0.4) + 
-  geom_polygon(
-      data = data.frame(
-        x = c(0, 0, 200/25, Inf),
-        y = c(0, 200/75, 0, 0)),
-      aes(x = x, y = y, fill = "2: 25x + 75y <= 200"),
-      inherit.aes = TRUE, alpha = 0.4) +
-  scale_fill_discrete(name = "Constraints") +
+resource_allocation_plot + 
   geom_point(aes(x=2, y=2), color = "black") +
   geom_text(aes(x=2, y=2), label="(2, 2)", vjust=-.5, hjust=0) +
   stat_function(fun = function(x) {(110 - 25*x)/30}, color = "black")
@@ -60,30 +42,14 @@ The line of the form \@ref(eq:objective-function) for which the entire feasible 
 
 library(ggplot2)
 
-ggplot() + 
-  xlim(0, 200/25) +
-  ylim(0, 200/20) +
-  geom_vline(xintercept=c(0), alpha=0.4) +
-  geom_hline(yintercept=c(0), alpha=0.4) +
-  theme_bw() + 
-  geom_polygon(
-      data = data.frame(
-        x = c(0, 0, 200/80, Inf),
-        y = c(0, 200/20, 0, 0)),
-      aes(x = x, y = y, fill = "1: 80x + 20y <= 200"),
-      inherit.aes = FALSE, alpha = 0.4) + 
-  geom_polygon(
-      data = data.frame(
-        x = c(0, 0, 200/25),
-        y = c(0, 200/75, 0)),
-      aes(x = x, y = y, fill = "2: 25x + 75y <= 200"),
-      inherit.aes = TRUE, alpha = 0.4) +
-  geom_polygon(
+resource_allocation_extra_plot <- resource_allocation_plot + geom_polygon(
       data = data.frame(
         x = c(0, 0, 3),
         y = c(0, 3, 0)),
       aes(x = x, y = y, fill = "3: x + y <= 3"),
-      inherit.aes = TRUE, alpha = 0.4) +
+      inherit.aes = TRUE, alpha = 0.4)
+
+resource_allocation_extra_plot +
   scale_fill_discrete(name = "Constraints") + 
   stat_function(fun = function(x) {((0.5 * 25 + 2.5 * 30) - 25*x)/30}, color = "black") +
   geom_point(aes(x=0.5, y=2.5), color = "black") +

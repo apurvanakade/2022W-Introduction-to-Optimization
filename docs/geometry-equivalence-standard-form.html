@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-05" />
+<meta name="date" content="2022-01-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="introduction-to-linear-programming.html"/>
-
+<link rel="next" href="the-simplex-method.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -82,6 +82,11 @@
 <li class="chapter" data-level="2.2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#equivalence-of-linear-programs"><i class="fa fa-check"></i><b>2.2</b> Equivalence of linear programs</a></li>
 <li class="chapter" data-level="2.3" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#standard-form-of-linear-programs"><i class="fa fa-check"></i><b>2.3</b> Standard form of linear programs</a></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="the-simplex-method.html"><a href="the-simplex-method.html"><i class="fa fa-check"></i><b>3</b> The Simplex Method</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="the-simplex-method.html"><a href="the-simplex-method.html#the-simplex-method-example"><i class="fa fa-check"></i><b>3.1</b> The Simplex Method: Example</a></li>
+<li class="chapter" data-level="3.2" data-path="the-simplex-method.html"><a href="the-simplex-method.html#the-simplex-method-algorithm"><i class="fa fa-check"></i><b>3.2</b> The Simplex Method: Algorithm</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -127,6 +132,8 @@ Figure 2.1: The feasible region lies below the line <span class="math inline">\(
  &amp;&amp; x, y &amp; \ge 0
 \end{align*}\]</span></p>
 <p>The line of the form <a href="geometry-equivalence-standard-form.html#eq:objective-function">(2.1)</a> for which the entire feasible region lies below it and which intersects the feasible region is <span class="math inline">\(87.5 = 25x + 30y\)</span> and it passes through <span class="math inline">\((0.5, 2.5)\)</span>. Here, instead of maximizing the time spend on each machine, we’re maximizing the amount of resources produced and the time spent on the second machine <span class="math inline">\(M_2\)</span>. As a result, our profit dropped from <span class="math inline">\(110\)</span> to <span class="math inline">\(87.5\)</span>.</p>
+<pre><code>## Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;, which
+## will replace the existing scale.</code></pre>
 <div class="figure"><span style="display:block;" id="fig:fig-resource-allocation-extra-line"></span>
 <img src="Introduction-to-Optimization_files/figure-html/fig-resource-allocation-extra-line-1.png" alt="The feasible region lies below the line $87.5 = 25x + 30y$ and intersects it at $(0.5, 2.5)$." width="672" />
 <p class="caption">
@@ -284,8 +291,8 @@ where <span class="math inline">\(x\)</span> is now the vector of decision varia
           </div>
         </div>
       </div>
-<a href="introduction-to-linear-programming.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="introduction-to-linear-programming.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-simplex-method.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -331,7 +338,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "subsection",
+"collapse": "section",
 "scroll_highlight": true
 },
 "toolbar": {

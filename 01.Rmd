@@ -80,7 +80,7 @@ Here $x$, $y$ are the units of $P_1$ and $P_2$ produced each day. One way to att
 
 library(ggplot2)
 
-ggplot() + 
+resource_allocation_plot <- ggplot() + 
   xlim(0, 200/25) +
   ylim(0, 200/20) +
   geom_vline(xintercept=c(0), alpha = 0.4) +
@@ -98,7 +98,9 @@ ggplot() +
         y = c(0, 200/75, 0)),
       aes(x = x, y = y, fill = "2: 25x + 75y <= 200"),
       inherit.aes = TRUE, alpha = 0.4) +
-  scale_fill_discrete(name = "Constraints") +
+  scale_fill_discrete(name = "Constraints")
+
+  resource_allocation_plot +
   geom_point(aes(x=2, y=2), color = "black") +
   geom_text(aes(x=2, y=2), label="(2, 2)", vjust=-.5, hjust=-.5)
 ```

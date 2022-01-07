@@ -1,0 +1,99 @@
+# The Simplex Method
+
+## The Simplex Method: Example
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  comment = NA, echo = FALSE
+)
+source("R/dictionaries.R", local = knitr::knit_global())
+```
+
+The simplex method jumps from vertex of the feasible region to find the optimal solution. It is best demonstrated using an example. 
+
+Consider the linear program in Example \@ref(resource-allocation-problem). There are 6 different points at which the lines corresponding to the constraints intersect. 
+
+```{r, resource-allocation-intersections}
+library(ggplot2)
+
+resource_allocation_plot +
+  geom_point(aes(x=2, y=2)) +
+  geom_point(aes(x=200/80, y=0)) +
+  geom_point(aes(x=0, y=200/20)) +
+  geom_point(aes(x=200/25, y=0)) +
+  geom_point(aes(x=0, y=200/75)) +
+  geom_point(aes(x=0, y=0))
+```
+
+The first algebraic trick is to introduce *slack variables*  $x_3$, $x_4$ using the constraints as follows.
+
+\begin{equation}
+``` {r, resource-allocation-dictionary, results="asis"}
+x <- new_dictionary(
+  objective = c(0, 25, 30),
+  coefficients = matrix(c(80, 20, 25, 75), nrow = 2, byrow = TRUE),
+  constants = c(200, 200),
+  basic_variables = c("x_1", "x_2"),
+  non_basic_variables = c("x_3", "x_4")
+)
+cat(str(x))
+```
+(\#eq:resource-allocation-dictionary)
+\end{equation}
+
+In addition to these constraints, we also have the positivity constraints $x_1, x_2, x_3, x_4 \ge 0$, which we won't explicitly write from now on. Using these new variables, the points of intersection be written as intersections of the lines $x_i = 0$ and $x_j = 0$, as $i$ and $j$ vary over the index set ${1, 2, 3, 4}$. 
+
+```{r, resource-allocation-intersections-labeled}
+library(ggplot2)
+
+resource_allocation_plot +
+  geom_point(aes(x=0, y=0, color="x_1 = 0, x_2 = 0")) +
+  geom_point(aes(x=0, y=200/20, color="x_1 = 0, x_3 = 0")) +
+  geom_point(aes(x=0, y=200/75, color="x_1 = 0, x_4 = 0")) +
+  geom_point(aes(x=200/80, y=0, color="x_2 = 0, x_3 = 0")) +
+  geom_point(aes(x=200/25, y=0, color="x_2 = 0, x_4 = 0")) +
+  geom_point(aes(x=2, y=2, color="x_3 = 0, x_4 = 0")) +
+  scale_colour_brewer("Intersection points", palette = "Dark2")
+```
+
+1. We start with the guess: $x_1 = 0, x_2 = 0, x_3 = 200, x_4 = 200$. 
+    1. Choose variable: At this point, $\zeta = 0$. We can increase $\zeta$ by increasing either $x_1$ or $x_2$. Let's choose $x_1$ for now.
+    2. To not violate the positivity of $x_3$, $x_4$, we can only increase $x_1$ so that both $200 \ge 80x_1$ and $200 \ge 25x_1$. The maximum such $x_1$ is $200/80$ and this makes $x_3 = 0$.
+    3. We rewrite $x_1$ in terms of $x_3$ and $x_2$ as $x_1 = 5/2 - 1/80 x_3 - 1/4 x_2$ and replace it everywhere to get the new linear program.
+    \begin{equation}
+    ``` {r, resource-allocation-dictionary-step1, results="asis"}
+    x <- new_dictionary(
+      objective = c(125/2, -5/16, 95/4),
+      coefficients = matrix(c(1/80, 1/4, 5/16, 275/4), nrow = 2, byrow = TRUE),
+      constants = c(5/2, 275/2),
+      basic_variables = c("x_3", "x_2"),
+      non_basic_variables = c("x_1", "x_4")
+    )
+    cat(str(x))
+    ```
+    (\#eq:resource-allocation-dictionary-step-1)
+    \end{equation}
+2. Our new guess is: $x_1 = 2.5, x_2 = 0, x_3 = 0, x_4 = 137.5$. 
+    1. Choose variable: The coefficient of $x_3$ in the objective function is negative. So increasing it will decrease the objective value. The only variable we can increase in the objective function is $x_2$.
+    2. To not violate the positivity of $x_1$, $x_4$, we can only increase $x_3$ so that both $2.5 \ge 0.25x_1$ and $137.5 \ge 68.75x_1$. The maximum such $x_1$ is $\min(2.5/0.25, 137.5/68.75) = 137.5/68.75 = 2$ and this makes $x_4 = 0$.
+    3. We rewrite $x_2$ in terms of $x_3$ and $x_4$ as $x_1 = 2 + 37/8127 x_3 - 4/275 x_4$ and replace it everywhere to get the new linear program.
+    \begin{equation}
+    ``` {r, resource-allocation-dictionary-step2, results="asis"}
+    x <- new_dictionary(
+      objective = c(110, -189/903, -19/55),
+      coefficients = matrix(c(115/8134, 1/275, -37/8127, 4/275), nrow = 2, byrow = TRUE),
+      constants = c(2, 2),
+      basic_variables = c("x_3", "x_4"),
+      non_basic_variables = c("x_1", "x_2")
+    )
+    cat(str(x))
+    ```
+    (\#eq:resource-allocation-dictionary-step-2)
+    \end{equation}
+3. Our new guess is: $x_1 = 2, x_2 = 2, x_3 = 0, x_4 = 0$. 
+    1. Choose variable: The coefficients of both the variables that appear in $\zeta$ are negative. So it is not possible to increase either variable without decreasing the objective value. The simplex algorithm halts. 
+
+The optimal objective value $100$ is the constant coefficient in the final $\zeta$.
+
+
+## The Simplex Method: Algorithm

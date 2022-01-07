@@ -15,9 +15,15 @@ eq:intro-standardized-lp
 eq:intro-standardized-lp-matrix-form
 thm:lp-to-standard-form
 exr:lp-to-standard-form
+eq:resource-allocation-dictionary
+eq:resource-allocation-dictionary-step-1
+eq:resource-allocation-dictionary-step-2
 introduction-to-linear-programming
 resource-allocation-problem
 geometry-equivalence-standard-form
 using-geometry-to-solve-linear-programs
 equivalence-of-linear-programs
 standard-form-of-linear-programs
+the-simplex-method
+the-simplex-method-example
+the-simplex-method-algorithm
