@@ -118,7 +118,7 @@ x_1, \: x_2 \ge 0
 \end{equation}\]</span></p>
 <p>The optimal solution is <span class="math inline">\((x_1, x_2) = (2, 4)\)</span> with objective value <span class="math inline">\(6\)</span>. There are 6 different points at which the lines corresponding to the constraints intersect. We’ll start with the vertex <span class="math inline">\((0,0)\)</span> and make our way up to <span class="math inline">\((2, 4)\)</span>.</p>
 <p><img src="Introduction-to-Optimization_files/figure-html/simplex-example-plot-1.png" width="672" /></p>
-<p>The first and arguably the most important trick in the simplex method is to introduce <em>slack variables</em> <span class="math inline">\(x_3\)</span> and <span class="math inline">\(x_4\)</span>, one for each constraint, as shown below, and create a new linear program called a <em>dictionary</em> which is equivalent to <a href="the-simplex-method---example.html#eq:simplex-example">(3.1)</a></p>
+<p>The first, and arguably the most important trick in the simplex method is the introduction of <em>slack variables</em> <span class="math inline">\(x_3\)</span> and <span class="math inline">\(x_4\)</span>, one for each constraint, as shown below, to create a new linear program called a <em>dictionary</em> which is equivalent to <a href="the-simplex-method---example.html#eq:simplex-example">(3.1)</a></p>
 <p><span class="math display" id="eq:simplex-example-dictionary">\[\begin{equation}
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; \zeta &amp;=&amp;0&amp; + &amp;1x_1 &amp;+&amp; 1x_2 \\ 
@@ -129,7 +129,7 @@ x_1, \: x_2 \ge 0
 x_1, \: x_2, \: x_3, \: x_4 \ge 0
 \tag{3.2}
 \end{equation}\]</span></p>
-<p>Using these new variables, the points of intersection can be written as intersections of the lines <span class="math inline">\(x_i = 0\)</span> and <span class="math inline">\(x_j = 0\)</span>, as <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> vary over the index set <span class="math inline">\(\{1, 2, 3, 4\}\)</span>.</p>
+<p>Using these new variables, the points of intersection can be written as intersections of the lines <span class="math inline">\(x_i = 0\)</span> and <span class="math inline">\(x_j = 0\)</span>, as <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> vary over the index set <span class="math inline">\(\{1, 2, 3, 4\}\)</span>. And so to traverse the set of vertices, we simply need to traverse the two element subsets of <span class="math inline">\(\{x_1 = 0, x_2 = 0, x_3 = 0, x_4 = 0\}\)</span>.</p>
 <p><img src="Introduction-to-Optimization_files/figure-html/simplex-example-intersections-labeled-1.png" width="672" /></p>
 <ol style="list-style-type: decimal">
 <li>We start with the guess: <span class="math inline">\(x_1 = 0, x_2 = 0, x_3 = 10, x_4 = 20\)</span>.

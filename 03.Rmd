@@ -50,7 +50,7 @@ simplex_example_plot +
   geom_point(aes(x=0, y=0))
 ```
 
-The first and arguably the most important trick in the simplex method is to introduce *slack variables*  $x_3$ and $x_4$, one for each constraint, as shown below, and create a new linear program called a *dictionary* which is equivalent to \@ref(eq:simplex-example)
+The first, and arguably the most important trick in the simplex method is the introduction of *slack variables*  $x_3$ and $x_4$, one for each constraint, as shown below, to create a new linear program called a *dictionary* which is equivalent to \@ref(eq:simplex-example)
 
 \begin{equation}
 ``` {r, resource-example-dictionary, results="asis"}
@@ -66,7 +66,7 @@ cat(str(x))
 (\#eq:simplex-example-dictionary)
 \end{equation}
 
-Using these new variables, the points of intersection can be written as intersections of the lines $x_i = 0$ and $x_j = 0$, as $i$ and $j$ vary over the index set $\{1, 2, 3, 4\}$. 
+Using these new variables, the points of intersection can be written as intersections of the lines $x_i = 0$ and $x_j = 0$, as $i$ and $j$ vary over the index set $\{1, 2, 3, 4\}$. And so to traverse the set of vertices, we simply need to traverse the two element subsets of $\{x_1 = 0, x_2 = 0, x_3 = 0, x_4 = 0\}$.
 
 ```{r, simplex-example-intersections-labeled}
 library(ggplot2)
@@ -78,7 +78,7 @@ simplex_example_plot +
   geom_point(aes(x=10/1, y=0, color = "x_2, x_3")) +
   geom_point(aes(x=20/4, y=0, color = "x_2, x_4")) +
   geom_point(aes(x=2, y=4, color = "x_3, x_4")) +
-  scale_colour_brewer("Intersection points", palette = "Set1")
+  scale_colour_brewer("Intersection points", palette = "Dark2")
 ```
 
 1. We start with the guess: $x_1 = 0, x_2 = 0, x_3 = 10, x_4 = 20$. 
