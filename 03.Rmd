@@ -50,7 +50,7 @@ simplex_example_plot +
   geom_point(aes(x=0, y=0))
 ```
 
-The first, and most non-trivial, algebraic trick is to introduce *slack variables*  $x_3$, $x_4$ using the constraints as follows and create a new linear program called a *dictionary* which is equivalent to \@ref(eq:simplex-example)
+The first and arguably the most important trick in the simplex method is to introduce *slack variables*  $x_3$ and $x_4$, one for each constraint, as shown below, and create a new linear program called a *dictionary* which is equivalent to \@ref(eq:simplex-example)
 
 \begin{equation}
 ``` {r, resource-example-dictionary, results="asis"}
@@ -66,7 +66,7 @@ cat(str(x))
 (\#eq:simplex-example-dictionary)
 \end{equation}
 
-Using these new variables, the points of intersection be written as intersections of the lines $x_i = 0$ and $x_j = 0$, as $i$ and $j$ vary over the index set $\{1, 2, 3, 4\}$. 
+Using these new variables, the points of intersection can be written as intersections of the lines $x_i = 0$ and $x_j = 0$, as $i$ and $j$ vary over the index set $\{1, 2, 3, 4\}$. 
 
 ```{r, simplex-example-intersections-labeled}
 library(ggplot2)
@@ -84,7 +84,7 @@ simplex_example_plot +
 1. We start with the guess: $x_1 = 0, x_2 = 0, x_3 = 10, x_4 = 20$. 
     1. At this point, $\zeta = 0$. We can increase $\zeta$ by increasing either $x_1$ or $x_2$. Let's choose $x_1$ and leave $x_2$ fixed at $0$.
     2. To not violate the positivity of $x_3$, $x_4$, we can only increase $x_1$ enough that both $10 \ge x_1$ and $20 \ge 4x_1$ remain true. The maximum such $x_1$ is $5$ and this makes $x_4 = 0$.
-    3. We rewrite $x_1$, $x_3$, and $\zeta$ in terms of the new variables that are $0$, namely, $x_2$ and $x_4$ to create a new dictionary:
+    3. We rewrite $x_1$, $x_3$, and $\zeta$ in terms of the new variables that are $0$, namely $x_2$ and $x_4$, to create a new dictionary:
     \begin{equation}
     ``` {r, simplex-example-step-1, results="asis"}
     x <- new_dictionary(
@@ -99,9 +99,9 @@ simplex_example_plot +
     (\#eq:simplex-example-dictionary-step-1)
     \end{equation}
 2. Our new guess is: $x_1 = 5, x_2 = 0, x_3 = 5, x_4 = 0$. 
-    1. The coefficient of $x_4$ in the objective function is negative. Increasing it will decrease the objective value. The only variable we can increase in the objective function is $x_2$.
+    1. The coefficient of $x_4$ in the objective function is negative. Increasing it will only decrease the objective value. The only variable we can increase in the objective function is $x_2$.
     2. To not violate the positivity of $x_1$, $x_3$, we can only increase $x_3$ enough that both $5 \ge 1.25x_2$ and $5 \ge 0.75x_2$ remain true. The maximum such $x_2$ is $\min(5/1.25, 5/0.75) = 5/1.25 = 4$ and this makes $x_3 = 0$.
-    3. We rewrite $x_2$, $x_1$, and $\zeta$ in terms of the new variables that are $0$, namely, $x_3$ and $x_4$ to create a new dictionary:
+    3. We rewrite $x_2$, $x_1$, and $\zeta$ in terms of the new variables that are $0$, namely $x_3$ and $x_4$, to create a new dictionary:
     \begin{equation}
     ``` {r, simplex-example-step-2, results="asis"}
     x <- new_dictionary(

@@ -165,7 +165,7 @@ The following two linear programs are equivalent to each other
 \mbox{subject to: } && 0 \le z &\le 1
 \end{aligned}
 \end{align*}
-via the transformations $T(x, y) = x + y$ and $S(t) = (z/2, z/2)$.
+via the transformations $T(x, y) = x + y$ and $S(z) = (z/2, z/2)$.
 
 :::
 
