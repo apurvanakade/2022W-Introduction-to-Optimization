@@ -1,12 +1,5 @@
 # Introduction to Linear Programming
 
-```{r, results = 'asis', echo = FALSE}
-source("R/linear_program.R", local = knitr::knit_global())
-source("R/linear_program_general.R", local = knitr::knit_global())
-```
-<script src="https://www.geogebra.org/apps/deployggb.js"></script>
-
-
 Linear programming is a technique for the optimization of a linear objective function, subject to linear (in)equality constraints. A **linear program** or a **linear programming problem** is a problem of the following form:
 
 \begin{equation}

@@ -10,15 +10,26 @@ new_linear_program <- function(obj = list(), A = list(),
 }
 
 str.linear_program <- function(x) {
-  paste0(paste0("\\mbox{maximize: } && ",
-    paste0(x$obj, x$variables, collapse = " + "),
-    " & \\\\ \n\\mbox{subject to: }",
-    paste0(" && ", apply(
-      matrix(paste0(t(x$A), x$variables), nrow = length(x$b), byrow = TRUE), 1, paste,
-      collapse = " + "
-    ), " & \\le ", x$b, " \\\\ \n", collapse = ""),
-    collapse = " "
-  ), " && ", paste(x$variables, collapse = ", "), " & \\ge 0")
+  objective <- paste0("\\mbox{maximize: } & ", paste0(x$obj, x$variables, collapse = " & + & "), " \\\\ \n")
+
+  # combine coefficients and variables
+  constraints <- 
+  paste("\\mbox{subject to: }",
+    paste(" &", 
+      paste(
+        apply(matrix(paste0(t(x$A), x$variables), nrow = length(x$b), byrow = TRUE), 
+        1, 
+        paste,
+        collapse = " & + & "), 
+      x$b, sep = " & \\le & "), 
+    " \\\\ \n", collapse = ""), 
+  collapse = "")
+
+  #print positivity constraints
+  positivity_constraints <- paste0(paste(x$variables, collapse = ", \\: "), " \\ge 0")
+
+  paste0("\\begin{array}{rrrr",paste(replicate(length(x$variables), "rr"), collapse=""),"}\n", objective, constraints, "\\end{array}\n \\\\ \n", positivity_constraints)
+    
 }
 
 str_math <- function(math, inline = FALSE) {

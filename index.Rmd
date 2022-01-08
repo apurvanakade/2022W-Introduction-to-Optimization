@@ -11,6 +11,18 @@ description: "Introduction to Optimization."
 
 ---
 
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  comment = NA, echo = FALSE, warning = FALSE
+)
+
+source("R/linear_program.R", local = knitr::knit_global())
+source("R/linear_program_general.R", local = knitr::knit_global())
+source("R/dictionaries.R", local = knitr::knit_global())
+
+```
+
 #  Preface {-}
 The question of optimization is the very general question of deciding when a function $g(x_1, \dots, x_n)$ attains its maximum or minimum value on a domain $D$ in $\mathbb{R^n}$. 
 \begin{align}
