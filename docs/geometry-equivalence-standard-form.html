@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-06" />
+<meta name="date" content="2022-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="introduction-to-linear-programming.html"/>
-<link rel="next" href="the-simplex-method.html"/>
+<link rel="next" href="the-simplex-method---example.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -82,10 +82,9 @@
 <li class="chapter" data-level="2.2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#equivalence-of-linear-programs"><i class="fa fa-check"></i><b>2.2</b> Equivalence of linear programs</a></li>
 <li class="chapter" data-level="2.3" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#standard-form-of-linear-programs"><i class="fa fa-check"></i><b>2.3</b> Standard form of linear programs</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="the-simplex-method.html"><a href="the-simplex-method.html"><i class="fa fa-check"></i><b>3</b> The Simplex Method</a>
+<li class="chapter" data-level="3" data-path="the-simplex-method---example.html"><a href="the-simplex-method---example.html"><i class="fa fa-check"></i><b>3</b> The Simplex Method - Example</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="the-simplex-method.html"><a href="the-simplex-method.html#the-simplex-method-example"><i class="fa fa-check"></i><b>3.1</b> The Simplex Method: Example</a></li>
-<li class="chapter" data-level="3.2" data-path="the-simplex-method.html"><a href="the-simplex-method.html#the-simplex-method-algorithm"><i class="fa fa-check"></i><b>3.2</b> The Simplex Method: Algorithm</a></li>
+<li class="chapter" data-level="3.1" data-path="the-simplex-method---example.html"><a href="the-simplex-method---example.html#summary"><i class="fa fa-check"></i><b>3.1</b> Summary</a></li>
 </ul></li>
 </ul>
 
@@ -124,16 +123,18 @@ Figure 2.1: The feasible region lies below the line <span class="math inline">\(
 <p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 2.1  </strong></span>Find an objective function <span class="math inline">\(\zeta\)</span> for which the point <span class="math inline">\((2, 2)\)</span> is no longer an optimal solution.</p>
 </div>
 <p>We can use the same reasoning to solve Exercise <a href="introduction-to-linear-programming.html#exr:resource-allocation-problem-extra">1.2</a>, which is modelled by the following linear program.</p>
-<p><span class="math display">\[\begin{align*}
-\mbox{maximize: } &amp;&amp; 25x + 30y &amp; \\ 
-\mbox{subject to: } &amp;&amp; 80x + 20y &amp; \le 200 \\ 
- &amp;&amp; 25x + 75y &amp; \le 200 \\ 
- &amp;&amp; 1x + 1y &amp; \le 3 \\ 
- &amp;&amp; x, y &amp; \ge 0
-\end{align*}\]</span></p>
+<p><span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrr}
+\mbox{maximize: } &amp; 25x &amp; + &amp; 30y \\ 
+\mbox{subject to: }  &amp; 80x &amp; + &amp; 20y &amp; \le &amp; 200  \\ 
+ &amp; 25x &amp; + &amp; 75y &amp; \le &amp; 200  \\ 
+ &amp; 1x &amp; + &amp; 1y &amp; \le &amp; 3  \\ 
+\end{array}
+ \\ 
+x, \: y \ge 0\end{align}\]</span></p>
 <p>The line of the form <a href="geometry-equivalence-standard-form.html#eq:objective-function">(2.1)</a> for which the entire feasible region lies below it and which intersects the feasible region is <span class="math inline">\(87.5 = 25x + 30y\)</span> and it passes through <span class="math inline">\((0.5, 2.5)\)</span>. Here, instead of maximizing the time spend on each machine, we’re maximizing the amount of resources produced and the time spent on the second machine <span class="math inline">\(M_2\)</span>. As a result, our profit dropped from <span class="math inline">\(110\)</span> to <span class="math inline">\(87.5\)</span>.</p>
-<pre><code>## Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;, which
-## will replace the existing scale.</code></pre>
+<pre><code>Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;, which
+will replace the existing scale.</code></pre>
 <div class="figure"><span style="display:block;" id="fig:fig-resource-allocation-extra-line"></span>
 <img src="Introduction-to-Optimization_files/figure-html/fig-resource-allocation-extra-line-1.png" alt="The feasible region lies below the line $87.5 = 25x + 30y$ and intersects it at $(0.5, 2.5)$." width="672" />
 <p class="caption">
@@ -195,23 +196,31 @@ Conclude that if <span class="math inline">\(P\)</span> and <span class="math in
 </div>
 <div class="example">
 <p><span id="exm:unlabeled-div-5" class="example"><strong>Example 2.1  </strong></span>The following linear programs are all equivalent to the linear program in Example <a href="introduction-to-linear-programming.html#resource-allocation-problem">1.1</a>.</p>
-<p><span class="math display">\[\begin{align*}
-\mbox{maximize: } &amp;&amp; 250x + 300y &amp; \\ 
-\mbox{subject to: } &amp;&amp; 80x + 20y &amp; \le 20 \\ 
- &amp;&amp; 25x + 75y &amp; \le 20 \\ 
- &amp;&amp; x, y &amp; \ge 0
-\end{align*}\]</span><span class="math display">\[\begin{align*}
-\mbox{maximize: } &amp;&amp; 25x + 30y &amp; \\ 
-\mbox{subject to: } &amp;&amp; 800x + 200y &amp; \le 2000 \\ 
- &amp;&amp; 25x + 75y &amp; \le 200 \\ 
- &amp;&amp; x, y &amp; \ge 0
-\end{align*}\]</span><span class="math display">\[\begin{align*}
-\mbox{maximize: } &amp;&amp; 25x + 30y &amp; \\ 
-\mbox{subject to: } &amp;&amp; 80x + 20y &amp; \le 200 \\ 
- &amp;&amp; 25x + 75y &amp; \le 200 \\ 
- &amp;&amp; 2x + 2y &amp; \le 200 \\ 
- &amp;&amp; x, y &amp; \ge 0
-\end{align*}\]</span></p>
+<p><span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrr}
+\mbox{maximize: } &amp; 250x &amp; + &amp; 300y \\ 
+\mbox{subject to: }  &amp; 80x &amp; + &amp; 20y &amp; \le &amp; 20  \\ 
+ &amp; 25x &amp; + &amp; 75y &amp; \le &amp; 20  \\ 
+\end{array}
+ \\ 
+x, \: y \ge 0\end{align}\]</span>
+<span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrr}
+\mbox{maximize: } &amp; 25x &amp; + &amp; 30y \\ 
+\mbox{subject to: }  &amp; 800x &amp; + &amp; 200y &amp; \le &amp; 2000  \\ 
+ &amp; 25x &amp; + &amp; 75y &amp; \le &amp; 200  \\ 
+\end{array}
+ \\ 
+x, \: y \ge 0\end{align}\]</span>
+<span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrr}
+\mbox{maximize: } &amp; 25x &amp; + &amp; 30y \\ 
+\mbox{subject to: }  &amp; 80x &amp; + &amp; 20y &amp; \le &amp; 200  \\ 
+ &amp; 25x &amp; + &amp; 75y &amp; \le &amp; 200  \\ 
+ &amp; 2x &amp; + &amp; 2y &amp; \le &amp; 200  \\ 
+\end{array}
+ \\ 
+x, \: y \ge 0\end{align}\]</span></p>
 </div>
 <div class="example">
 <p><span id="exm:unlabeled-div-6" class="example"><strong>Example 2.2  </strong></span>The following two linear programs are equivalent to each other
@@ -292,7 +301,7 @@ where <span class="math inline">\(x\)</span> is now the vector of decision varia
         </div>
       </div>
 <a href="introduction-to-linear-programming.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-simplex-method.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="the-simplex-method---example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
