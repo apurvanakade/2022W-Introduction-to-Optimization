@@ -47,10 +47,9 @@ resource_allocation_extra_plot <- resource_allocation_plot + geom_polygon(
         x = c(0, 0, 3),
         y = c(0, 3, 0)),
       aes(x = x, y = y, fill = "3: x + y <= 3"),
-      inherit.aes = TRUE, alpha = 0.4)
+      inherit.aes = FALSE, alpha = 0.4)
 
 resource_allocation_extra_plot +
-  scale_fill_discrete(name = "Constraints") + 
   stat_function(fun = function(x) {((0.5 * 25 + 2.5 * 30) - 25*x)/30}, color = "black") +
   geom_point(aes(x=0.5, y=2.5), color = "black") +
   geom_text(aes(x=0.5, y=2.5), label="(0.5, 2.5)", vjust=-.5, hjust=0)

@@ -26,4 +26,3 @@ using-geometry-to-solve-linear-programs
 equivalence-of-linear-programs
 standard-form-of-linear-programs
 the-simplex-method---example
-summary

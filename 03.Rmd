@@ -16,7 +16,7 @@ cat(str(simplex_method_example))
 (\#eq:simplex-example)
 \end{equation}
 
-The optimal solution is $(x_1, x_2) = (2, 4)$ with objective value $6$. There are 6 different points at which the lines corresponding to the constraints intersect. We'll start with the vertex $(0,0)$ and make our way up to $(2, 4)$.
+The optimal solution is $(x_1, x_2) = (2, 4)$ with objective value $6$. There are six different points at which the lines corresponding to the constraints intersect. We'll start with the vertex $(0,0)$ and make our way up to $(2, 4)$ while making sure that we do not leave the feasible region.
 
 ```{r, simplex-example-plot}
 library(ggplot2)
@@ -50,7 +50,7 @@ simplex_example_plot +
   geom_point(aes(x=0, y=0))
 ```
 
-The first, and arguably the most important trick in the simplex method is the introduction of *slack variables*  $x_3$ and $x_4$, one for each constraint, as shown below, to create a new linear program called a *dictionary* which is equivalent to \@ref(eq:simplex-example)
+The first, and arguably the most important trick in the simplex algorithm is the introduction of *slack variables*  $x_3$ and $x_4$, one for each constraint, as shown below, to create a new linear program called a *dictionary* which is equivalent to \@ref(eq:simplex-example)
 
 \begin{equation}
 ``` {r, resource-example-dictionary, results="asis"}
@@ -100,7 +100,7 @@ simplex_example_plot +
     \end{equation}
 2. Our new guess is: $x_1 = 5, x_2 = 0, x_3 = 5, x_4 = 0$. 
     1. The coefficient of $x_4$ in the objective function is negative. Increasing it will only decrease the objective value. The only variable we can increase in the objective function is $x_2$.
-    2. To not violate the positivity of $x_1$, $x_3$, we can only increase $x_3$ enough that both $5 \ge 1.25x_2$ and $5 \ge 0.75x_2$ remain true. The maximum such $x_2$ is $\min(5/1.25, 5/0.75) = 5/1.25 = 4$ and this makes $x_3 = 0$.
+    2. To not violate the positivity of $x_1$, $x_3$, we can only increase $x_2$ enough that both $5 \ge 1.25x_2$ and $5 \ge 0.75x_2$ remain true. The maximum such $x_2$ is $\min(5/1.25, 5/0.75) = 5/1.25 = 4$ and this makes $x_3 = 0$.
     3. We rewrite $x_2$, $x_1$, and $\zeta$ in terms of the new variables that are $0$, namely $x_3$ and $x_4$, to create a new dictionary:
     \begin{equation}
     ``` {r, simplex-example-step-2, results="asis"}
@@ -131,7 +131,7 @@ simplex_example_plot +
   scale_colour_brewer("Guesses", palette = "Set1")
 ```
 
-
+<!-- 
 ## Summary
 
 Here's a summary of the simplex method used in the above example, with a few technical terms introduced.
@@ -159,4 +159,4 @@ Here's a summary of the simplex method used in the above example, with a few tec
     2. Set the leaving variable to 0.
     1. Recalculate values of the other basic variables and the objective function.
     2. Update the guess.
-5. *Go back to Step 2*.
+5. *Go back to Step 2*. -->

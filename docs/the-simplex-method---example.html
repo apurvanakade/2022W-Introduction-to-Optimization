@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-08" />
+<meta name="date" content="2022-01-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -82,10 +82,7 @@
 <li class="chapter" data-level="2.2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#equivalence-of-linear-programs"><i class="fa fa-check"></i><b>2.2</b> Equivalence of linear programs</a></li>
 <li class="chapter" data-level="2.3" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#standard-form-of-linear-programs"><i class="fa fa-check"></i><b>2.3</b> Standard form of linear programs</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="the-simplex-method---example.html"><a href="the-simplex-method---example.html"><i class="fa fa-check"></i><b>3</b> The Simplex Method - Example</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="the-simplex-method---example.html"><a href="the-simplex-method---example.html#summary"><i class="fa fa-check"></i><b>3.1</b> Summary</a></li>
-</ul></li>
+<li class="chapter" data-level="3" data-path="the-simplex-method---example.html"><a href="the-simplex-method---example.html"><i class="fa fa-check"></i><b>3</b> The Simplex Method - Example</a></li>
 </ul>
 
       </nav>
@@ -116,9 +113,9 @@
 x_1, \: x_2 \ge 0
 \tag{3.1}
 \end{equation}\]</span></p>
-<p>The optimal solution is <span class="math inline">\((x_1, x_2) = (2, 4)\)</span> with objective value <span class="math inline">\(6\)</span>. There are 6 different points at which the lines corresponding to the constraints intersect. We’ll start with the vertex <span class="math inline">\((0,0)\)</span> and make our way up to <span class="math inline">\((2, 4)\)</span>.</p>
+<p>The optimal solution is <span class="math inline">\((x_1, x_2) = (2, 4)\)</span> with objective value <span class="math inline">\(6\)</span>. There are six different points at which the lines corresponding to the constraints intersect. We’ll start with the vertex <span class="math inline">\((0,0)\)</span> and make our way up to <span class="math inline">\((2, 4)\)</span> while making sure that we do not leave the feasible region.</p>
 <p><img src="Introduction-to-Optimization_files/figure-html/simplex-example-plot-1.png" width="672" /></p>
-<p>The first, and arguably the most important trick in the simplex method is the introduction of <em>slack variables</em> <span class="math inline">\(x_3\)</span> and <span class="math inline">\(x_4\)</span>, one for each constraint, as shown below, to create a new linear program called a <em>dictionary</em> which is equivalent to <a href="the-simplex-method---example.html#eq:simplex-example">(3.1)</a></p>
+<p>The first, and arguably the most important trick in the simplex algorithm is the introduction of <em>slack variables</em> <span class="math inline">\(x_3\)</span> and <span class="math inline">\(x_4\)</span>, one for each constraint, as shown below, to create a new linear program called a <em>dictionary</em> which is equivalent to <a href="the-simplex-method---example.html#eq:simplex-example">(3.1)</a></p>
 <p><span class="math display" id="eq:simplex-example-dictionary">\[\begin{equation}
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; \zeta &amp;=&amp;0&amp; + &amp;1x_1 &amp;+&amp; 1x_2 \\ 
@@ -151,7 +148,7 @@ x_1, \: x_2, \: x_3, \: x_4 \ge 0
 <li>Our new guess is: <span class="math inline">\(x_1 = 5, x_2 = 0, x_3 = 5, x_4 = 0\)</span>.
 <ol style="list-style-type: decimal">
 <li>The coefficient of <span class="math inline">\(x_4\)</span> in the objective function is negative. Increasing it will only decrease the objective value. The only variable we can increase in the objective function is <span class="math inline">\(x_2\)</span>.</li>
-<li>To not violate the positivity of <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_3\)</span>, we can only increase <span class="math inline">\(x_3\)</span> enough that both <span class="math inline">\(5 \ge 1.25x_2\)</span> and <span class="math inline">\(5 \ge 0.75x_2\)</span> remain true. The maximum such <span class="math inline">\(x_2\)</span> is <span class="math inline">\(\min(5/1.25, 5/0.75) = 5/1.25 = 4\)</span> and this makes <span class="math inline">\(x_3 = 0\)</span>.</li>
+<li>To not violate the positivity of <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_3\)</span>, we can only increase <span class="math inline">\(x_2\)</span> enough that both <span class="math inline">\(5 \ge 1.25x_2\)</span> and <span class="math inline">\(5 \ge 0.75x_2\)</span> remain true. The maximum such <span class="math inline">\(x_2\)</span> is <span class="math inline">\(\min(5/1.25, 5/0.75) = 5/1.25 = 4\)</span> and this makes <span class="math inline">\(x_3 = 0\)</span>.</li>
 <li>We rewrite <span class="math inline">\(x_2\)</span>, <span class="math inline">\(x_1\)</span>, and <span class="math inline">\(\zeta\)</span> in terms of the new variables that are <span class="math inline">\(0\)</span>, namely <span class="math inline">\(x_3\)</span> and <span class="math inline">\(x_4\)</span>, to create a new dictionary:
 <span class="math display" id="eq:simplex-example-dictionary-step-2">\[\begin{equation}
  \begin{array}{rrrrrrrr}
@@ -171,52 +168,36 @@ x_1, \: x_2, \: x_3, \: x_4 \ge 0
 </ol>
 <p>The optimal objective value <span class="math inline">\(6\)</span> is the constant coefficient in the final <span class="math inline">\(\zeta\)</span> and it is attained at <span class="math inline">\((x_1, x_2) = (2, 4)\)</span>.</p>
 <p><img src="Introduction-to-Optimization_files/figure-html/simplex-example-intersections-traced-1.png" width="672" /></p>
-<div id="summary" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Summary</h2>
-<p>Here’s a summary of the simplex method used in the above example, with a few technical terms introduced.</p>
-<ol style="list-style-type: decimal">
-<li><em>Setup:</em>
-<ol style="list-style-type: decimal">
-<li>Introduce slack variables.</li>
-<li>Create dictionary.</li>
-<li>Set all the decision variables to 0.</li>
-<li>Calculate the values of the slack variables. This is our initial guess.</li>
-<li>Call the decision variables the non-basic variables and the slack variables the basic variables.</li>
-</ol></li>
-<li><em>Choose an entering variable:</em>
-<ol style="list-style-type: decimal">
-<li>Choose a non-basic variable whose coefficient in the objective function is positive.</li>
-</ol>
-<ul>
-<li><strong>If no such variable exists, the algorithm halts and the current guess is the optimal solution.</strong></li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li>Call this variable the entering variable.</li>
-<li>Add the entering variable to the list of basic variables and remove it from the list of non-basic variables.</li>
-</ol></li>
-<li><em>Find the leaving variable:</em>
-<ol style="list-style-type: decimal">
-<li>Find the maximum value the entering variable can be increased to without violating any of the positivity constraints.</li>
-<li>This maximum value will force the corresponding basic variable to become zero. Call this the leaving variable.</li>
-<li>Add the leaving variable to the list of non-basic variables and remove it from the list of basic variables.<br />
-</li>
-</ol></li>
-<li><em>Update dictionary:</em>
-<ol start="2" style="list-style-type: decimal">
-<li>Rewrite the entering variable in terms of the leaving variable.</li>
-<li>Rewrite the objective function and all the other basic variables in terms of the new non-basic variables.</li>
-</ol></li>
-<li><em>Recalculate guess:</em>
-<ol style="list-style-type: decimal">
-<li>Set the maximum value found above as the new value of the entering variable.</li>
-<li>Set the leaving variable to 0.</li>
-<li>Recalculate values of the other basic variables and the objective function.</li>
-<li>Update the guess.</li>
-</ol></li>
-<li><em>Go back to Step 2</em>.</li>
-</ol>
+<!-- 
+## Summary
 
-</div>
+Here's a summary of the simplex method used in the above example, with a few technical terms introduced.
+
+1. *Setup:*
+    1. Introduce slack variables.
+    2. Create dictionary.
+    3. Set all the decision variables to 0. 
+    4. Calculate the values of the slack variables. This is our initial guess.
+    5. Call the decision variables the non-basic variables and the slack variables the basic variables.
+2. *Choose an entering variable:*
+    1. Choose a non-basic variable whose coefficient in the objective function is positive.
+      - **If no such variable exists, the algorithm halts and the current guess is the optimal solution.**
+    2. Call this variable the entering variable.
+    3. Add the entering variable to the list of basic variables and remove it from the list of non-basic variables.
+3. *Find the leaving variable:* 
+    1. Find the maximum value the entering variable can be increased to without violating any of the positivity constraints.
+    2. This maximum value will force the corresponding basic variable to become zero. Call this the leaving variable.
+    3. Add the leaving variable to the list of non-basic variables and remove it from the list of basic variables.      
+4. *Update dictionary:*
+    2. Rewrite the entering variable in terms of the leaving variable.
+    3. Rewrite the objective function and all the other basic variables in terms of the new non-basic variables.
+5. *Recalculate guess:*
+    1. Set the maximum value found above as the new value of the entering variable.
+    2. Set the leaving variable to 0.
+    1. Recalculate values of the other basic variables and the objective function.
+    2. Update the guess.
+5. *Go back to Step 2*. -->
+
 </div>
             </section>
 
