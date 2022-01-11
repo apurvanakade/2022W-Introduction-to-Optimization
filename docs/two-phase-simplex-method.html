@@ -108,16 +108,16 @@
 <div id="two-phase-simplex-method" class="section level1" number="4">
 <h1><span class="header-section-number">Day 4</span> Two Phase Simplex Method</h1>
 <p>As we saw in Example <a href="simplex-method---example.html#eq:simplex-example">(3.1)</a>, the two phase simplex method is an algorithm for solving a linear program in the standard form. The method described below is the <strong>Two phase simplex method</strong> using the <em>dictionary notation</em>. We’ll later see an implementation of the same method using the <em>tableaux notation</em>.</p>
-<p>Given a standard linear program <a href="geometry-equivalence-standard-form.html#eq:standard-lp">(2.2)</a>, we can form an linear program called <strong>dictionary</strong> of the following form by introducing <strong>slack variables</strong> <span class="math inline">\(x_{n+1}, \dots, x_{n + m}\)</span>:</p>
+<p>Given a standard linear program <a href="geometry-equivalence-standard-form.html#eq:standard-lp">(2.2)</a>, we can form an linear program, called a <strong>dictionary</strong>, of the following form by introducing <strong>slack variables</strong> <span class="math inline">\(x_{n+1}, \dots, x_{n + m}\)</span>.</p>
 <p><span class="math display" id="eq:dictionary-definition">\[\begin{equation}
   \begin{array}{rrrrrrrrrrrr}
     \mbox{maximize: } &amp; \zeta &amp; = &amp; c _ 0 &amp; + &amp; c_1 x_1 &amp; + &amp; \dots &amp; + &amp; c_n x_n \\
     \mbox{subject to: } &amp; x_{n+1} &amp; = &amp; b_1 &amp; - &amp; a_{11} x_1 &amp; - &amp; \dots &amp; - &amp; a_{1n} x_n \\
       &amp; x_{n+2} &amp; = &amp; b_2 &amp; - &amp; a_{21} x_1 &amp; - &amp; \dots &amp; - &amp; a_{2n} x_n \\
       &amp; &amp;  &amp;  &amp; &amp;  &amp; \vdots &amp; &amp; \\
-      &amp; x_{n+m} &amp; = &amp; b_m &amp; - &amp; a_{m1} x_1 &amp; - &amp; \dots &amp; - &amp; a_{mn} x_n 
+      &amp; x_{n+m} &amp; = &amp; b_m &amp; - &amp; a_{m1} x_1 &amp; - &amp; \dots &amp; - &amp; a_{mn} x_n,
   \end{array} \\
-    x_1, \: \dots \: , \: x_{m + n} \: \geq \: 0
+    x_1, \: \dots \: , \: x_{m + n} \: \geq \: 0.
   \tag{4.1}
 \end{equation}\]</span></p>
 <p>The variables appearing on the right-hand side are called <strong>non-basic</strong> variables, and the variables appearing on the left-hand side are called <strong>basic</strong> variables. The simplex algorithm creates a sequence of dictionaries through a process called <strong>pivoting</strong>. In each pivot step, one non-basic variable becomes basic; this is the <strong>entering</strong> variable, and one basic variable becomes non-basic; this is the <strong>leaving</strong> variable.</p>
@@ -130,14 +130,14 @@
 <p>Phase II of the simplex method assumes that the dictionary is feasible. If this is not the case, we use Phase I to try and find a feasible dictionary. Once we have a feasible dictionary, we proceed as follows.</p>
 <div class="boxed">
 <ol style="list-style-type: decimal">
-<li><em>Find entering variable:</em>
+<li><em>Find the entering variable:</em>
 <ol style="list-style-type: decimal">
 <li>Let <span class="math inline">\(e\)</span> be an index such that <span class="math inline">\(c_e\)</span> is positive.
 <ul>
 <li><strong>If none exists, exit.</strong></li>
 </ul></li>
 </ol></li>
-<li><em>Find leaving variable:</em>
+<li><em>Find the leaving variable:</em>
 <ol style="list-style-type: decimal">
 <li>Let <span class="math inline">\(S\)</span> be the set of indices <span class="math inline">\(i\)</span> such that <span class="math inline">\(a_{ie}\)</span> is positive.</li>
 <li>Set <span class="math inline">\(\ell = \mathrm{arg}\max_{i \in S} \left(\dfrac{b_i}{a_{ie}}\right)\)</span>.</li>
@@ -186,7 +186,7 @@ The trick is to create the following auxiliary linear program whose optimal solu
 <ol style="list-style-type: decimal">
 <li>Apply the Phase II algorithm to find an optimal solution.</li>
 </ol></li>
-<li>In the optimal solution,
+<li><em>Phase II:</em> In the optimal solution,
 <ol style="list-style-type: decimal">
 <li>If <span class="math inline">\(x_0 \neq 0\)</span>, then the original linear program is not feasible.</li>
 <li>If <span class="math inline">\(x_0 = 0\)</span>,
