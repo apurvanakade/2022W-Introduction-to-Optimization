@@ -1,4 +1,4 @@
-# Two Phase Simplex Method
+# Two-Phase Simplex Method
 
 As we saw in Example \@ref(eq:simplex-example), the two phase simplex method is an algorithm for solving a linear program in the standard form. The method described below is the **Two phase simplex method** using the *dictionary notation*. We'll later see an implementation of the same method using the *tableaux notation*.
 
@@ -36,7 +36,7 @@ Phase II of the simplex method assumes that the dictionary is feasible. If this 
         - **If none exists, exit.**
 2. *Find the leaving variable:*
     1. Let $S$ be the set of indices $i$ such that $a_{ie}$ is positive.
-    2. Set $\ell = \mathrm{arg}\max_{i \in S} \left(\dfrac{b_i}{a_{ie}}\right)$.
+    2. Set $\ell = \mathrm{arg}\min_{i \in S} \left(\dfrac{b_i}{a_{ie}}\right)$.
 3. *Pivot:*
     2. Add $x_e$ to the set of basic variables and remove it from the set of non-basic variables.
     3. Add $x_\ell$ to the set of non-basic variables and remove it from the set of basic variables.

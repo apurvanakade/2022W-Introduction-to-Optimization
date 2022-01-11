@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Day 4 Two Phase Simplex Method | Introduction to Optimization</title>
-  <meta name="description" content="Day 4 Two Phase Simplex Method | Introduction to Optimization." />
+  <title>Day 4 Two-Phase Simplex Method | Introduction to Optimization</title>
+  <meta name="description" content="Day 4 Two-Phase Simplex Method | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Day 4 Two Phase Simplex Method | Introduction to Optimization" />
+  <meta property="og:title" content="Day 4 Two-Phase Simplex Method | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://apurvanakade.github.io/Introduction-to-optimization/" />
   
-  <meta property="og:description" content="Day 4 Two Phase Simplex Method | Introduction to Optimization." />
+  <meta property="og:description" content="Day 4 Two-Phase Simplex Method | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Day 4 Two Phase Simplex Method | Introduction to Optimization" />
+  <meta name="twitter:title" content="Day 4 Two-Phase Simplex Method | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Day 4 Two Phase Simplex Method | Introduction to Optimization." />
+  <meta name="twitter:description" content="Day 4 Two-Phase Simplex Method | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-10" />
+<meta name="date" content="2022-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -83,7 +83,7 @@
 <li class="chapter" data-level="2.3" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#standard-form-of-linear-programs"><i class="fa fa-check"></i><b>2.3</b> Standard form of linear programs</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="simplex-method---example.html"><a href="simplex-method---example.html"><i class="fa fa-check"></i><b>3</b> Simplex Method - Example</a></li>
-<li class="chapter" data-level="4" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html"><i class="fa fa-check"></i><b>4</b> Two Phase Simplex Method</a>
+<li class="chapter" data-level="4" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html"><i class="fa fa-check"></i><b>4</b> Two-Phase Simplex Method</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-ii"><i class="fa fa-check"></i><b>4.1</b> Phase II</a></li>
 <li class="chapter" data-level="4.2" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-i"><i class="fa fa-check"></i><b>4.2</b> Phase I</a></li>
@@ -106,7 +106,7 @@
 
             <section class="normal" id="section-">
 <div id="two-phase-simplex-method" class="section level1" number="4">
-<h1><span class="header-section-number">Day 4</span> Two Phase Simplex Method</h1>
+<h1><span class="header-section-number">Day 4</span> Two-Phase Simplex Method</h1>
 <p>As we saw in Example <a href="simplex-method---example.html#eq:simplex-example">(3.1)</a>, the two phase simplex method is an algorithm for solving a linear program in the standard form. The method described below is the <strong>Two phase simplex method</strong> using the <em>dictionary notation</em>. We’ll later see an implementation of the same method using the <em>tableaux notation</em>.</p>
 <p>Given a standard linear program <a href="geometry-equivalence-standard-form.html#eq:standard-lp">(2.2)</a>, we can form an linear program, called a <strong>dictionary</strong>, of the following form by introducing <strong>slack variables</strong> <span class="math inline">\(x_{n+1}, \dots, x_{n + m}\)</span>.</p>
 <p><span class="math display" id="eq:dictionary-definition">\[\begin{equation}
@@ -140,7 +140,7 @@
 <li><em>Find the leaving variable:</em>
 <ol style="list-style-type: decimal">
 <li>Let <span class="math inline">\(S\)</span> be the set of indices <span class="math inline">\(i\)</span> such that <span class="math inline">\(a_{ie}\)</span> is positive.</li>
-<li>Set <span class="math inline">\(\ell = \mathrm{arg}\max_{i \in S} \left(\dfrac{b_i}{a_{ie}}\right)\)</span>.</li>
+<li>Set <span class="math inline">\(\ell = \mathrm{arg}\min_{i \in S} \left(\dfrac{b_i}{a_{ie}}\right)\)</span>.</li>
 </ol></li>
 <li><em>Pivot:</em>
 <ol start="2" style="list-style-type: decimal">
