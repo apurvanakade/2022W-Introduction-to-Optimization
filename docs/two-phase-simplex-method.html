@@ -156,7 +156,7 @@
 <div id="phase-i" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Phase I</h2>
 <p>In the case when some of the constants <span class="math inline">\(b_i\)</span> are negative, Phase I of the simplex algorithm is used to find a feasible dictionary.
-It attempts to find a sequence of pivots on the dictionary <a href="two-phase-simplex-method.html#eq:dictionary-definition">(4.1)</a> and make it feasible.
+It attempts to find a sequence of pivots on the dictionary <a href="two-phase-simplex-method.html#eq:dictionary-definition">(4.1)</a> that make it feasible.
 The trick is to create the following auxiliary linear program whose optimal solution provides a BFS of the original linear program, if one exists.</p>
 <p><span class="math display" id="eq:auxiliary-lp">\[\begin{equation}
   \begin{array}{rrrrrrrrrrrr}
@@ -198,7 +198,7 @@ The trick is to create the following auxiliary linear program whose optimal solu
 </ol></li>
 </ol>
 </div>
-<p>Step 2 of the above algorithm creates a feasible dictionary by Exercise <a href="two-phase-simplex-method.html#exr:auxiliary-lp-2">4.3</a>. Hence, we can use the Phase II algorithm to solve the auxiliary linear program in Step 3. The solution obtained in Step 3 provides a BFS of the original linear program when <span class="math inline">\(x_0 = 0\)</span> by Part 4 of Exercise <a href="two-phase-simplex-method.html#exr:auxiliary-lp-1">4.2</a>.</p>
+<p>Step 2 of the above algorithm creates a feasible dictionary by Exercise <a href="two-phase-simplex-method.html#exr:auxiliary-lp-2">4.3</a>. Hence, we can use the Phase II algorithm to solve the auxiliary linear program in Step 3. The solution obtained in Step 3 provides a BFS of the original linear program when <span class="math inline">\(x_0 = 0\)</span> by the proof of Part 4 of Exercise <a href="two-phase-simplex-method.html#exr:auxiliary-lp-1">4.2</a>.</p>
 <div class="exercise">
 <p><span id="exr:auxiliary-lp-1" class="exercise"><strong>Exercise 4.2  </strong></span>The following exercises prove that optimal solution of the auxiliary linear program provides a BFS of the original linear program.</p>
 <ol style="list-style-type: decimal">

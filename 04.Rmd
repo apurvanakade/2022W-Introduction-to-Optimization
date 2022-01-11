@@ -49,7 +49,7 @@ Assuming the program halts, the optimal solution will be the BFS of the final di
 ## Phase I
 
 In the case when some of the constants $b_i$ are negative, Phase I of the simplex algorithm is used to find a feasible dictionary. 
-It attempts to find a sequence of pivots on the dictionary \@ref(eq:dictionary-definition) and make it feasible. 
+It attempts to find a sequence of pivots on the dictionary \@ref(eq:dictionary-definition) that make it feasible. 
 The trick is to create the following auxiliary linear program whose optimal solution provides a BFS of the original linear program, if one exists.
 
 \begin{equation}
@@ -83,7 +83,7 @@ We create an (infeasible) dictionary for this linear program and process as foll
           3. Proceed to Phase II.
 </div>
 
-Step 2 of the above algorithm creates a feasible dictionary by Exercise \@ref(exr:auxiliary-lp-2). Hence, we can use the Phase II algorithm to solve the auxiliary linear program in Step 3. The solution obtained in Step 3 provides a BFS of the original linear program when $x_0 = 0$ by Part 4 of Exercise \@ref(exr:auxiliary-lp-1).
+Step 2 of the above algorithm creates a feasible dictionary by Exercise \@ref(exr:auxiliary-lp-2). Hence, we can use the Phase II algorithm to solve the auxiliary linear program in Step 3. The solution obtained in Step 3 provides a BFS of the original linear program when $x_0 = 0$ by the proof of Part 4 of Exercise \@ref(exr:auxiliary-lp-1).
 
 ::: {.exercise #auxiliary-lp-1}
 
