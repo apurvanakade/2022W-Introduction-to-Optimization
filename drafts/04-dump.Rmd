@@ -1,0 +1,64 @@
+<!-- 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+        }
+    });
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css">
+<script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.js"></script>
+
+```{js}
+
+window.addEventListener('load', (event) => {
+  elem = document.querySelectorAll(".algorithm")
+  elem.forEach(e => {
+    pseudocode.renderElement(e, {lineNumber: false, lineNumberPunc: ' '});
+  })
+});
+
+``` -->
+<!-- 
+**Phase I**
+
+Create a dictionary from 
+
+```{.algorithm}
+\begin{algorithm}
+\caption{Phase II of the Simplex Algorithm}
+\begin{algorithmic}
+\PROCEDURE{Pivot}{$dict$}
+    \STATE $e \gets $ \CALL{FindEntering}{}
+    \IF{$i = none$}
+      \return 
+    \ENDIF
+    \STATE $l \gets $ \CALL{FindLeaving}{$e$}
+    \STATE \CALL{UpdateDictionary}{$e, l$}
+    \STATE \CALL{Pivot}{}
+\ENDPROCEDURE
+\PROCEDURE{FindEntering}{}
+    \FOR{$j = 1$ \TO $n$}
+      \IF {$c_j > 0$}
+        \RETURN $j$
+      \ELSE
+        \RETURN $none$
+      \ENDIF
+    \ENDFOR
+\ENDPROCEDURE
+\PROCEDURE{FindLeaving}{$e$}
+    \STATE $max \gets -\infty$
+    \STATE $l \gets none$
+    \FOR{$j = 1$ \TO $n$}
+      \IF {$a_{ej} > 0$}
+        \RETURN $j$
+      \ENDIF
+    \ENDFOR
+    \RETURN 
+\ENDPROCEDURE
+\end{algorithmic}
+\end{algorithm}
+``` -->

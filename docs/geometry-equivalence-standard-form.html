@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="introduction-to-linear-programming.html"/>
-<link rel="next" href="the-simplex-method---example.html"/>
+<link rel="next" href="simplex-method---example.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -82,7 +82,12 @@
 <li class="chapter" data-level="2.2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#equivalence-of-linear-programs"><i class="fa fa-check"></i><b>2.2</b> Equivalence of linear programs</a></li>
 <li class="chapter" data-level="2.3" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#standard-form-of-linear-programs"><i class="fa fa-check"></i><b>2.3</b> Standard form of linear programs</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="the-simplex-method---example.html"><a href="the-simplex-method---example.html"><i class="fa fa-check"></i><b>3</b> The Simplex Method - Example</a></li>
+<li class="chapter" data-level="3" data-path="simplex-method---example.html"><a href="simplex-method---example.html"><i class="fa fa-check"></i><b>3</b> Simplex Method - Example</a></li>
+<li class="chapter" data-level="4" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html"><i class="fa fa-check"></i><b>4</b> Two Phase Simplex Method</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-ii"><i class="fa fa-check"></i><b>4.1</b> Phase II</a></li>
+<li class="chapter" data-level="4.2" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-i"><i class="fa fa-check"></i><b>4.2</b> Phase I</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -237,20 +242,20 @@ via the transformations <span class="math inline">\(T(x, y) = x + y\)</span> and
 <div id="standard-form-of-linear-programs" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Standard form of linear programs</h2>
 <p>A linear program of the following form is said to be in a <em>standard form</em>:
-<span class="math display" id="eq:intro-standardized-lp">\[\begin{equation}
-  \begin{aligned}
-    \mbox{maximize: } &amp;&amp; c_1 x_1 + \dots + c_n x_n &amp; \\
+<span class="math display" id="eq:standard-lp">\[\begin{equation}
+  \begin{array}{lrrrrrrrrr}
+    \mbox{maximize: }  &amp; c_1 x_1 &amp; + &amp; \dots &amp; + &amp; c_n x_n &amp; \\
     \mbox{subject to: } 
-      &amp;&amp; a_{11} x_1 + \dots + a_{1n} x_n &amp; \leq b_1 \\
-      &amp;&amp; a_{21} x_1 + \dots + a_{2n} x_n &amp; \leq b_2 \\
-      &amp;&amp; \vdots &amp;  \\
-      &amp;&amp; a_{m1} x_1 + \dots + a_{mn} x_n &amp; \leq b_m \\
-      &amp;&amp; x_1, \dots, x_n &amp; \geq 0.
-  \end{aligned}
+      &amp; a_{11} x_1 &amp; + &amp; \dots &amp; + &amp; a_{1n} x_n &amp; \leq &amp; b_1 \\
+      &amp; a_{21} x_1 &amp; + &amp; \dots &amp; + &amp; a_{2n} x_n &amp; \leq &amp; b_2 \\
+      &amp; \vdots &amp;  \\
+      &amp; a_{m1} x_1 &amp; + &amp; \dots &amp; + &amp; a_{mn} x_n &amp; \leq &amp; b_m 
+  \end{array} \\
+      x_1, \: \dots \: , \: x_{n} \: \geq \: 0
   \tag{2.2}
 \end{equation}\]</span>
 Such a linear program can be written more succinctly using vectors and matrices as follows.
-<span class="math display" id="eq:intro-standardized-lp-matrix-form">\[\begin{equation}
+<span class="math display" id="eq:standard-lp-matrix-form">\[\begin{equation}
   \begin{aligned}
     \mbox{maximize: } &amp;&amp; c^T x &amp; \\
     \mbox{subject to: } 
@@ -296,7 +301,7 @@ where <span class="math inline">\(x\)</span> is now the vector of decision varia
         </div>
       </div>
 <a href="introduction-to-linear-programming.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-simplex-method---example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="simplex-method---example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

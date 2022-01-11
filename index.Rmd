@@ -14,7 +14,10 @@ description: "Introduction to Optimization."
 
 ```{r, setup, include=FALSE}
 knitr::opts_chunk$set(
-  comment = NA, echo = FALSE, warning = FALSE
+  comment = NA, 
+  echo = FALSE, 
+  warning = FALSE, 
+  cache=TRUE
 )
 
 source("R/linear_program.R", local = knitr::knit_global())

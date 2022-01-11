@@ -1,4 +1,4 @@
-# The Simplex Method - Example
+# Simplex Method - Example
 
 The simplex method jumps from vertex of the feasible region to find the optimal solution. It is best demonstrated using an example. Consider the following linear program.
 

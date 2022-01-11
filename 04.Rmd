@@ -1,0 +1,105 @@
+# Two Phase Simplex Method
+
+As we saw in Example \@ref(eq:simplex-example), the two phase simplex method is an algorithm for solving a linear program in the standard form. The method described below is the **Two phase simplex method** using the *dictionary notation*. We'll later see an implementation of the same method using the *tableaux notation*.
+
+Given a standard linear program \@ref(eq:standard-lp), we can form an linear program called **dictionary** of the following form by introducing **slack variables** $x_{n+1}, \dots, x_{n + m}$:
+
+\begin{equation}
+  \begin{array}{rrrrrrrrrrrr}
+    \mbox{maximize: } & \zeta & = & c _ 0 & + & c_1 x_1 & + & \dots & + & c_n x_n \\
+    \mbox{subject to: } & x_{n+1} & = & b_1 & - & a_{11} x_1 & - & \dots & - & a_{1n} x_n \\
+      & x_{n+2} & = & b_2 & - & a_{21} x_1 & - & \dots & - & a_{2n} x_n \\
+      & &  &  & &  & \vdots & & \\
+      & x_{n+m} & = & b_m & - & a_{m1} x_1 & - & \dots & - & a_{mn} x_n 
+  \end{array} \\
+    x_1, \: \dots \: , \: x_{m + n} \: \geq \: 0
+  (\#eq:dictionary-definition)
+\end{equation}
+
+The variables appearing on the right-hand side are called **non-basic** variables, and the variables appearing on the left-hand side are called **basic** variables. The simplex algorithm creates a sequence of dictionaries through a process called **pivoting**. In each pivot step, one non-basic variable becomes basic; this is the **entering** variable, and one basic variable becomes non-basic; this is the **leaving** variable.
+
+A **basic** solution of the dictionary is obtained by setting all the non-basic variables to 0. If such a solution is feasible, then it is called a **basic feasible solution** (**BFS** for short). In this case, we say that the dictionary is feasible. 
+
+::: {.exercise}
+Show that a dictionary is feasible if and only if all the constants $b_i$ are non-negative.
+:::
+
+
+## Phase II
+
+Phase II of the simplex method assumes that the dictionary is feasible. If this is not the case, we use Phase I to try and find a feasible dictionary. Once we have a feasible dictionary, we proceed as follows.
+
+<div class="boxed">
+
+1. *Find entering variable:*
+    1. Let $e$ be an index such that $c_e$ is positive.
+        - **If none exists, exit.**
+2. *Find leaving variable:*
+    1. Let $S$ be the set of indices $i$ such that $a_{ie}$ is positive.
+    2. Set $\ell = \mathrm{arg}\max_{i \in S} \left(\dfrac{b_i}{a_{ie}}\right)$.
+3. *Pivot:*
+    2. Add $x_e$ to the set of basic variables and remove it from the set of non-basic variables.
+    3. Add $x_\ell$ to the set of non-basic variables and remove it from the set of basic variables.
+    1. Rewrite the basic variables and the objective function in terms of the non-basic variables.
+4. *Go back to step 1.*
+</div>
+
+Assuming the program halts, the optimal solution will be the BFS of the final dictionary.
+
+## Phase I
+
+In the case when some of the constants $b_i$ are negative, Phase I of the simplex algorithm is used to find a feasible dictionary. 
+It attempts to find a sequence of pivots on the dictionary \@ref(eq:dictionary-definition) and make it feasible. 
+The trick is to create the following auxiliary linear program whose optimal solution provides a BFS of the original linear program, if one exists.
+
+\begin{equation}
+  \begin{array}{rrrrrrrrrrrr}
+    \mbox{maximize: } & & & & & & - & x_0   \\
+    \mbox{subject to: } & a_{11} x_1 & + & \dots & + & a_{1n} x_n & - & x_0 & \le & b_1 \\
+      & a_{21} x_1 & + & \dots & + & a_{2n} x_n & - &x_0 & \le & b_2 \\
+      & &  &  & &  & \vdots & & \\
+      & a_{m1} x_1 & + & \dots & + & a_{mn} x_n & - &x_0 & \le & b_m 
+  \end{array} \\
+    x_0, \: x_1, \: \dots \: , \: x_{n} \: \geq \: 0
+  (\#eq:auxiliary-lp)
+\end{equation}
+
+We create an (infeasible) dictionary for this linear program and process as follows. 
+
+<div class="boxed">
+  1. *Find leaving variable*:
+      1. Set $\ell = \mathrm{arg}\min_{1 \le i \le m} b_i$.
+  2. *Pivot:*
+      2. Add $x_0$ to the set of basic variables and remove it from the set of non-basic variables.
+      3. Add $x_\ell$ to the set of non-basic variables and remove it from the set of basic variables.
+      1. Rewrite the basic variables and the objective function in terms of the non-basic variables.
+  3. *Solve:* 
+      1. Apply the Phase II algorithm to find an optimal solution. 
+  4. In the optimal solution,
+      1. If $x_0 \neq 0$, then the original linear program is not feasible.
+      2. If $x_0 = 0$, 
+          1. Form the initial infeasible dictionary from the original linear program.
+          2. Perform pivots until the optimal solution of the auxiliary linear program becomes the BFS of the resulting dictionary.
+          3. Proceed to Phase II.
+</div>
+
+Step 2 of the above algorithm creates a feasible dictionary by Exercise \@ref(exr:auxiliary-lp-2). Hence, we can use the Phase II algorithm to solve the auxiliary linear program in Step 3. The solution obtained in Step 3 provides a BFS of the original linear program when $x_0 = 0$ by Part 4 of Exercise \@ref(exr:auxiliary-lp-1).
+
+::: {.exercise #auxiliary-lp-1}
+
+The following exercises prove that optimal solution of the auxiliary linear program provides a BFS of the original linear program.
+
+1. Show that the linear program \@ref(eq:auxiliary-lp) is always feasible.
+
+    Assume that the linear program \@ref(eq:auxiliary-lp) always has an optimal solution. 
+1. Show that the optimal objective value of \@ref(eq:auxiliary-lp) is always $\le 0$.
+1. Show that if the linear program \@ref(eq:standard-lp) is feasible then the optimal objective value of \@ref(eq:auxiliary-lp) is 0.
+1. Show that if the optimal objective value of \@ref(eq:auxiliary-lp) is 0 then \@ref(eq:standard-lp) is feasible.
+
+:::
+
+::: {.exercise #auxiliary-lp-2}
+
+Suppose the dictionary of \@ref(eq:standard-lp) (and hence \@ref(eq:auxiliary-lp)) is not feasible. Without any loss of generality, assume that $b_1$ is the smallest among all the $b_i$ (i.e. the most negative). Show that the initial dictionary of \@ref(eq:auxiliary-lp) becomes feasible after one pivot step that makes $x_0$ basic and $x_{n+1}$ non-basic.
+
+:::

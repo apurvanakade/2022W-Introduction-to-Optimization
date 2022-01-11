@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Day 4 Two Phase Simplex Method | Introduction to Optimization</title>
+  <meta name="description" content="Day 4 Two Phase Simplex Method | Introduction to Optimization." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Day 4 Two Phase Simplex Method | Introduction to Optimization" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://apurvanakade.github.io/Introduction-to-optimization/" />
+  
+  <meta property="og:description" content="Day 4 Two Phase Simplex Method | Introduction to Optimization." />
+  <meta name="github-repo" content="apurvanakade/Introduction-to-optimization" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Day 4 Two Phase Simplex Method | Introduction to Optimization" />
+  
+  <meta name="twitter:description" content="Day 4 Two Phase Simplex Method | Introduction to Optimization." />
+  
+
+<meta name="author" content="Apurva Nakade" />
+
+
+<meta name="date" content="2022-01-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="simplex-method---example.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-linear-programming.html"><a href="introduction-to-linear-programming.html"><i class="fa fa-check"></i><b>1</b> Introduction to Linear Programming</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-linear-programming.html"><a href="introduction-to-linear-programming.html#resource-allocation-problem"><i class="fa fa-check"></i><b>1.1</b> Resource allocation problem</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html"><i class="fa fa-check"></i><b>2</b> Geometry, Equivalence, Standard form</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#using-geometry-to-solve-linear-programs"><i class="fa fa-check"></i><b>2.1</b> Using geometry to solve linear programs</a></li>
+<li class="chapter" data-level="2.2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#equivalence-of-linear-programs"><i class="fa fa-check"></i><b>2.2</b> Equivalence of linear programs</a></li>
+<li class="chapter" data-level="2.3" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#standard-form-of-linear-programs"><i class="fa fa-check"></i><b>2.3</b> Standard form of linear programs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="simplex-method---example.html"><a href="simplex-method---example.html"><i class="fa fa-check"></i><b>3</b> Simplex Method - Example</a></li>
+<li class="chapter" data-level="4" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html"><i class="fa fa-check"></i><b>4</b> Two Phase Simplex Method</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-ii"><i class="fa fa-check"></i><b>4.1</b> Phase II</a></li>
+<li class="chapter" data-level="4.2" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-i"><i class="fa fa-check"></i><b>4.2</b> Phase I</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Optimization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="two-phase-simplex-method" class="section level1" number="4">
+<h1><span class="header-section-number">Day 4</span> Two Phase Simplex Method</h1>
+<p>As we saw in Example <a href="simplex-method---example.html#eq:simplex-example">(3.1)</a>, the two phase simplex method is an algorithm for solving a linear program in the standard form. The method described below is the <strong>Two phase simplex method</strong> using the <em>dictionary notation</em>. We’ll later see an implementation of the same method using the <em>tableaux notation</em>.</p>
+<p>Given a standard linear program <a href="geometry-equivalence-standard-form.html#eq:standard-lp">(2.2)</a>, we can form an linear program called <strong>dictionary</strong> of the following form by introducing <strong>slack variables</strong> <span class="math inline">\(x_{n+1}, \dots, x_{n + m}\)</span>:</p>
+<p><span class="math display" id="eq:dictionary-definition">\[\begin{equation}
+  \begin{array}{rrrrrrrrrrrr}
+    \mbox{maximize: } &amp; \zeta &amp; = &amp; c _ 0 &amp; + &amp; c_1 x_1 &amp; + &amp; \dots &amp; + &amp; c_n x_n \\
+    \mbox{subject to: } &amp; x_{n+1} &amp; = &amp; b_1 &amp; - &amp; a_{11} x_1 &amp; - &amp; \dots &amp; - &amp; a_{1n} x_n \\
+      &amp; x_{n+2} &amp; = &amp; b_2 &amp; - &amp; a_{21} x_1 &amp; - &amp; \dots &amp; - &amp; a_{2n} x_n \\
+      &amp; &amp;  &amp;  &amp; &amp;  &amp; \vdots &amp; &amp; \\
+      &amp; x_{n+m} &amp; = &amp; b_m &amp; - &amp; a_{m1} x_1 &amp; - &amp; \dots &amp; - &amp; a_{mn} x_n 
+  \end{array} \\
+    x_1, \: \dots \: , \: x_{m + n} \: \geq \: 0
+  \tag{4.1}
+\end{equation}\]</span></p>
+<p>The variables appearing on the right-hand side are called <strong>non-basic</strong> variables, and the variables appearing on the left-hand side are called <strong>basic</strong> variables. The simplex algorithm creates a sequence of dictionaries through a process called <strong>pivoting</strong>. In each pivot step, one non-basic variable becomes basic; this is the <strong>entering</strong> variable, and one basic variable becomes non-basic; this is the <strong>leaving</strong> variable.</p>
+<p>A <strong>basic</strong> solution of the dictionary is obtained by setting all the non-basic variables to 0. If such a solution is feasible, then it is called a <strong>basic feasible solution</strong> (<strong>BFS</strong> for short). In this case, we say that the dictionary is feasible.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 4.1  </strong></span>Show that a dictionary is feasible if and only if all the constants <span class="math inline">\(b_i\)</span> are non-negative.</p>
+</div>
+<div id="phase-ii" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Phase II</h2>
+<p>Phase II of the simplex method assumes that the dictionary is feasible. If this is not the case, we use Phase I to try and find a feasible dictionary. Once we have a feasible dictionary, we proceed as follows.</p>
+<div class="boxed">
+<ol style="list-style-type: decimal">
+<li><em>Find entering variable:</em>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(e\)</span> be an index such that <span class="math inline">\(c_e\)</span> is positive.
+<ul>
+<li><strong>If none exists, exit.</strong></li>
+</ul></li>
+</ol></li>
+<li><em>Find leaving variable:</em>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(S\)</span> be the set of indices <span class="math inline">\(i\)</span> such that <span class="math inline">\(a_{ie}\)</span> is positive.</li>
+<li>Set <span class="math inline">\(\ell = \mathrm{arg}\max_{i \in S} \left(\dfrac{b_i}{a_{ie}}\right)\)</span>.</li>
+</ol></li>
+<li><em>Pivot:</em>
+<ol start="2" style="list-style-type: decimal">
+<li>Add <span class="math inline">\(x_e\)</span> to the set of basic variables and remove it from the set of non-basic variables.</li>
+<li>Add <span class="math inline">\(x_\ell\)</span> to the set of non-basic variables and remove it from the set of basic variables.</li>
+<li>Rewrite the basic variables and the objective function in terms of the non-basic variables.</li>
+</ol></li>
+<li><em>Go back to step 1.</em></li>
+</ol>
+</div>
+<p>Assuming the program halts, the optimal solution will be the BFS of the final dictionary.</p>
+</div>
+<div id="phase-i" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Phase I</h2>
+<p>In the case when some of the constants <span class="math inline">\(b_i\)</span> are negative, Phase I of the simplex algorithm is used to find a feasible dictionary.
+It attempts to find a sequence of pivots on the dictionary <a href="two-phase-simplex-method.html#eq:dictionary-definition">(4.1)</a> and make it feasible.
+The trick is to create the following auxiliary linear program whose optimal solution provides a BFS of the original linear program, if one exists.</p>
+<p><span class="math display" id="eq:auxiliary-lp">\[\begin{equation}
+  \begin{array}{rrrrrrrrrrrr}
+    \mbox{maximize: } &amp; &amp; &amp; &amp; &amp; &amp; - &amp; x_0   \\
+    \mbox{subject to: } &amp; a_{11} x_1 &amp; + &amp; \dots &amp; + &amp; a_{1n} x_n &amp; - &amp; x_0 &amp; \le &amp; b_1 \\
+      &amp; a_{21} x_1 &amp; + &amp; \dots &amp; + &amp; a_{2n} x_n &amp; - &amp;x_0 &amp; \le &amp; b_2 \\
+      &amp; &amp;  &amp;  &amp; &amp;  &amp; \vdots &amp; &amp; \\
+      &amp; a_{m1} x_1 &amp; + &amp; \dots &amp; + &amp; a_{mn} x_n &amp; - &amp;x_0 &amp; \le &amp; b_m 
+  \end{array} \\
+    x_0, \: x_1, \: \dots \: , \: x_{n} \: \geq \: 0
+  \tag{4.2}
+\end{equation}\]</span></p>
+<p>We create an (infeasible) dictionary for this linear program and process as follows.</p>
+<div class="boxed">
+<ol style="list-style-type: decimal">
+<li><em>Find leaving variable</em>:
+<ol style="list-style-type: decimal">
+<li>Set <span class="math inline">\(\ell = \mathrm{arg}\min_{1 \le i \le m} b_i\)</span>.</li>
+</ol></li>
+<li><em>Pivot:</em>
+<ol start="2" style="list-style-type: decimal">
+<li>Add <span class="math inline">\(x_0\)</span> to the set of basic variables and remove it from the set of non-basic variables.</li>
+<li>Add <span class="math inline">\(x_\ell\)</span> to the set of non-basic variables and remove it from the set of basic variables.</li>
+<li>Rewrite the basic variables and the objective function in terms of the non-basic variables.</li>
+</ol></li>
+<li><em>Solve:</em>
+<ol style="list-style-type: decimal">
+<li>Apply the Phase II algorithm to find an optimal solution.</li>
+</ol></li>
+<li>In the optimal solution,
+<ol style="list-style-type: decimal">
+<li>If <span class="math inline">\(x_0 \neq 0\)</span>, then the original linear program is not feasible.</li>
+<li>If <span class="math inline">\(x_0 = 0\)</span>,
+<ol style="list-style-type: decimal">
+<li>Form the initial infeasible dictionary from the original linear program.</li>
+<li>Perform pivots until the optimal solution of the auxiliary linear program becomes the BFS of the resulting dictionary.</li>
+<li>Proceed to Phase II.</li>
+</ol></li>
+</ol></li>
+</ol>
+</div>
+<p>Step 2 of the above algorithm creates a feasible dictionary by Exercise <a href="two-phase-simplex-method.html#exr:auxiliary-lp-2">4.3</a>. Hence, we can use the Phase II algorithm to solve the auxiliary linear program in Step 3. The solution obtained in Step 3 provides a BFS of the original linear program when <span class="math inline">\(x_0 = 0\)</span> by Part 4 of Exercise <a href="two-phase-simplex-method.html#exr:auxiliary-lp-1">4.2</a>.</p>
+<div class="exercise">
+<p><span id="exr:auxiliary-lp-1" class="exercise"><strong>Exercise 4.2  </strong></span>The following exercises prove that optimal solution of the auxiliary linear program provides a BFS of the original linear program.</p>
+<ol style="list-style-type: decimal">
+<li><p>Show that the linear program <a href="two-phase-simplex-method.html#eq:auxiliary-lp">(4.2)</a> is always feasible.</p>
+<p>Assume that the linear program <a href="two-phase-simplex-method.html#eq:auxiliary-lp">(4.2)</a> always has an optimal solution.</p></li>
+<li><p>Show that the optimal objective value of <a href="two-phase-simplex-method.html#eq:auxiliary-lp">(4.2)</a> is always <span class="math inline">\(\le 0\)</span>.</p></li>
+<li><p>Show that if the linear program <a href="geometry-equivalence-standard-form.html#eq:standard-lp">(2.2)</a> is feasible then the optimal objective value of <a href="two-phase-simplex-method.html#eq:auxiliary-lp">(4.2)</a> is 0.</p></li>
+<li><p>Show that if the optimal objective value of <a href="two-phase-simplex-method.html#eq:auxiliary-lp">(4.2)</a> is 0 then <a href="geometry-equivalence-standard-form.html#eq:standard-lp">(2.2)</a> is feasible.</p></li>
+</ol>
+</div>
+<div class="exercise">
+<p><span id="exr:auxiliary-lp-2" class="exercise"><strong>Exercise 4.3  </strong></span>Suppose the dictionary of <a href="geometry-equivalence-standard-form.html#eq:standard-lp">(2.2)</a> (and hence <a href="two-phase-simplex-method.html#eq:auxiliary-lp">(4.2)</a>) is not feasible. Without any loss of generality, assume that <span class="math inline">\(b_1\)</span> is the smallest among all the <span class="math inline">\(b_i\)</span> (i.e. the most negative). Show that the initial dictionary of <a href="two-phase-simplex-method.html#eq:auxiliary-lp">(4.2)</a> becomes feasible after one pivot step that makes <span class="math inline">\(x_0\)</span> basic and <span class="math inline">\(x_{n+1}\)</span> non-basic.</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="simplex-method---example.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": "github"
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
