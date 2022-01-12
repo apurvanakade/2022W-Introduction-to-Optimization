@@ -1,0 +1,96 @@
+# Phase I - Example, Unboundedness
+
+
+## Phase I - Example
+
+Consider the following linear program:
+
+```{r, phase1-example, results = "asis"}
+phase1_example <- new_linear_program(
+  obj = c(-2, -1),
+  A = matrix(c(-1, 1, -1, -2, 0, 1), nrow = 3, byrow = TRUE),
+  b = c(-1, -2, 1),
+  variables = c('x_1', 'x_2')
+)
+
+cat(str_math(phase1_example))
+```
+
+The initial dictionary formed using this linear program is not feasible because $b_1, b_2 < 0$. 
+So, we initiate Phase I to find a feasible dictionary first. The first step is to create an auxiliary linear program and form its dictionary (which is still infeasible).
+
+```{r, phase1-dictionary, results = "asis"}
+phase1_dictionary <- new_dictionary(
+  obj = c(0, 0, 0, -1),
+  coefficients = matrix(c(-1, 1, -1, -1, -2, -1, 0, 1, -1), nrow = 3, byrow = TRUE),
+  constants = c(-1, -2, 1),
+  non_basic_variables = c('x_1', 'x_2', 'x_0'),
+  basic_variables = c('x_3', 'x_4', 'x_5')
+)
+
+cat(str_math(phase1_dictionary))
+```
+
+The most negative $b_i$ is $b_2 = -2$. So we perform a pivot that makes $x_0$ entering and $x_4$ leaving. This updates our dictionary to the following.
+
+```{r, phase1-dictionary-pivot, results = "asis"}
+phase1_dictionary_pivot <- new_dictionary(
+  obj = c(-2, 1, -2, -1),
+  coefficients = matrix(c(0, -1, -1, 1, -2, -1, 1, -1, -1), nrow = 3, byrow = TRUE),
+  constants = c(1, 2, 3),
+  non_basic_variables = c('x_1', 'x_2', 'x_4'),
+  basic_variables = c('x_3', 'x_0', 'x_5')
+)
+
+cat(str_math(phase1_dictionary_pivot))
+```
+
+We solve this using the Phase II simplex method to get the following final feasible dictionary and *an* optimal solution $x_1 = 2, {\color{red}{x_2 = 0}}, x_3 = 1, {\color{red}{x_4 = 0}}, x_5 = 1$. After this, we go back to the original linear program and form its initial (infeasible) dictionary.
+
+```{r, phase1-example-dictionary, results = "asis"}
+phase1_example_dictionary <- new_dictionary(
+  obj = c(0, -2, -1),
+  coefficients = matrix(c(-1, 1, -1, -2, 0, 1), nrow = 3, byrow = TRUE),
+  constants = c(-1, -2, 1),
+  non_basic_variables = c('x_1', 'x_2'),
+  basic_variables = c('x_3', 'x_4', 'x_5')
+)
+
+cat(str_math(phase1_example_dictionary))
+```
+
+The current non-basic variables are $x_1$, $x_2$ but the solution to the auxiliary linear program tells us that the non-basic variables need to be $x_2$ and $x_4$ to get a feasible dictionary. So, we perform a pivot that make $x_1$ enter and $x_4$ leave the set of basic variables to get the following feasible dictionary.
+
+```{r, phase1-example-pivot, results = "asis"}
+phase1_example_pivot <- new_dictionary(
+  obj = c(-4, -2, 3),
+  coefficients = matrix(c(-1, 3, -1, 2, 0, 1), nrow = 3, byrow = TRUE),
+  constants = c(1, 2, 1),
+  non_basic_variables = c('x_4', 'x_2'),
+  basic_variables = c('x_3', 'x_1', 'x_5')
+)
+
+cat(str_math(phase1_example_pivot))
+```
+
+This dictionary is now feasible and can be solved using the Phase II of the simplex method to get the optimal solution $x_1 = 1/3, x_2 = 4/3, \zeta = -3$.
+
+## Unboundedness
+
+In the Phase II, we find the leaving variable by comparing the constants $b_i/a_{ie}$ where the index $i$ varies over all the positive $a_{ie}$. However, it can happen that none of the $a_{ie}$ are positive. In this case, the entering variable $x_e$ can be made arbitrarily large while still maintaining all the positive constraints and the objective can become arbitrarily large i.e. the linear program is unbounded with no largest optimal value. The updated Phase II algorithm is as follows.
+
+<div class="boxed">
+
+1. *Find the entering variable:*
+    1. Let $e$ be an index such that $c_e$ is positive.
+        - **If none exists, exit.**
+2. *Find the leaving variable:*
+    1. Let $S$ be the set of indices $i$ such that $a_{ie}$ is positive.
+        - **If $S$ is empty, exit. Linear program is unbounded with no optimal solution.**
+    2. Set $\ell = \mathrm{arg}\min_{i \in S} \left(\dfrac{b_i}{a_{ie}}\right)$.
+3. *Pivot:*
+    2. Add $x_e$ to the set of basic variables and remove it from the set of non-basic variables.
+    3. Add $x_\ell$ to the set of non-basic variables and remove it from the set of basic variables.
+    1. Rewrite the basic variables and the objective function in terms of the non-basic variables.
+4. *Go back to step 1.*
+</div>

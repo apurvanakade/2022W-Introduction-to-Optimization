@@ -1,3 +1,8 @@
+# R
+- Change variable names in LP from A, b to coefficients and constants
+- Fix the confusion between coefficient matrices and their transposes
+- Function to generate dictionaries
+- Function to pivot
 
 # 01.Rmd
 

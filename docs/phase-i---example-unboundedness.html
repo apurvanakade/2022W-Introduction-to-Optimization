@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Day 5 Phase I - Example, Unboundedness | Introduction to Optimization</title>
+  <meta name="description" content="Day 5 Phase I - Example, Unboundedness | Introduction to Optimization." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Day 5 Phase I - Example, Unboundedness | Introduction to Optimization" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://apurvanakade.github.io/Introduction-to-optimization/" />
+  
+  <meta property="og:description" content="Day 5 Phase I - Example, Unboundedness | Introduction to Optimization." />
+  <meta name="github-repo" content="apurvanakade/Introduction-to-optimization" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Day 5 Phase I - Example, Unboundedness | Introduction to Optimization" />
+  
+  <meta name="twitter:description" content="Day 5 Phase I - Example, Unboundedness | Introduction to Optimization." />
+  
+
+<meta name="author" content="Apurva Nakade" />
+
+
+<meta name="date" content="2022-01-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="two-phase-simplex-method.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-linear-programming.html"><a href="introduction-to-linear-programming.html"><i class="fa fa-check"></i><b>1</b> Introduction to Linear Programming</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-linear-programming.html"><a href="introduction-to-linear-programming.html#resource-allocation-problem"><i class="fa fa-check"></i><b>1.1</b> Resource allocation problem</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html"><i class="fa fa-check"></i><b>2</b> Geometry, Equivalence, Standard form</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#using-geometry-to-solve-linear-programs"><i class="fa fa-check"></i><b>2.1</b> Using geometry to solve linear programs</a></li>
+<li class="chapter" data-level="2.2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#equivalence-of-linear-programs"><i class="fa fa-check"></i><b>2.2</b> Equivalence of linear programs</a></li>
+<li class="chapter" data-level="2.3" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#standard-form-of-linear-programs"><i class="fa fa-check"></i><b>2.3</b> Standard form of linear programs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="simplex-method---example.html"><a href="simplex-method---example.html"><i class="fa fa-check"></i><b>3</b> Simplex Method - Example</a></li>
+<li class="chapter" data-level="4" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html"><i class="fa fa-check"></i><b>4</b> Two-Phase Simplex Method</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-ii"><i class="fa fa-check"></i><b>4.1</b> Phase II</a></li>
+<li class="chapter" data-level="4.2" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-i"><i class="fa fa-check"></i><b>4.2</b> Phase I</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html"><i class="fa fa-check"></i><b>5</b> Phase I - Example, Unboundedness</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html#phase-i---example"><i class="fa fa-check"></i><b>5.1</b> Phase I - Example</a></li>
+<li class="chapter" data-level="5.2" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html#unboundedness"><i class="fa fa-check"></i><b>5.2</b> Unboundedness</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Optimization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="phase-i---example-unboundedness" class="section level1" number="5">
+<h1><span class="header-section-number">Day 5</span> Phase I - Example, Unboundedness</h1>
+<div id="phase-i---example" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Phase I - Example</h2>
+<p>Consider the following linear program:</p>
+<p><span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrr}
+\mbox{maximize: } &amp; -2x_1 &amp; + &amp; -1x_2 \\ 
+\mbox{subject to: }  &amp; -1x_1 &amp; + &amp; 1x_2 &amp; \le &amp; -1  \\ 
+ &amp; -1x_1 &amp; + &amp; -2x_2 &amp; \le &amp; -2  \\ 
+ &amp; 0x_1 &amp; + &amp; 1x_2 &amp; \le &amp; 1  \\ 
+\end{array}
+ \\ 
+x_1, \: x_2 \ge 0\end{align}\]</span></p>
+<p>The initial dictionary formed using this linear program is not feasible because <span class="math inline">\(b_1, b_2 &lt; 0\)</span>.
+So, we initiate Phase I to find a feasible dictionary first. The first step is to create an auxiliary linear program and form its dictionary (which is still infeasible).</p>
+<p><span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrrrr}
+\mbox{maximize: } &amp; \zeta &amp;=&amp;0&amp; + &amp;0x_1 &amp;+&amp; 0x_2 &amp;+&amp; -1x_0 \\ 
+\mbox{subject to: } &amp; x_3 &amp; = &amp; -1 &amp; - &amp;-1x_1 &amp; - &amp;1x_2 &amp; - &amp;-1x_0 \\ 
+ &amp; x_4 &amp; = &amp; -2 &amp; - &amp;-1x_1 &amp; - &amp;-2x_2 &amp; - &amp;-1x_0 \\ 
+ &amp; x_5 &amp; = &amp; 1 &amp; - &amp;0x_1 &amp; - &amp;1x_2 &amp; - &amp;-1x_0 \\ 
+\end{array}
+ \\ 
+x_1, \: x_2, \: x_0, \: x_3, \: x_4, \: x_5 \ge 0\end{align}\]</span></p>
+<p>The most negative <span class="math inline">\(b_i\)</span> is <span class="math inline">\(b_2 = -2\)</span>. So we perform a pivot that makes <span class="math inline">\(x_0\)</span> entering and <span class="math inline">\(x_4\)</span> leaving. This updates our dictionary to the following.</p>
+<p><span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrrrr}
+\mbox{maximize: } &amp; \zeta &amp;=&amp;-2&amp; + &amp;1x_1 &amp;+&amp; -2x_2 &amp;+&amp; -1x_4 \\ 
+\mbox{subject to: } &amp; x_3 &amp; = &amp; 1 &amp; - &amp;0x_1 &amp; - &amp;-1x_2 &amp; - &amp;-1x_4 \\ 
+ &amp; x_0 &amp; = &amp; 2 &amp; - &amp;1x_1 &amp; - &amp;-2x_2 &amp; - &amp;-1x_4 \\ 
+ &amp; x_5 &amp; = &amp; 3 &amp; - &amp;1x_1 &amp; - &amp;-1x_2 &amp; - &amp;-1x_4 \\ 
+\end{array}
+ \\ 
+x_1, \: x_2, \: x_4, \: x_3, \: x_0, \: x_5 \ge 0\end{align}\]</span></p>
+<p>We solve this using the Phase II simplex method to get the following final feasible dictionary and <em>an</em> optimal solution <span class="math inline">\(x_1 = 2, {\color{red}{x_2 = 0}}, x_3 = 1, {\color{red}{x_4 = 0}}, x_5 = 1\)</span>. After this, we go back to the original linear program and form its initial (infeasible) dictionary.</p>
+<p><span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrr}
+\mbox{maximize: } &amp; \zeta &amp;=&amp;0&amp; + &amp;-2x_1 &amp;+&amp; -1x_2 \\ 
+\mbox{subject to: } &amp; x_3 &amp; = &amp; -1 &amp; - &amp;-1x_1 &amp; - &amp;1x_2 \\ 
+ &amp; x_4 &amp; = &amp; -2 &amp; - &amp;-1x_1 &amp; - &amp;-2x_2 \\ 
+ &amp; x_5 &amp; = &amp; 1 &amp; - &amp;0x_1 &amp; - &amp;1x_2 \\ 
+\end{array}
+ \\ 
+x_1, \: x_2, \: x_3, \: x_4, \: x_5 \ge 0\end{align}\]</span></p>
+<p>The current non-basic variables are <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span> but the solution to the auxiliary linear program tells us that the non-basic variables need to be <span class="math inline">\(x_2\)</span> and <span class="math inline">\(x_4\)</span> to get a feasible dictionary. So, we perform a pivot that make <span class="math inline">\(x_1\)</span> enter and <span class="math inline">\(x_4\)</span> leave the set of basic variables to get the following feasible dictionary.</p>
+<p><span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrr}
+\mbox{maximize: } &amp; \zeta &amp;=&amp;-4&amp; + &amp;-2x_4 &amp;+&amp; 3x_2 \\ 
+\mbox{subject to: } &amp; x_3 &amp; = &amp; 1 &amp; - &amp;-1x_4 &amp; - &amp;3x_2 \\ 
+ &amp; x_1 &amp; = &amp; 2 &amp; - &amp;-1x_4 &amp; - &amp;2x_2 \\ 
+ &amp; x_5 &amp; = &amp; 1 &amp; - &amp;0x_4 &amp; - &amp;1x_2 \\ 
+\end{array}
+ \\ 
+x_4, \: x_2, \: x_3, \: x_1, \: x_5 \ge 0\end{align}\]</span></p>
+<p>This dictionary is now feasible and can be solved using the Phase II of the simplex method to get the optimal solution <span class="math inline">\(x_1 = 1/3, x_2 = 4/3, \zeta = -3\)</span>.</p>
+</div>
+<div id="unboundedness" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Unboundedness</h2>
+<p>In the Phase II, we find the leaving variable by comparing the constants <span class="math inline">\(b_i/a_{ie}\)</span> where the index <span class="math inline">\(i\)</span> varies over all the positive <span class="math inline">\(a_{ie}\)</span>. However, it can happen that none of the <span class="math inline">\(a_{ie}\)</span> are positive. In this case, the entering variable <span class="math inline">\(x_e\)</span> can be made arbitrarily large while still maintaining all the positive constraints and the objective can become arbitrarily large i.e. the linear program is unbounded with no largest optimal value. The updated Phase II algorithm is as follows.</p>
+<div class="boxed">
+<ol style="list-style-type: decimal">
+<li><em>Find the entering variable:</em>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(e\)</span> be an index such that <span class="math inline">\(c_e\)</span> is positive.
+<ul>
+<li><strong>If none exists, exit.</strong></li>
+</ul></li>
+</ol></li>
+<li><em>Find the leaving variable:</em>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(S\)</span> be the set of indices <span class="math inline">\(i\)</span> such that <span class="math inline">\(a_{ie}\)</span> is positive.
+<ul>
+<li><strong>If <span class="math inline">\(S\)</span> is empty, exit. Linear program is unbounded with no optimal solution.</strong></li>
+</ul></li>
+<li>Set <span class="math inline">\(\ell = \mathrm{arg}\min_{i \in S} \left(\dfrac{b_i}{a_{ie}}\right)\)</span>.</li>
+</ol></li>
+<li><em>Pivot:</em>
+<ol start="2" style="list-style-type: decimal">
+<li>Add <span class="math inline">\(x_e\)</span> to the set of basic variables and remove it from the set of non-basic variables.</li>
+<li>Add <span class="math inline">\(x_\ell\)</span> to the set of non-basic variables and remove it from the set of basic variables.</li>
+<li>Rewrite the basic variables and the objective function in terms of the non-basic variables.</li>
+</ol></li>
+<li><em>Go back to step 1.</em></li>
+</ol>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="two-phase-simplex-method.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": "github"
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

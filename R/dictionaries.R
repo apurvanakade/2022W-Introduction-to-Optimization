@@ -18,8 +18,9 @@ str.dictionary <- function(x) {
 
   # combine coefficients and variables
   coefficients <- 
-    apply(t(matrix(paste0(t(x$coefficients), x$non_basic_variables), 
-      nrow = length(x$constants))), 1, paste0, collapse = " & - &")
+    apply(
+      t(matrix(paste0(t(x$coefficients), x$non_basic_variables), nrow = length(x$non_basic_variables))), 
+      1, paste0, collapse = " & - &")
 
   # print constraints
   constraints <- paste0("\\mbox{subject to: }", 
@@ -30,6 +31,8 @@ str.dictionary <- function(x) {
   positivity_constraints <- paste0(paste(paste(x$non_basic_variables, collapse = ", \\: "), paste(x$basic_variables, collapse = ", \\: "), sep = ", \\: "), " \\ge 0")
   
   paste0("\\begin{array}{rrrr",paste(replicate(length(x$non_basic_variables), "rr"), collapse=""),"}\n", objective, constraints, "\\end{array}\n \\\\ \n", positivity_constraints)
+
+  # coefficients
 }
 
 str_math <- function(math, inline = FALSE) {

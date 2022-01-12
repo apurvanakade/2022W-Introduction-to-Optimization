@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Introduction to Optimization</title>
-  <meta name="description" content="Page not found | Introduction to Optimization." />
+  <title>Day 5 Phase I - Example | Introduction to Optimization</title>
+  <meta name="description" content="Day 5 Phase I - Example | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Introduction to Optimization" />
+  <meta property="og:title" content="Day 5 Phase I - Example | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://apurvanakade.github.io/Introduction-to-optimization/" />
   
-  <meta property="og:description" content="Page not found | Introduction to Optimization." />
+  <meta property="og:description" content="Day 5 Phase I - Example | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Introduction to Optimization" />
+  <meta name="twitter:title" content="Day 5 Phase I - Example | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Page not found | Introduction to Optimization." />
+  <meta name="twitter:description" content="Day 5 Phase I - Example | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="two-phase-simplex-method.html"/>
 
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -88,11 +88,7 @@
 <li class="chapter" data-level="4.1" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-ii"><i class="fa fa-check"></i><b>4.1</b> Phase II</a></li>
 <li class="chapter" data-level="4.2" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-i"><i class="fa fa-check"></i><b>4.2</b> Phase I</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html"><i class="fa fa-check"></i><b>5</b> Phase I - Example, Unboundedness</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html#phase-i---example"><i class="fa fa-check"></i><b>5.1</b> Phase I - Example</a></li>
-<li class="chapter" data-level="5.2" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html#unboundedness"><i class="fa fa-check"></i><b>5.2</b> Unboundedness</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="phase-i---example.html"><a href="phase-i---example.html"><i class="fa fa-check"></i><b>5</b> Phase I - Example</a></li>
 </ul>
 
       </nav>
@@ -110,18 +106,37 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="phase-i---example" class="section level1" number="5">
+<h1><span class="header-section-number">Day 5</span> Phase I - Example</h1>
+<p>Consider the following linear program:</p>
+<p><span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrr}
+\mbox{maximize: } &amp; -2x_1 &amp; + &amp; -1x_2 \\ 
+\mbox{subject to: }  &amp; -1x_1 &amp; + &amp; 1x_2 &amp; \le &amp; -1  \\ 
+ &amp; -1x_1 &amp; + &amp; 2x_2 &amp; \le &amp; -2  \\ 
+ &amp; 0x_1 &amp; + &amp; 1x_2 &amp; \le &amp; 1  \\ 
+\end{array}
+ \\ 
+x_1, \: x_2 \ge 0\end{align}\]</span></p>
+<p>The initial dictionary formed using this linear program is not feasible because <span class="math inline">\(b_1, b_2 &lt; 0\)</span>.
+So, we initiate Phase I to find a feasible dictionary first. The first step is to create an auxiliary linear program.</p>
+<p><span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrrrr}
+\mbox{maximize: } &amp; 0x_1 &amp; + &amp; 0x_2 &amp; + &amp; -1x_0 \\ 
+\mbox{subject to: }  &amp; -1x_1 &amp; + &amp; 1x_2 &amp; + &amp; -1x_0 &amp; \le &amp; -1  \\ 
+ &amp; -1x_1 &amp; + &amp; 2x_2 &amp; + &amp; -1x_0 &amp; \le &amp; -2  \\ 
+ &amp; 0x_1 &amp; + &amp; 1x_2 &amp; + &amp; -1x_0 &amp; \le &amp; 1  \\ 
+\end{array}
+ \\ 
+x_1, \: x_2, \: x_0 \ge 0\end{align}\]</span></p>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
+<a href="two-phase-simplex-method.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
