@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introduction to Optimization</title>
-  <meta name="description" content="Introduction to Optimization." />
+  <title>Lecture 6 Bland’s rule, Klee–Minty cube | Introduction to Optimization</title>
+  <meta name="description" content="Lecture 6 Bland’s rule, Klee–Minty cube | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introduction to Optimization" />
+  <meta property="og:title" content="Lecture 6 Bland’s rule, Klee–Minty cube | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://apurvanakade.github.io/Introduction-to-optimization/" />
   
-  <meta property="og:description" content="Introduction to Optimization." />
+  <meta property="og:description" content="Lecture 6 Bland’s rule, Klee–Minty cube | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introduction to Optimization" />
+  <meta name="twitter:title" content="Lecture 6 Bland’s rule, Klee–Minty cube | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Introduction to Optimization." />
+  <meta name="twitter:description" content="Lecture 6 Bland’s rule, Klee–Minty cube | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="phase-i---example-unboundedness.html"/>
 
-<link rel="next" href="introduction-to-linear-programming.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -115,31 +115,88 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Introduction to Optimization</h1>
-<p class="author"><em>Apurva Nakade</em></p>
-<p class="date"><em>2022-01-14</em></p>
+<div id="blands-rule-kleeminty-cube" class="section level1" number="6">
+<h1><span class="header-section-number">Lecture 6</span> Bland’s rule, Klee–Minty cube</h1>
+<div id="blands-rule" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Bland’s rule</h2>
+<p>A pivot where <span class="math inline">\(x_e\)</span> enters and <span class="math inline">\(x_\ell\)</span> leaves is said to be <strong>degenerate</strong> if <span class="math inline">\(a_{\ell e} &gt; 0\)</span> and <span class="math inline">\(b_\ell = 0\)</span>.
+In this case, as <span class="math inline">\(b_{\ell}/a_{\ell e}\)</span>, the entering variables value remains unchanged at 0 even after it becomes basic.
+Similarly, the objective value also stays constant after the pivot.
+Degenerate simplices can cause the simplex algorithm to get stuck in an infinite loop.
+In linear programming, this issue is called <strong>cycling</strong>.
+For example, the following linear program
+<span class="math display">\[\begin{align} 
+\begin{array}{rrrrrrrrrrrr}
+\mbox{maximize: } &amp; 1x_1 &amp; + &amp; -2x_2 &amp; + &amp; 0x_3 &amp; + &amp; -2x_4 \\ 
+\mbox{subject to: }  &amp; 0.5x_1 &amp; + &amp; -3.5x_2 &amp; + &amp; -2x_3 &amp; + &amp; 4x_4 &amp; \le &amp; 0  \\ 
+ &amp; 0.5x_1 &amp; + &amp; -1x_2 &amp; + &amp; -0.5x_3 &amp; + &amp; 0.5x_4 &amp; \le &amp; 0  \\ 
+ &amp; 1x_1 &amp; + &amp; 0x_2 &amp; + &amp; 0x_3 &amp; + &amp; 0x_4 &amp; \le &amp; 1  \\ 
+\end{array}
+ \\ 
+x_1, \: x_2, \: x_3, \: x_4 \ge 0\end{align}\]</span>
+cycles for the following pivot rules:</p>
+<ul>
+<li><span class="math inline">\(x_1\)</span> enters and <span class="math inline">\(x_5\)</span> leaves,</li>
+<li><span class="math inline">\(x_2\)</span> enters and <span class="math inline">\(x_6\)</span> leaves,</li>
+<li><span class="math inline">\(x_3\)</span> enters and <span class="math inline">\(x_1\)</span> leaves,</li>
+<li><span class="math inline">\(x_4\)</span> enters and <span class="math inline">\(x_2\)</span> leaves,</li>
+<li><span class="math inline">\(x_5\)</span> enters and <span class="math inline">\(x_3\)</span> leaves,</li>
+<li><span class="math inline">\(x_6\)</span> enters and <span class="math inline">\(x_4\)</span> leaves.</li>
+</ul>
+<p>There are several ways to prevent cycling, the simplest of which is called <strong>Bland’s rule</strong>, which states that whenever there are multiple candidates for the entering or leaving variables, choose the one with the <strong>smallest index</strong>. One can check that the sixth pivot in the above example violates Bland’s rule.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-9" class="theorem"><strong>Theorem 6.1  </strong></span>Bland’s rule prevent cycling.</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>The question of optimization is the very general question of deciding when a function <span class="math inline">\(g(x_1, \dots, x_n)\)</span> attains its maximum or minimum value on a domain <span class="math inline">\(D\)</span> in <span class="math inline">\(\mathbb{R^n}\)</span>.
-<span class="math display">\[\begin{align}
-\mbox{optimize: } &amp;&amp; g(x_1, \dots, x_n) &amp; \\
-\mbox{subject to: } &amp;&amp; (x_1, \dots, x_n) &amp;\in D.
-\end{align}\]</span>
-These questions show up frequently in every quantitative field.
-But it is almost impossible to analyze the question at this level of generality without making any further assumptions on <span class="math inline">\(g\)</span> and <span class="math inline">\(D\)</span>.</p>
-<p>We will start with the simplest interesting functions, namely, linear functions. We’ll let <span class="math inline">\(g\)</span> be a linear function and let <span class="math inline">\(D\)</span> be a region cut out by linear (in)equalities. The study of this problem is called Linear Programming. Despite the simplicity of the Linear Programming setup, or perhaps because of it, LP is one of the most commonly used models for real world optimization problems.</p>
-<p>Most of this course is about Linear Programming. In the first half, we’ll study the simplex method, which is an algorithm for solving linear programs, and in the second half we’ll study the theory behind linear programs using duality theory.</p>
+The updated Phase II simplex algorithm that takes into account Bland’s rule is as follows.
+<div class="boxed">
+<ol style="list-style-type: decimal">
+<li><em>Find the entering variable:</em>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(E\)</span> be the set of indices <span class="math inline">\(j\)</span> such that <span class="math inline">\(c_{j}\)</span> is positive.
+<ul>
+<li><strong>If <span class="math inline">\(E\)</span> is empty, exit.</strong></li>
+</ul></li>
+<li>Set <span class="math inline">\(e = \min E\)</span>.</li>
+</ol></li>
+<li><em>Find the leaving variable:</em>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(L\)</span> be the set of indices <span class="math inline">\(i\)</span> such that <span class="math inline">\(a_{ie}\)</span> is positive.
+<ul>
+<li><strong>If <span class="math inline">\(L\)</span> is empty, exit. Linear program is unbounded with no optimal solution.</strong></li>
+</ul></li>
+<li>Set <span class="math inline">\(\ell = \min \left[ \mathrm{arg}\min_{i \in L} \left(\dfrac{b_i}{a_{ie}}\right) \right]\)</span>.</li>
+</ol></li>
+<li><em>Pivot:</em>
+<ol start="2" style="list-style-type: decimal">
+<li>Add <span class="math inline">\(x_e\)</span> to the set of basic variables and remove it from the set of non-basic variables.</li>
+<li>Add <span class="math inline">\(x_\ell\)</span> to the set of non-basic variables and remove it from the set of basic variables.</li>
+<li>Rewrite the basic variables and the objective function in terms of the non-basic variables.</li>
+</ol></li>
+<li><em>Go back to step 1.</em></li>
+</ol>
+</div>
+</div>
+<div id="kleeminty-cube" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Klee–Minty cube</h2>
+<p>The simplex algorithm runs in polynomial time over real-world problems but is an exponential time algorithm in the worst case.
+The following is an example of a linear program in <span class="math inline">\(n\)</span> variables and <span class="math inline">\(n\)</span> constraints, called a Klee–Minty cube, for which the simplex method requires <span class="math inline">\(\mathcal{O}(2^n)\)</span> steps.
+One proves this by showing that the feasible set has <span class="math inline">\(2^n\)</span> vertices and the simplex algorithm visits all the vertices of the feasible set.</p>
+<p><span class="math display">\[\begin{align}
+  \begin{array}{rlllllllll}
+    \mbox{maximize: }  &amp; \sum \limits_{j = 1}^n x_j &amp; \\
+    \mbox{subject to: } &amp; \sum \limits_{j = 1}^{i - 1} 2 x_j + x_i  &amp; \le 2^{i - 1} &amp; &amp; \mbox{ for } i = 1, \dots, n.
+  \end{array}
+\end{align}\]</span></p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="phase-i---example-unboundedness.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="introduction-to-linear-programming.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

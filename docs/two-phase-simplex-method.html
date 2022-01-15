@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Day 4 Two-Phase Simplex Method | Introduction to Optimization</title>
-  <meta name="description" content="Day 4 Two-Phase Simplex Method | Introduction to Optimization." />
+  <title>Lecture 4 Two-Phase Simplex Method | Introduction to Optimization</title>
+  <meta name="description" content="Lecture 4 Two-Phase Simplex Method | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Day 4 Two-Phase Simplex Method | Introduction to Optimization" />
+  <meta property="og:title" content="Lecture 4 Two-Phase Simplex Method | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://apurvanakade.github.io/Introduction-to-optimization/" />
   
-  <meta property="og:description" content="Day 4 Two-Phase Simplex Method | Introduction to Optimization." />
+  <meta property="og:description" content="Lecture 4 Two-Phase Simplex Method | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Day 4 Two-Phase Simplex Method | Introduction to Optimization" />
+  <meta name="twitter:title" content="Lecture 4 Two-Phase Simplex Method | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Day 4 Two-Phase Simplex Method | Introduction to Optimization." />
+  <meta name="twitter:description" content="Lecture 4 Two-Phase Simplex Method | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-12" />
+<meta name="date" content="2022-01-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -93,6 +93,11 @@
 <li class="chapter" data-level="5.1" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html#phase-i---example"><i class="fa fa-check"></i><b>5.1</b> Phase I - Example</a></li>
 <li class="chapter" data-level="5.2" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html#unboundedness"><i class="fa fa-check"></i><b>5.2</b> Unboundedness</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="blands-rule-kleeminty-cube.html"><a href="blands-rule-kleeminty-cube.html"><i class="fa fa-check"></i><b>6</b> Bland’s rule, Klee–Minty cube</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blands-rule-kleeminty-cube.html"><a href="blands-rule-kleeminty-cube.html#blands-rule"><i class="fa fa-check"></i><b>6.1</b> Bland’s rule</a></li>
+<li class="chapter" data-level="6.2" data-path="blands-rule-kleeminty-cube.html"><a href="blands-rule-kleeminty-cube.html#kleeminty-cube"><i class="fa fa-check"></i><b>6.2</b> Klee–Minty cube</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -111,7 +116,7 @@
 
             <section class="normal" id="section-">
 <div id="two-phase-simplex-method" class="section level1" number="4">
-<h1><span class="header-section-number">Day 4</span> Two-Phase Simplex Method</h1>
+<h1><span class="header-section-number">Lecture 4</span> Two-Phase Simplex Method</h1>
 <p>As we saw in Example <a href="simplex-method---example.html#eq:simplex-example">(3.1)</a>, the two phase simplex method is an algorithm for solving a linear program in the standard form. The method described below is the <strong>Two phase simplex method</strong> using the <em>dictionary notation</em>. We’ll later see an implementation of the same method using the <em>tableaux notation</em>.</p>
 <p>Given a standard linear program <a href="geometry-equivalence-standard-form.html#eq:standard-lp">(2.2)</a>, we can form an linear program, called a <strong>dictionary</strong>, of the following form by introducing <strong>slack variables</strong> <span class="math inline">\(x_{n+1}, \dots, x_{n + m}\)</span>.</p>
 <p><span class="math display" id="eq:dictionary-definition">\[\begin{equation}

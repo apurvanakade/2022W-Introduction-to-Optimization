@@ -1,6 +1,6 @@
 book_filename: "Introduction to Optimization"
 language:
   ui:
-    chapter_name: "Day "
+    chapter_name: "Lecture "
 delete_merged_file: true
 output_dir: "docs"

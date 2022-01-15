@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Day 3 Simplex Method - Example | Introduction to Optimization</title>
-  <meta name="description" content="Day 3 Simplex Method - Example | Introduction to Optimization." />
+  <title>Lecture 3 Simplex Method - Example | Introduction to Optimization</title>
+  <meta name="description" content="Lecture 3 Simplex Method - Example | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Day 3 Simplex Method - Example | Introduction to Optimization" />
+  <meta property="og:title" content="Lecture 3 Simplex Method - Example | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://apurvanakade.github.io/Introduction-to-optimization/" />
   
-  <meta property="og:description" content="Day 3 Simplex Method - Example | Introduction to Optimization." />
+  <meta property="og:description" content="Lecture 3 Simplex Method - Example | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Day 3 Simplex Method - Example | Introduction to Optimization" />
+  <meta name="twitter:title" content="Lecture 3 Simplex Method - Example | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Day 3 Simplex Method - Example | Introduction to Optimization." />
+  <meta name="twitter:description" content="Lecture 3 Simplex Method - Example | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-12" />
+<meta name="date" content="2022-01-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -93,6 +93,11 @@
 <li class="chapter" data-level="5.1" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html#phase-i---example"><i class="fa fa-check"></i><b>5.1</b> Phase I - Example</a></li>
 <li class="chapter" data-level="5.2" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html#unboundedness"><i class="fa fa-check"></i><b>5.2</b> Unboundedness</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="blands-rule-kleeminty-cube.html"><a href="blands-rule-kleeminty-cube.html"><i class="fa fa-check"></i><b>6</b> Bland’s rule, Klee–Minty cube</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blands-rule-kleeminty-cube.html"><a href="blands-rule-kleeminty-cube.html#blands-rule"><i class="fa fa-check"></i><b>6.1</b> Bland’s rule</a></li>
+<li class="chapter" data-level="6.2" data-path="blands-rule-kleeminty-cube.html"><a href="blands-rule-kleeminty-cube.html#kleeminty-cube"><i class="fa fa-check"></i><b>6.2</b> Klee–Minty cube</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -111,7 +116,7 @@
 
             <section class="normal" id="section-">
 <div id="simplex-method---example" class="section level1" number="3">
-<h1><span class="header-section-number">Day 3</span> Simplex Method - Example</h1>
+<h1><span class="header-section-number">Lecture 3</span> Simplex Method - Example</h1>
 <p>The simplex method jumps from vertex of the feasible region to find the optimal solution. It is best demonstrated using an example. Consider the following linear program.</p>
 <p><span class="math display" id="eq:simplex-example">\[\begin{equation}
 \begin{array}{rrrrrrrr}
@@ -178,35 +183,6 @@ x_1, \: x_2, \: x_3, \: x_4 \ge 0
 </ol>
 <p>The optimal objective value <span class="math inline">\(6\)</span> is the constant coefficient in the final <span class="math inline">\(\zeta\)</span> and it is attained at <span class="math inline">\((x_1, x_2) = (2, 4)\)</span>.</p>
 <p><img src="Introduction-to-Optimization_files/figure-html/simplex-example-intersections-traced-1.png" width="672" /></p>
-<!-- 
-## Summary
-
-Here's a summary of the simplex method used in the above example, with a few technical terms introduced.
-
-1. *Setup:*
-    1. Introduce slack variables.
-    2. Create dictionary.
-    3. Set all the decision variables to 0. 
-    4. Calculate the values of the slack variables. This is our initial guess.
-    5. Call the decision variables the non-basic variables and the slack variables the basic variables.
-2. *Choose an entering variable:*
-    1. Choose a non-basic variable whose coefficient in the objective function is positive.
-      - **If no such variable exists, the algorithm halts and the current guess is the optimal solution.**
-    2. Call this variable the entering variable.
-    3. Add the entering variable to the list of basic variables and remove it from the list of non-basic variables.
-3. *Find the leaving variable:* 
-    1. Find the maximum value the entering variable can be increased to without violating any of the positivity constraints.
-    2. This maximum value will force the corresponding basic variable to become zero. Call this the leaving variable.
-    3. Add the leaving variable to the list of non-basic variables and remove it from the list of basic variables.      
-4. *Update dictionary:*
-    2. Rewrite the entering variable in terms of the leaving variable.
-    3. Rewrite the objective function and all the other basic variables in terms of the new non-basic variables.
-5. *Recalculate guess:*
-    1. Set the maximum value found above as the new value of the entering variable.
-    2. Set the leaving variable to 0.
-    1. Recalculate values of the other basic variables and the objective function.
-    2. Update the guess.
-5. *Go back to Step 2*. -->
 
 </div>
             </section>

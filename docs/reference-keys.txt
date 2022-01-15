@@ -24,6 +24,7 @@ exr:unlabeled-div-8
 eq:auxiliary-lp
 exr:auxiliary-lp-1
 exr:auxiliary-lp-2
+thm:unlabeled-div-9
 introduction-to-linear-programming
 resource-allocation-problem
 geometry-equivalence-standard-form
@@ -37,3 +38,6 @@ phase-i
 phase-i---example-unboundedness
 phase-i---example
 unboundedness
+blands-rule-kleeminty-cube
+blands-rule
+kleeminty-cube

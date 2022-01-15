@@ -130,33 +130,3 @@ simplex_example_plot +
   geom_point(aes(x=2, y=4, color = "Guess 3: x_3, x_4")) +
   scale_colour_brewer("Guesses", palette = "Set1")
 ```
-
-<!-- 
-## Summary
-
-Here's a summary of the simplex method used in the above example, with a few technical terms introduced.
-
-1. *Setup:*
-    1. Introduce slack variables.
-    2. Create dictionary.
-    3. Set all the decision variables to 0. 
-    4. Calculate the values of the slack variables. This is our initial guess.
-    5. Call the decision variables the non-basic variables and the slack variables the basic variables.
-2. *Choose an entering variable:*
-    1. Choose a non-basic variable whose coefficient in the objective function is positive.
-      - **If no such variable exists, the algorithm halts and the current guess is the optimal solution.**
-    2. Call this variable the entering variable.
-    3. Add the entering variable to the list of basic variables and remove it from the list of non-basic variables.
-3. *Find the leaving variable:* 
-    1. Find the maximum value the entering variable can be increased to without violating any of the positivity constraints.
-    2. This maximum value will force the corresponding basic variable to become zero. Call this the leaving variable.
-    3. Add the leaving variable to the list of non-basic variables and remove it from the list of basic variables.      
-4. *Update dictionary:*
-    2. Rewrite the entering variable in terms of the leaving variable.
-    3. Rewrite the objective function and all the other basic variables in terms of the new non-basic variables.
-5. *Recalculate guess:*
-    1. Set the maximum value found above as the new value of the entering variable.
-    2. Set the leaving variable to 0.
-    1. Recalculate values of the other basic variables and the objective function.
-    2. Update the guess.
-5. *Go back to Step 2*. -->
