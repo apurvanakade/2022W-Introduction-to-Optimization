@@ -5,7 +5,7 @@ The simplex method jumps from vertex of the feasible region to find the optimal 
 \begin{equation}
 ```{r, simplex-example, results = 'asis'}
 simplex_method_example <- new_linear_program(
-  obj = c(1, 1),
+  obj = c(1, 1.5),
   A = matrix(c(1, 2, 4, 3), nrow = 2, byrow = TRUE),
   b = c(10, 20),
   variables = c('x_1', 'x_2')
@@ -55,7 +55,7 @@ The first, and arguably the most important trick in the simplex algorithm is the
 \begin{equation}
 ``` {r, resource-example-dictionary, results="asis"}
 x <- new_dictionary(
-  objective = c(0, 1, 1),
+  objective = c(0, 1, 1.5),
   coefficients = matrix(c(1, 2, 4, 3), nrow = 2, byrow = TRUE),
   constants = c(10, 20),
   non_basic_variables = c("x_1", "x_2"),
@@ -88,7 +88,7 @@ simplex_example_plot +
     \begin{equation}
     ``` {r, simplex-example-step-1, results="asis"}
     x <- new_dictionary(
-      objective = c(5, -1/4, 1/4),
+      objective = c(5, -1/4, 3/4),
       coefficients = matrix(c(-1/4, 5/4, 1/4, 3/4), nrow = 2, byrow = TRUE),
       constants = c(5, 5),
       basic_variables = c("x_3", "x_1"),
@@ -105,7 +105,7 @@ simplex_example_plot +
     \begin{equation}
     ``` {r, simplex-example-step-2, results="asis"}
     x <- new_dictionary(
-      objective = c(6, -1/5, -1/5),
+      objective = c(8, -1/10, -3/5),
       coefficients = matrix(c(-1/5, 4/5, 2/5, -3/5), nrow = 2, byrow = TRUE),
       constants = c(4, 2),
       basic_variables = c("x_2", "x_1"),
@@ -118,7 +118,7 @@ simplex_example_plot +
 3. Our new guess is: $x_1 = 2, x_2 = 4, x_3 = 0, x_4 = 0$. 
     1. The coefficients of both the variables that appear in $\zeta$ are negative. It is not possible to increase either variable without decreasing the objective value. The simplex algorithm halts. 
 
-The optimal objective value $6$ is the constant coefficient in the final $\zeta$ and it is attained at $(x_1, x_2) = (2, 4)$.
+The optimal objective value $8$ is the constant coefficient in the final $\zeta$ and it is attained at $(x_1, x_2) = (2, 4)$.
 
 
 ```{r, simplex-example-intersections-traced}

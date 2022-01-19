@@ -1,0 +1,137 @@
+# (PART) Duality Theory {-}
+
+# Introduction to Duality
+
+
+## Dual Linear Program
+
+Let us consider the linear program \@ref(eq:simplex-example) again.
+\begin{equation}
+```{r, simlex-example-2, results = 'asis'}
+cat(str(simplex_method_example))
+```
+(\#eq:simplex-example-2)
+\end{equation}
+We can interpret this as a resource allocation problem where we're producing two products $P_1$ and $P_2$ using machines $M_1$ and $M_2$. 
+Each product requires some time on each of the machines, and each constraint represents the total time available on each machine.
+
+```{r, table-resource-allocation-2}
+
+df <- data.frame(
+  P1 = c(1, 4),
+  P2 = c(2, 3),
+  Upper_Bounds = c(10, 20)
+)
+rownames(df) <- c("M1", "M2")
+df
+```
+
+Now, we consider the following dual question. Suppose we're interested in renting out the machines. *What is the minimum price can we can rent out the machines so that, for each product, the profit from renting is at least as much as the profit from producing?* If this is not the case, then it is more profitable to produce than rent out.
+
+Suppose we rent out $M_1$ and $M_2$ at the rate of $y_1$ and $y_2$ per hour, respectively. Suppose further that we only rent $M_1$ for 10 hours and $M_2$ for 20 hours as a package. Then the following inequalities must hold:
+
+\begin{align}
+  y_1 + 4y_2 & \ge 1 \\
+  2y_1 + 3y_2 & \ge 1.5
+\end{align}
+
+where we can interpret $y_1 + 4y_2$ and $2y_1 + 3y_2$ as the calculated price from the production of $P_1$ and $P_2.$ The inequalities say that, for each product, the calculated price from renting is at least as much as the price from selling the product directly. Given these constraints, we then ask the minimum total profit we can make from renting. This gives us the following **dual linear program**. (The original linear program \@ref(eq:simplex-example-2) is called the **primal**.)
+
+\begin{equation}
+```{r, dual-example, results = 'asis'}
+dual_example <- new_linear_program(
+  obj = c(10, 20),
+  A = matrix(c(1, 4, 2, 3), nrow = 2, byrow = TRUE),
+  b = c(1, 1.5),
+  variables = c('y_1', 'y_2')
+)
+
+cat(str(dual_example))
+```
+(\#eq:dual-example)
+\end{equation}
+
+We can solve this geometrically, to get the optimal solution $(y_1, y_2) = (0.6, 0.1)$ and the objective value $8$. It is not a coincidence that the optimal objective value of the dual is the same as the optimal objective value of the primal. This is a consequence of **strong duality**, which is what we'll prove in the next few lectures.
+
+```{r, fig-dual-example, fig.cap = "The feasible region is the unbounded non-shaded region, as the inequalities are reversed. The entire feasible region lies above line 8 = 10y_1 + 20y_2."}
+
+library(ggplot2)
+
+dual_example_plot <- ggplot() + 
+  xlab("y_1") +
+  ylab("y_2") +
+  xlim(0, max(1/1, 1.5/2)) +
+  ylim(0, max(1/4, 1.5/3)) +
+  geom_vline(xintercept=c(0), alpha = 0.4) +
+  geom_hline(yintercept=c(0), alpha = 0.4) +
+  theme_bw() + 
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 1/1),
+        y = c(0, 1/4, 0)),
+      aes(x = x, y = y, fill = "1: y_1 + 4 y_2 >= 1"),
+      inherit.aes = FALSE, alpha = 0.4) + 
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 1.5/2),
+        y = c(0, 1.5/3, 0)),
+      aes(x = x, y = y, fill = "2: 2 y_1 + 3 y_2 >= 1.5"),
+      inherit.aes = TRUE, alpha = 0.4) +
+  scale_fill_discrete(name = "Constraints")
+
+  dual_example_plot +
+  geom_point(aes(x=0.6, y=0.1), color = "black") +
+  geom_text(aes(x=0.6, y=0.1), label="(0.6, 0.1)", vjust=-.5, hjust=0) +
+  stat_function(fun = function(x) {(8 - 10*x)/20}, color = "black")
+```
+
+
+## Shadow Prices
+
+For a linear program in the standard form, the **shadow price** of the constraint $b_i$ is defined as the increase in the value of the optimal objective value per unit increase in the constraint $b_i$, while keeping everything else constant. If we think of the constraints as limits on our production capacity, then the shadow price is the increase in maximum profit per unit increase in production capacity. Alternately, shadow prices are the expenses we can afford for increasing the production capacities without incurring any losses.
+
+More precisely, the shadow price of the $i^{th}$ constraint is simply 
+\begin{align}
+  \dfrac{\partial \zeta_\max}{\partial b_i}.
+\end{align}
+
+Because all our equations are linear, we can calculate shadow prices by making a small change in $b_i$ i.e.
+\begin{equation}
+  \dfrac{\partial \zeta_\max}{\partial b_i} = \dfrac{\Delta \zeta_\max}{\Delta b_i}.
+(\#eq:approx-shadow-price)
+\end{equation}
+where $\Delta \zeta$ is increase in the optimal objective value when $b_i$ is increased to $b_i + \Delta b_i$. 
+
+::: {.remark}
+While using the approximation \@ref(eq:approx-shadow-price) it is important to keep the change $\Delta b_i$ small. 
+We want the perturbed feasible set to be "close" to the original feasible set. No new vertices should be created and no existing vertices should be deleted by the perturbation.
+:::
+
+For example, to calculate the shadow prices for \@ref(eq:simplex-example-2) we can solve the following linear programs.
+
+```{r, shadow-price-example-1, results = 'asis'}
+simplex_method_example <- new_linear_program(
+  obj = c(1, 1.5),
+  A = matrix(c(1, 2, 4, 3), nrow = 2, byrow = TRUE),
+  b = c(10.1, 20),
+  variables = c('x_1', 'x_2')
+)
+
+cat(str_math(simplex_method_example))
+```
+
+```{r, shadow-price-example-2, results = 'asis'}
+simplex_method_example <- new_linear_program(
+  obj = c(1, 1.5),
+  A = matrix(c(1, 2, 4, 3), nrow = 2, byrow = TRUE),
+  b = c(10, 20.1),
+  variables = c('x_1', 'x_2')
+)
+
+cat(str_math(simplex_method_example))
+```
+
+The optimal objective value of the first linear program is $8.06$ so the shadow price for the first constraint is $\dfrac{8.06 - 8}{0.1} = 0.6$.
+The optimal objective value of the second linear program is $8.01$ so the shadow price for the first constraint is $\dfrac{8.01 - 8}{0.1} = 0.1$.
+These values are precisely the optimal solutions to the dual linear program! 
+This provides another interpretation of the dual linear program as calculating the shadow prices of the primal.

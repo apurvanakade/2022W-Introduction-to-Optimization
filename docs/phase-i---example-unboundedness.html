@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-14" />
+<meta name="date" content="2022-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -72,6 +72,7 @@
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>I The Simplex Method</b></span></li>
 <li class="chapter" data-level="1" data-path="introduction-to-linear-programming.html"><a href="introduction-to-linear-programming.html"><i class="fa fa-check"></i><b>1</b> Introduction to Linear Programming</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="introduction-to-linear-programming.html"><a href="introduction-to-linear-programming.html#resource-allocation-problem"><i class="fa fa-check"></i><b>1.1</b> Resource allocation problem</a></li>
@@ -98,6 +99,12 @@
 <li class="chapter" data-level="6.1" data-path="blands-rule-kleeminty-cube.html"><a href="blands-rule-kleeminty-cube.html#blands-rule"><i class="fa fa-check"></i><b>6.1</b> Bland’s rule</a></li>
 <li class="chapter" data-level="6.2" data-path="blands-rule-kleeminty-cube.html"><a href="blands-rule-kleeminty-cube.html#kleeminty-cube"><i class="fa fa-check"></i><b>6.2</b> Klee–Minty cube</a></li>
 </ul></li>
+<li class="part"><span><b>II Duality Theory</b></span></li>
+<li class="chapter" data-level="7" data-path="introduction-to-duality.html"><a href="introduction-to-duality.html"><i class="fa fa-check"></i><b>7</b> Introduction to Duality</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-duality.html"><a href="introduction-to-duality.html#dual-linear-program"><i class="fa fa-check"></i><b>7.1</b> Dual Linear Program</a></li>
+<li class="chapter" data-level="7.2" data-path="introduction-to-duality.html"><a href="introduction-to-duality.html#shadow-prices"><i class="fa fa-check"></i><b>7.2</b> Shadow Prices</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -120,7 +127,7 @@
 <div id="phase-i---example" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Phase I - Example</h2>
 <p>Consider the following linear program:</p>
-<p><span class="math display">\[\begin{align} 
+<p><span class="math display">\[\begin{align*} 
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; -2x_1 &amp; + &amp; -1x_2 \\ 
 \mbox{subject to: }  &amp; -1x_1 &amp; + &amp; 1x_2 &amp; \le &amp; -1  \\ 
@@ -128,10 +135,10 @@
  &amp; 0x_1 &amp; + &amp; 1x_2 &amp; \le &amp; 1  \\ 
 \end{array}
  \\ 
-x_1, \: x_2 \ge 0\end{align}\]</span></p>
+x_1, \: x_2 \ge 0\end{align*}\]</span></p>
 <p>The initial dictionary formed using this linear program is not feasible because <span class="math inline">\(b_1, b_2 &lt; 0\)</span>.
 So, we initiate Phase I to find a feasible dictionary first. The first step is to create an auxiliary linear program and form its dictionary (which is still infeasible).</p>
-<p><span class="math display">\[\begin{align} 
+<p><span class="math display">\[\begin{align*} 
 \begin{array}{rrrrrrrrrr}
 \mbox{maximize: } &amp; \zeta &amp;=&amp;0&amp; + &amp;0x_1 &amp;+&amp; 0x_2 &amp;+&amp; -1x_0 \\ 
 \mbox{subject to: } &amp; x_3 &amp; = &amp; -1 &amp; - &amp;-1x_1 &amp; - &amp;1x_2 &amp; - &amp;-1x_0 \\ 
@@ -139,9 +146,9 @@ So, we initiate Phase I to find a feasible dictionary first. The first step is t
  &amp; x_5 &amp; = &amp; 1 &amp; - &amp;0x_1 &amp; - &amp;1x_2 &amp; - &amp;-1x_0 \\ 
 \end{array}
  \\ 
-x_1, \: x_2, \: x_0, \: x_3, \: x_4, \: x_5 \ge 0\end{align}\]</span></p>
+x_1, \: x_2, \: x_0, \: x_3, \: x_4, \: x_5 \ge 0\end{align*}\]</span></p>
 <p>The most negative <span class="math inline">\(b_i\)</span> is <span class="math inline">\(b_2 = -2\)</span>. So we perform a pivot that makes <span class="math inline">\(x_0\)</span> entering and <span class="math inline">\(x_4\)</span> leaving. This updates our dictionary to the following.</p>
-<p><span class="math display">\[\begin{align} 
+<p><span class="math display">\[\begin{align*} 
 \begin{array}{rrrrrrrrrr}
 \mbox{maximize: } &amp; \zeta &amp;=&amp;-2&amp; + &amp;1x_1 &amp;+&amp; -2x_2 &amp;+&amp; -1x_4 \\ 
 \mbox{subject to: } &amp; x_3 &amp; = &amp; 1 &amp; - &amp;0x_1 &amp; - &amp;-1x_2 &amp; - &amp;-1x_4 \\ 
@@ -149,9 +156,9 @@ x_1, \: x_2, \: x_0, \: x_3, \: x_4, \: x_5 \ge 0\end{align}\]</span></p>
  &amp; x_5 &amp; = &amp; 3 &amp; - &amp;1x_1 &amp; - &amp;-1x_2 &amp; - &amp;-1x_4 \\ 
 \end{array}
  \\ 
-x_1, \: x_2, \: x_4, \: x_3, \: x_0, \: x_5 \ge 0\end{align}\]</span></p>
+x_1, \: x_2, \: x_4, \: x_3, \: x_0, \: x_5 \ge 0\end{align*}\]</span></p>
 <p>We solve this using the Phase II simplex method to get the following final feasible dictionary and <em>an</em> optimal solution <span class="math inline">\(x_1 = 2, {\color{red}{x_2 = 0}}, x_3 = 1, {\color{red}{x_4 = 0}}, x_5 = 1\)</span>. After this, we go back to the original linear program and form its initial (infeasible) dictionary.</p>
-<p><span class="math display">\[\begin{align} 
+<p><span class="math display">\[\begin{align*} 
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; \zeta &amp;=&amp;0&amp; + &amp;-2x_1 &amp;+&amp; -1x_2 \\ 
 \mbox{subject to: } &amp; x_3 &amp; = &amp; -1 &amp; - &amp;-1x_1 &amp; - &amp;1x_2 \\ 
@@ -159,9 +166,9 @@ x_1, \: x_2, \: x_4, \: x_3, \: x_0, \: x_5 \ge 0\end{align}\]</span></p>
  &amp; x_5 &amp; = &amp; 1 &amp; - &amp;0x_1 &amp; - &amp;1x_2 \\ 
 \end{array}
  \\ 
-x_1, \: x_2, \: x_3, \: x_4, \: x_5 \ge 0\end{align}\]</span></p>
+x_1, \: x_2, \: x_3, \: x_4, \: x_5 \ge 0\end{align*}\]</span></p>
 <p>The current non-basic variables are <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span> but the solution to the auxiliary linear program tells us that the non-basic variables need to be <span class="math inline">\(x_2\)</span> and <span class="math inline">\(x_4\)</span> to get a feasible dictionary. So, we perform a pivot that make <span class="math inline">\(x_1\)</span> enter and <span class="math inline">\(x_4\)</span> leave the set of basic variables to get the following feasible dictionary.</p>
-<p><span class="math display">\[\begin{align} 
+<p><span class="math display">\[\begin{align*} 
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; \zeta &amp;=&amp;-4&amp; + &amp;-2x_4 &amp;+&amp; 3x_2 \\ 
 \mbox{subject to: } &amp; x_3 &amp; = &amp; 1 &amp; - &amp;-1x_4 &amp; - &amp;3x_2 \\ 
@@ -169,7 +176,7 @@ x_1, \: x_2, \: x_3, \: x_4, \: x_5 \ge 0\end{align}\]</span></p>
  &amp; x_5 &amp; = &amp; 1 &amp; - &amp;0x_4 &amp; - &amp;1x_2 \\ 
 \end{array}
  \\ 
-x_4, \: x_2, \: x_3, \: x_1, \: x_5 \ge 0\end{align}\]</span></p>
+x_4, \: x_2, \: x_3, \: x_1, \: x_5 \ge 0\end{align*}\]</span></p>
 <p>This dictionary is now feasible and can be solved using the Phase II of the simplex method to get the optimal solution <span class="math inline">\(x_1 = 1/3, x_2 = 4/3, \zeta = -3\)</span>.</p>
 </div>
 <div id="unboundedness" class="section level2" number="5.2">
