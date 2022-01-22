@@ -1,0 +1,88 @@
+# Weak Duality
+
+The dual of the standard linear program \@ref(eq:standard-lp-matrix-form) is the the following
+
+\begin{equation}
+  \begin{aligned}
+    \mbox{minimize: } && b^T y & \\
+    \mbox{subject to: } 
+      && A^T y & \geq c \\
+      && y & \geq 0,
+  \end{aligned}
+  (\#eq:dual-lp-matrix-form)
+\end{equation}
+
+where $y = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix}$ is the vector of decision variables.
+We can standardize the dual to get the following linear program.
+
+\begin{equation}
+  \begin{aligned}
+    \mbox{maximize: } && - b^T y & \\
+    \mbox{subject to: } 
+      && -A^T y & \leq -c \\
+      && y & \geq 0,
+  \end{aligned}
+\end{equation}
+
+Taking further dual we get the following linear program which is equivalent to the primal \@ref(eq:standard-lp-matrix-form).
+
+\begin{equation}
+  \begin{aligned}
+    \mbox{minimize: } && -(-c^T)^T z & \\
+    \mbox{subject to: } 
+      && (-A^T)^T z & \geq -b \\
+      && z & \geq 0,
+  \end{aligned}
+\end{equation}
+
+::: {.theorem}
+The dual of the dual is the primal.
+:::
+
+We'll denote by $\zeta$ the primal objective and by $\xi$ the dual objective. Let $x^*$ denote an arbitrary primal feasible solution (not necessarily optimal) and let $y^*$ denote an arbitrary dual feasible solution (not necessarily optimal). Let $\zeta_\max$ and $\xi_\min$ denote the optimal primal and dual solutions, if they exist. Then we have 
+
+\begin{align}
+  \zeta_\max = \max_{x^*} \zeta(x^*) \qquad \mbox{ and } \qquad
+  \xi_\min = \min_{y^*} \xi(y^*).
+\end{align}
+
+::: {.theorem name="Weak Duality"}
+
+For any primal feasible solution $x^*$ and dual feasible solution $y^*$, $\zeta(x^*) \le \xi(y^*)$. Hence,
+
+1. If both the primal and dual have optimal solutions, then $\zeta_\max \le \xi_\min$.
+2. If the primal is unbounded, then the dual is infeasible.
+3. If the duals is unbounded, then the primal is infeasible.
+:::
+
+::: {.proof}
+Let $x^*$ be a primal feasible solution and let $y^*$ be a dual feasile solution, then
+\begin{align}
+  \zeta(x^*)
+  & = c^T x^* \\
+  & = (x^*)^T c \\
+  & \le (x^*)^T A^T y^* \\
+  & = (A x^*)^T y^* \\
+  & \le b^T y^* \\
+  & = \xi(y^*).
+\end{align}
+In the above derivation, we're repeatedly using the feasibility of both $x^*$ and $y^*$. 
+The rest of the results follow naturally.
+:::
+
+## Certificate of Optimality
+
+In the next class, we'll prove the following stronger theorem.
+
+::: {.theorem}
+
+If the primal has an optimal feasible solution then so does the dual and in this case $\zeta_\max = \xi_\min$.
+:::
+
+Assuming this we can find an efficient way to verify the solution to our linear program. $x^*$ is the optimal primal solution and $y^*$ is the optimal dual solution if and only if the following hold:
+
+1. $x^*$ is primal feasible,
+1. $y^*$ is dual feasible,
+1. $\zeta(x^*) = \xi(y^*)$.
+
+This is called providing a **Certificate of Optimality**.

@@ -29,10 +29,6 @@ eq:simplex-example-2
 eq:dual-example
 fig:fig-dual-example
 eq:approx-shadow-price
-eq:dual-lp-matrix-form
-thm:unlabeled-div-11
-thm:unlabeled-div-12
-thm:unlabeled-div-14
 introduction-to-linear-programming
 resource-allocation-problem
 geometry-equivalence-standard-form
@@ -52,5 +48,3 @@ kleeminty-cube
 introduction-to-duality
 dual-linear-program
 shadow-prices
-weak-duality
-certificate-of-optimality

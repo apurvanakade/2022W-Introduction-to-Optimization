@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-19" />
+<meta name="date" content="2022-01-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -105,6 +105,10 @@
 <li class="chapter" data-level="7.1" data-path="introduction-to-duality.html"><a href="introduction-to-duality.html#dual-linear-program"><i class="fa fa-check"></i><b>7.1</b> Dual Linear Program</a></li>
 <li class="chapter" data-level="7.2" data-path="introduction-to-duality.html"><a href="introduction-to-duality.html#shadow-prices"><i class="fa fa-check"></i><b>7.2</b> Shadow Prices</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="weak-duality.html"><a href="weak-duality.html"><i class="fa fa-check"></i><b>8</b> Weak Duality</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="weak-duality.html"><a href="weak-duality.html#certificate-of-optimality"><i class="fa fa-check"></i><b>8.1</b> Certificate of Optimality</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -172,10 +176,10 @@ Figure 2.2: The feasible region lies below the line <span class="math inline">\(
 <p><span class="math display">\[\begin{align*}
 \mbox{maximize: } &amp;&amp; c_1 x + c_2 y &amp; =: \zeta(x,y) \\
 \mbox{subject to: } 
-  &amp;&amp; a_{11} x + a_{12} y &amp; \lesseqgtr b_1 \\
-  &amp;&amp; a_{21} x + a_{22} y &amp; \lesseqgtr b_2 \\
+  &amp;&amp; a_{11} x + a_{12} y &amp; \lesseqqgtr b_1 \\
+  &amp;&amp; a_{21} x + a_{22} y &amp; \lesseqqgtr b_2 \\
   &amp;&amp; \vdots &amp;  \\
-  &amp;&amp; a_{m1} x + a_{m2} y &amp; \lesseqgtr b_m. 
+  &amp;&amp; a_{m1} x + a_{m2} y &amp; \lesseqqgtr b_m. 
 \end{align*}\]</span></p>
 <p>Let <span class="math inline">\(\mathcal{S}\)</span> denote the feasible set. <em>Assume that <span class="math inline">\(\mathcal{S}\)</span> is bounded and non-empty.</em> Let <span class="math inline">\(P = (x_1, y_1)\)</span> and <span class="math inline">\(Q = (x_2, y_2)\)</span> be two distinct points in <span class="math inline">\(\mathbb{R}^2\)</span>. Let <span class="math inline">\(R = (x_3, y_3)\)</span> be a point lying on the line segment between <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>.</p>
 <ol style="list-style-type: decimal">

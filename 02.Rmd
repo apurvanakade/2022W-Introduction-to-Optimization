@@ -72,10 +72,10 @@ Consider the following linear program
 \begin{align*}
 \mbox{maximize: } && c_1 x + c_2 y & =: \zeta(x,y) \\
 \mbox{subject to: } 
-  && a_{11} x + a_{12} y & \lesseqgtr b_1 \\
-  && a_{21} x + a_{22} y & \lesseqgtr b_2 \\
+  && a_{11} x + a_{12} y & \lesseqqgtr b_1 \\
+  && a_{21} x + a_{22} y & \lesseqqgtr b_2 \\
   && \vdots &  \\
-  && a_{m1} x + a_{m2} y & \lesseqgtr b_m. 
+  && a_{m1} x + a_{m2} y & \lesseqqgtr b_m. 
 \end{align*}
 
 Let $\mathcal{S}$ denote the feasible set. *Assume that $\mathcal{S}$ is bounded and non-empty.*   Let $P = (x_1, y_1)$ and $Q = (x_2, y_2)$ be two distinct points in $\mathbb{R}^2$. Let $R = (x_3, y_3)$ be a point lying on the line segment between $P$ and $Q$. 

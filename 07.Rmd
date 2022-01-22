@@ -51,7 +51,7 @@ cat(str(dual_example))
 (\#eq:dual-example)
 \end{equation}
 
-We can solve this geometrically, to get the optimal solution $(y_1, y_2) = (0.6, 0.1)$ and the objective value $8$. It is not a coincidence that the optimal objective value of the dual is the same as the optimal objective value of the primal. This is a consequence of **strong duality**, which is what we'll prove in the next few lectures.
+We can solve this geometrically, to get the optimal solution $(y_1, y_2) = (0.6, 0.1)$ and the objective value $8$. It is not a coincidence that the optimal objective value of the dual is the same as the optimal objective value of the primal. This is a consequence of [strong duality](https://en.wikipedia.org/wiki/Dual_linear_program#Strong_duality).
 
 ```{r, fig-dual-example, fig.cap = "The feasible region is the unbounded non-shaded region, as the inequalities are reversed. The entire feasible region lies above line 8 = 10y_1 + 20y_2."}
 

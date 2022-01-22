@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lecture 7 Introduction to Duality | Introduction to Optimization</title>
-  <meta name="description" content="Lecture 7 Introduction to Duality | Introduction to Optimization." />
+  <title>Lecture 8 Weak Duality | Introduction to Optimization</title>
+  <meta name="description" content="Lecture 8 Weak Duality | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lecture 7 Introduction to Duality | Introduction to Optimization" />
+  <meta property="og:title" content="Lecture 8 Weak Duality | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://apurvanakade.github.io/Introduction-to-optimization/" />
   
-  <meta property="og:description" content="Lecture 7 Introduction to Duality | Introduction to Optimization." />
+  <meta property="og:description" content="Lecture 8 Weak Duality | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lecture 7 Introduction to Duality | Introduction to Optimization" />
+  <meta name="twitter:title" content="Lecture 8 Weak Duality | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Lecture 7 Introduction to Duality | Introduction to Optimization." />
+  <meta name="twitter:description" content="Lecture 8 Weak Duality | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="blands-rule-kleeminty-cube.html"/>
-<link rel="next" href="weak-duality.html"/>
+<link rel="prev" href="introduction-to-duality.html"/>
+
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -126,89 +126,80 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-duality" class="section level1" number="7">
-<h1><span class="header-section-number">Lecture 7</span> Introduction to Duality</h1>
-<div id="dual-linear-program" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Dual Linear Program</h2>
-<p>Let us consider the linear program <a href="simplex-method---example.html#eq:simplex-example">(3.1)</a> again.
-<span class="math display" id="eq:simplex-example-2">\[\begin{equation}
-\begin{array}{rrrrrrrr}
-\mbox{maximize: } &amp; 1x_1 &amp; + &amp; 1.5x_2 \\ 
-\mbox{subject to: }  &amp; 1x_1 &amp; + &amp; 2x_2 &amp; \le &amp; 10  \\ 
- &amp; 4x_1 &amp; + &amp; 3x_2 &amp; \le &amp; 20  \\ 
-\end{array}
- \\ 
-x_1, \: x_2 \ge 0
-\tag{7.1}
-\end{equation}\]</span>
-We can interpret this as a resource allocation problem where we’re producing two products <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> using machines <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>.
-Each product requires some time on each of the machines, and each constraint represents the total time available on each machine.</p>
-<pre><code>   P1 P2 Upper_Bounds
-M1  1  2           10
-M2  4  3           20</code></pre>
-<p>Now, we consider the following dual question. Suppose we’re interested in renting out the machines. <em>What is the minimum price can we can rent out the machines so that, for each product, the profit from renting is at least as much as the profit from producing?</em> If this is not the case, then it is more profitable to produce than rent out.</p>
-<p>Suppose we rent out <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> at the rate of <span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span> per hour, respectively. Suppose further that we only rent <span class="math inline">\(M_1\)</span> for 10 hours and <span class="math inline">\(M_2\)</span> for 20 hours as a package. Then the following inequalities must hold:</p>
-<p><span class="math display">\[\begin{align}
-  y_1 + 4y_2 &amp; \ge 1 \\
-  2y_1 + 3y_2 &amp; \ge 1.5
-\end{align}\]</span></p>
-<p>where we can interpret <span class="math inline">\(y_1 + 4y_2\)</span> and <span class="math inline">\(2y_1 + 3y_2\)</span> as the calculated price from the production of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2.\)</span> The inequalities say that, for each product, the calculated price from renting is at least as much as the price from selling the product directly. Given these constraints, we then ask the minimum total profit we can make from renting. This gives us the following <strong>dual linear program</strong>. (The original linear program <a href="introduction-to-duality.html#eq:simplex-example-2">(7.1)</a> is called the <strong>primal</strong>.)</p>
-<p><span class="math display" id="eq:dual-example">\[\begin{equation}
-\begin{array}{rrrrrrrr}
-\mbox{maximize: } &amp; 10y_1 &amp; + &amp; 20y_2 \\ 
-\mbox{subject to: }  &amp; 1y_1 &amp; + &amp; 4y_2 &amp; \le &amp; 1  \\ 
- &amp; 2y_1 &amp; + &amp; 3y_2 &amp; \le &amp; 1.5  \\ 
-\end{array}
- \\ 
-y_1, \: y_2 \ge 0
-\tag{7.2}
+<div id="weak-duality" class="section level1" number="8">
+<h1><span class="header-section-number">Lecture 8</span> Weak Duality</h1>
+<p>The dual of the standard linear program <a href="geometry-equivalence-standard-form.html#eq:standard-lp-matrix-form">(2.3)</a> is the the following</p>
+<p><span class="math display" id="eq:dual-lp-matrix-form">\[\begin{equation}
+  \begin{aligned}
+    \mbox{minimize: } &amp;&amp; b^T y &amp; \\
+    \mbox{subject to: } 
+      &amp;&amp; A^T y &amp; \geq c \\
+      &amp;&amp; y &amp; \geq 0,
+  \end{aligned}
+  \tag{8.1}
 \end{equation}\]</span></p>
-<p>We can solve this geometrically, to get the optimal solution <span class="math inline">\((y_1, y_2) = (0.6, 0.1)\)</span> and the objective value <span class="math inline">\(8\)</span>. It is not a coincidence that the optimal objective value of the dual is the same as the optimal objective value of the primal. This is a consequence of <a href="https://en.wikipedia.org/wiki/Dual_linear_program#Strong_duality">strong duality</a>.</p>
-<div class="figure"><span style="display:block;" id="fig:fig-dual-example"></span>
-<img src="Introduction-to-Optimization_files/figure-html/fig-dual-example-1.png" alt="The feasible region is the unbounded non-shaded region, as the inequalities are reversed. The entire feasible region lies above line 8 = 10y_1 + 20y_2." width="672" />
-<p class="caption">
-Figure 7.1: The feasible region is the unbounded non-shaded region, as the inequalities are reversed. The entire feasible region lies above line 8 = 10y_1 + 20y_2.
-</p>
+<p>where <span class="math inline">\(y = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix}\)</span> is the vector of decision variables.
+We can standardize the dual to get the following linear program.</p>
+<p><span class="math display">\[\begin{equation}
+  \begin{aligned}
+    \mbox{maximize: } &amp;&amp; - b^T y &amp; \\
+    \mbox{subject to: } 
+      &amp;&amp; -A^T y &amp; \leq -c \\
+      &amp;&amp; y &amp; \geq 0,
+  \end{aligned}
+\end{equation}\]</span></p>
+<p>Taking further dual we get the following linear program which is equivalent to the primal <a href="geometry-equivalence-standard-form.html#eq:standard-lp-matrix-form">(2.3)</a>.</p>
+<p><span class="math display">\[\begin{equation}
+  \begin{aligned}
+    \mbox{minimize: } &amp;&amp; -(-c^T)^T z &amp; \\
+    \mbox{subject to: } 
+      &amp;&amp; (-A^T)^T z &amp; \geq -b \\
+      &amp;&amp; z &amp; \geq 0,
+  \end{aligned}
+\end{equation}\]</span></p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-11" class="theorem"><strong>Theorem 8.1  </strong></span>The dual of the dual is the primal.</p>
 </div>
-</div>
-<div id="shadow-prices" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Shadow Prices</h2>
-<p>For a linear program in the standard form, the <strong>shadow price</strong> of the constraint <span class="math inline">\(b_i\)</span> is defined as the increase in the value of the optimal objective value per unit increase in the constraint <span class="math inline">\(b_i\)</span>, while keeping everything else constant. If we think of the constraints as limits on our production capacity, then the shadow price is the increase in maximum profit per unit increase in production capacity. Alternately, shadow prices are the expenses we can afford for increasing the production capacities without incurring any losses.</p>
-<p>More precisely, the shadow price of the <span class="math inline">\(i^{th}\)</span> constraint is simply
-<span class="math display">\[\begin{align}
-  \dfrac{\partial \zeta_\max}{\partial b_i}.
+<p>We’ll denote by <span class="math inline">\(\zeta\)</span> the primal objective and by <span class="math inline">\(\xi\)</span> the dual objective. Let <span class="math inline">\(x^*\)</span> denote an arbitrary primal feasible solution (not necessarily optimal) and let <span class="math inline">\(y^*\)</span> denote an arbitrary dual feasible solution (not necessarily optimal). Let <span class="math inline">\(\zeta_\max\)</span> and <span class="math inline">\(\xi_\min\)</span> denote the optimal primal and dual solutions, if they exist. Then we have</p>
+<p><span class="math display">\[\begin{align}
+  \zeta_\max = \max_{x^*} \zeta(x^*) \qquad \mbox{ and } \qquad
+  \xi_\min = \min_{y^*} \xi(y^*).
 \end{align}\]</span></p>
-<p>Because all our equations are linear, we can calculate shadow prices by making a small change in <span class="math inline">\(b_i\)</span> i.e.
-<span class="math display" id="eq:approx-shadow-price">\[\begin{equation}
-  \dfrac{\partial \zeta_\max}{\partial b_i} = \dfrac{\Delta \zeta_\max}{\Delta b_i}.
-\tag{7.3}
-\end{equation}\]</span>
-where <span class="math inline">\(\Delta \zeta\)</span> is increase in the optimal objective value when <span class="math inline">\(b_i\)</span> is increased to <span class="math inline">\(b_i + \Delta b_i\)</span>.</p>
-<div class="remark">
-<p><span id="unlabeled-div-10" class="remark"><em>Remark</em>. </span>While using the approximation <a href="introduction-to-duality.html#eq:approx-shadow-price">(7.3)</a> it is important to keep the change <span class="math inline">\(\Delta b_i\)</span> small.
-We want the perturbed feasible set to be “close” to the original feasible set. No new vertices should be created and no existing vertices should be deleted by the perturbation.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-12" class="theorem"><strong>Theorem 8.2  (Weak Duality) </strong></span>For any primal feasible solution <span class="math inline">\(x^*\)</span> and dual feasible solution <span class="math inline">\(y^*\)</span>, <span class="math inline">\(\zeta(x^*) \le \xi(y^*)\)</span>. Hence,</p>
+<ol style="list-style-type: decimal">
+<li>If both the primal and dual have optimal solutions, then <span class="math inline">\(\zeta_\max \le \xi_\min\)</span>.</li>
+<li>If the primal is unbounded, then the dual is infeasible.</li>
+<li>If the duals is unbounded, then the primal is infeasible.</li>
+</ol>
 </div>
-<p>For example, to calculate the shadow prices for <a href="introduction-to-duality.html#eq:simplex-example-2">(7.1)</a> we can solve the following linear programs.</p>
-<p><span class="math display">\[\begin{align*} 
-\begin{array}{rrrrrrrr}
-\mbox{maximize: } &amp; 1x_1 &amp; + &amp; 1.5x_2 \\ 
-\mbox{subject to: }  &amp; 1x_1 &amp; + &amp; 2x_2 &amp; \le &amp; 10.1  \\ 
- &amp; 4x_1 &amp; + &amp; 3x_2 &amp; \le &amp; 20  \\ 
-\end{array}
- \\ 
-x_1, \: x_2 \ge 0\end{align*}\]</span></p>
-<p><span class="math display">\[\begin{align*} 
-\begin{array}{rrrrrrrr}
-\mbox{maximize: } &amp; 1x_1 &amp; + &amp; 1.5x_2 \\ 
-\mbox{subject to: }  &amp; 1x_1 &amp; + &amp; 2x_2 &amp; \le &amp; 10  \\ 
- &amp; 4x_1 &amp; + &amp; 3x_2 &amp; \le &amp; 20.1  \\ 
-\end{array}
- \\ 
-x_1, \: x_2 \ge 0\end{align*}\]</span></p>
-<p>The optimal objective value of the first linear program is <span class="math inline">\(8.06\)</span> so the shadow price for the first constraint is <span class="math inline">\(\dfrac{8.06 - 8}{0.1} = 0.6\)</span>.
-The optimal objective value of the second linear program is <span class="math inline">\(8.01\)</span> so the shadow price for the first constraint is <span class="math inline">\(\dfrac{8.01 - 8}{0.1} = 0.1\)</span>.
-These values are precisely the optimal solutions to the dual linear program!
-This provides another interpretation of the dual linear program as calculating the shadow prices of the primal.</p>
+<div class="proof">
+<p><span id="unlabeled-div-13" class="proof"><em>Proof</em>. </span>Let <span class="math inline">\(x^*\)</span> be a primal feasible solution and let <span class="math inline">\(y^*\)</span> be a dual feasile solution, then
+<span class="math display">\[\begin{align}
+  \zeta(x^*)
+  &amp; = c^T x^* \\
+  &amp; = (x^*)^T c \\
+  &amp; \le (x^*)^T A^T y^* \\
+  &amp; = (A x^*)^T y^* \\
+  &amp; \le b^T y^* \\
+  &amp; = \xi(y^*).
+\end{align}\]</span>
+In the above derivation, we’re repeatedly using the feasibility of both <span class="math inline">\(x^*\)</span> and <span class="math inline">\(y^*\)</span>.
+The rest of the results follow naturally.</p>
+</div>
+<div id="certificate-of-optimality" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Certificate of Optimality</h2>
+<p>In the next class, we’ll prove the following stronger theorem.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-14" class="theorem"><strong>Theorem 8.3  </strong></span>If the primal has an optimal feasible solution then so does the dual and in this case <span class="math inline">\(\zeta_\max = \xi_\min\)</span>.</p>
+</div>
+<p>Assuming this we can find an efficient way to verify the solution to our linear program. <span class="math inline">\(x^*\)</span> is the optimal primal solution and <span class="math inline">\(y^*\)</span> is the optimal dual solution if and only if the following hold:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(x^*\)</span> is primal feasible,</li>
+<li><span class="math inline">\(y^*\)</span> is dual feasible,</li>
+<li><span class="math inline">\(\zeta(x^*) = \xi(y^*)\)</span>.</li>
+</ol>
+<p>This is called providing a <strong>Certificate of Optimality</strong>.</p>
 
 </div>
 </div>
@@ -217,8 +208,8 @@ This provides another interpretation of the dual linear program as calculating t
           </div>
         </div>
       </div>
-<a href="blands-rule-kleeminty-cube.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="weak-duality.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-to-duality.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
