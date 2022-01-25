@@ -1,0 +1,82 @@
+# Strong duality
+
+::: {.theorem name="Strong duality"}
+If a standard linear program has an optimal solution, then so does its dual. Moreover, in this case, they have the same optimal objective values.
+:::
+
+Before we start with the proof of strong duality, we need to define the dual dictionary. Recall that the dictionary of the standard linear program  \@ref(eq:standard-lp-matrix-form) is given by \@ref(eq:dictionary-definition). The **dual dictionary** is the dictionary of the *standardized dual*. More explicitly, the dual dictionary is as follows.
+
+\begin{equation}
+  \begin{array}{rrrrrrrrrrrr}
+    \mbox{maximize: } & \xi & = & -c_0 & - & b_1 y_{m+1} & - & \dots & - & b_m y_{m + n} \\
+    \mbox{subject to: } 
+      & y_{1} & = & -c_1 & + & a_{11} y_{m+1} & + & \dots & + & a_{m1} y_{n+m} \\
+      & y_{2} & = & -c_2 & + & a_{21} y_{m+1} & + & \dots & + & a_{m2} y_{n+m} \\
+      & &  &  & &  & \vdots & & \\
+      & y_{m} & = & -c_n & + & a_{n1} y_{m+1} & + & \dots & + & a_{nm} y_{n+m},
+  \end{array} \\
+    y_1, \: \dots \: , \: y_{m + n} \: \geq \: 0.
+  (\#eq:dual-dictionary)
+\end{equation}
+
+Note the unusual choice of labeling the basic and non-basic variables. This ensures that the dual dictionary \@ref(eq:dual-dictionary) is **negative transpose** of the primal dictionary \@ref(eq:dictionary-definition).
+
+The following theorem is the key ingredient in the proof of strong duality. 
+
+:::{.lemma name="Dual pivots" #dual-pivots}
+If we perform a pivot with $x_i$ entering and $x_j$ leaving on the primal dictionary and a pivot with $y_j$ entering and $y_i$ leaving on the dual dictionary, then the resulting dictionaries are negative transposes of each other.
+:::
+
+This lemma is proven by explicitly calculating the result of both the pivots and verifying that the results are negative transposes. The following is a simple example that'll help you see the steps of the proof.
+
+::: {.exercise}
+Consider a primal-dual dictionary dictionary pair:
+  \begin{align*}
+    \begin{array}{rrrrrrrrrrr}
+      \zeta & = & c_0 & + & c_1 x_1 & + & c_2 x_2 \\
+      x_3 & = & b_1 & - & a_{11} x_1 & - & a_{12} x_2 
+    \end{array}
+    &&
+    \begin{array}{rrrrrrrrrrr}
+      \xi & = & -c_0 & - & b_1 y_3  \\
+      y_1 & = & -c_1 & + & a_{11} y_3\\
+      y_2 & = & -c_2 & + & a_{12} y_3
+    \end{array}
+  \end{align*}
+  \begin{enumerate}
+    \item Perform a pivot with $x_1$ entering and $x_3$ leaving on the primal.
+    \item Perform a pivot with $y_3$ entering and $y_1$ leaving on the dual. 
+  \end{enumerate}
+  Verify that after the pivots the dual dictionary is still negative transpose of the primal. 
+  There is nothing special about one equation and three variables. This proof completely generalizes to any number of equations and variables.
+:::
+
+::: {.proof name="Strong duality"}
+Let us first consider the case when the initial primal dictionary is feasible. We run the simplex algorithm to find the optimal solution. Every time we perform a pivot $(x_i, x_j)$ we perform the dual pivot $(y_j, y_i)$ on the dual. By Lemma \@ref(lem:dual-pivots), the resulting primal and dual dictionaries will always be negative transposes of each other.
+
+If the primal has an optimal feasible solution, then at the end of the simplex method the final $b \ge 0$ (feasibility) and the final $c \le 0$ (optimality). But this precisely means that the dual dictionary is also optimal feasible and hence provides an optimal solution to the dual. Again because the primal and dual dictionaries stay negative transposes of each other, the dual optimal objective equals the primal optimal objective.
+
+If the initial primal dictionary is infeasible, then we can perform pivots to make it feasible (using information from the Phase I algorithm. We perform the dual pivots on the dual and then continue the proof as above.
+
+:::
+
+:::{.exercise}
+
+Consider a linear program in the standard form:
+\begin{align*}
+  \begin{array}{lrrllll}
+  \mbox{maximize: } & \zeta & = & c^T x & \\
+  \mbox{subject to: } 
+    & A x & \leq & b \\
+    & x & \geq & 0.
+  \end{array}
+\end{align*}
+Assume that the problem has an optimal solution $x^*$ with the corresponding objective $\zeta_{\max}$. Using strong duality, show that $$\dfrac{\partial \zeta_{\max}}{\partial b_j} = y^*_j \mbox{ for } 1 \le j \le m, $$ where $y^*$ is the optimal dual solution. (Recall that this is the $j^{th}$ shadow price.)
+
+:::
+
+
+## Dual simplex method
+
+It can happen that the initial primal dictionary is infeasible but the initial dual dictionary is feasible. This will be case if some $b_i < 0$ and all the $c_j \le 0$.
+In this case, we can avoid the Phase I algorithm by instead solving the dual problem. By strong duality, we can obtain the solution of the primal by simply taking the negative transpose of the final solution.

@@ -33,6 +33,11 @@ eq:dual-lp-matrix-form
 thm:unlabeled-div-11
 thm:unlabeled-div-12
 thm:unlabeled-div-14
+thm:unlabeled-div-15
+eq:dual-dictionary
+lem:dual-pivots
+exr:unlabeled-div-16
+exr:unlabeled-div-18
 introduction-to-linear-programming
 resource-allocation-problem
 geometry-equivalence-standard-form
@@ -54,3 +59,5 @@ dual-linear-program
 shadow-prices
 weak-duality
 certificate-of-optimality
+strong-duality
+dual-simplex-method
