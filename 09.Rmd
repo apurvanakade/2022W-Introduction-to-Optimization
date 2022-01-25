@@ -43,12 +43,12 @@ Consider a primal-dual dictionary dictionary pair:
       y_2 & = & -c_2 & + & a_{12} y_3
     \end{array}
   \end{align*}
-  \begin{enumerate}
-    \item Perform a pivot with $x_1$ entering and $x_3$ leaving on the primal.
-    \item Perform a pivot with $y_3$ entering and $y_1$ leaving on the dual. 
-  \end{enumerate}
+  
+  1. Perform a pivot with $x_1$ entering and $x_3$ leaving on the primal.
+  2. Perform a pivot with $y_3$ entering and $y_1$ leaving on the dual. 
+
   Verify that after the pivots the dual dictionary is still negative transpose of the primal. 
-  There is nothing special about one equation and three variables. This proof completely generalizes to any number of equations and variables.
+  There is nothing special about one constraint and two variables. This proof completely generalizes to any number of equations and variables.
 :::
 
 ::: {.proof name="Strong duality"}

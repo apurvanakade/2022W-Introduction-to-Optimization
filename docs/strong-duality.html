@@ -155,7 +155,7 @@
 </div>
 <p>This lemma is proven by explicitly calculating the result of both the pivots and verifying that the results are negative transposes. The following is a simple example that’ll help you see the steps of the proof.</p>
 <div class="exercise">
-<span id="exr:unlabeled-div-16" class="exercise"><strong>Exercise 9.1  </strong></span>Consider a primal-dual dictionary dictionary pair:
+<p><span id="exr:unlabeled-div-16" class="exercise"><strong>Exercise 9.1  </strong></span>Consider a primal-dual dictionary dictionary pair:
 <span class="math display">\[\begin{align*}
     \begin{array}{rrrrrrrrrrr}
       \zeta &amp; = &amp; c_0 &amp; + &amp; c_1 x_1 &amp; + &amp; c_2 x_2 \\
@@ -167,9 +167,13 @@
       y_1 &amp; = &amp; -c_1 &amp; + &amp; a_{11} y_3\\
       y_2 &amp; = &amp; -c_2 &amp; + &amp; a_{12} y_3
     \end{array}
-  \end{align*}\]</span>
+  \end{align*}\]</span></p>
+<ol style="list-style-type: decimal">
+<li>Perform a pivot with <span class="math inline">\(x_1\)</span> entering and <span class="math inline">\(x_3\)</span> leaving on the primal.</li>
+<li>Perform a pivot with <span class="math inline">\(y_3\)</span> entering and <span class="math inline">\(y_1\)</span> leaving on the dual.</li>
+</ol>
 <p>Verify that after the pivots the dual dictionary is still negative transpose of the primal.
-There is nothing special about one equation and three variables. This proof completely generalizes to any number of equations and variables.</p>
+There is nothing special about one constraint and two variables. This proof completely generalizes to any number of equations and variables.</p>
 </div>
 <div class="proof">
 <p><span id="unlabeled-div-17" class="proof"><em>Proof</em> (Strong duality). </span>Let us first consider the case when the initial primal dictionary is feasible. We run the simplex algorithm to find the optimal solution. Every time we perform a pivot <span class="math inline">\((x_i, x_j)\)</span> we perform the dual pivot <span class="math inline">\((y_j, y_i)\)</span> on the dual. By Lemma <a href="strong-duality.html#lem:dual-pivots">9.1</a>, the resulting primal and dual dictionaries will always be negative transposes of each other.</p>
