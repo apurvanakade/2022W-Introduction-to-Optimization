@@ -203,7 +203,7 @@ Every linear program is equivalent to a linear program in the standard form.
 ::: {.proof}
 The proof is by an explicit algorithm. Consider the linear program in \@ref(eq:intro-lp), where we're assuming that the goal is to maximize the objective function. If it is in the standard form, then we're done. If not, then there must be a finite number of *errors* of the following types:
 
-1. A linear constraint is an upper bound and has the form $$a_{i1} x_1 + \dots + a_{in} x_n \geq b_i.$$
+1. A linear constraint is a lower bound and has the form $$a_{i1} x_1 + \dots + a_{in} x_n \geq b_i.$$
 2. A linear constraint is an equality and has the form $$a_{i1} x_1 + \dots + a_{in} x_n = b_i.$$
 3. A variable $x_j$ has a *negativity constraint* $x_j \leq 0$.
 4. A variable $x_j$ is missing a *sign constraint*.
