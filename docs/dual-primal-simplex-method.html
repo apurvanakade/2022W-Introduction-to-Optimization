@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lecture 1 Introduction to Linear Programming | Introduction to Optimization</title>
-  <meta name="description" content="Lecture 1 Introduction to Linear Programming | Introduction to Optimization." />
+  <title>Lecture 10 Dual-Primal Simplex Method | Introduction to Optimization</title>
+  <meta name="description" content="Lecture 10 Dual-Primal Simplex Method | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lecture 1 Introduction to Linear Programming | Introduction to Optimization" />
+  <meta property="og:title" content="Lecture 10 Dual-Primal Simplex Method | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://apurvanakade.github.io/Introduction-to-optimization/" />
   
-  <meta property="og:description" content="Lecture 1 Introduction to Linear Programming | Introduction to Optimization." />
+  <meta property="og:description" content="Lecture 10 Dual-Primal Simplex Method | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lecture 1 Introduction to Linear Programming | Introduction to Optimization" />
+  <meta name="twitter:title" content="Lecture 10 Dual-Primal Simplex Method | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Lecture 1 Introduction to Linear Programming | Introduction to Optimization." />
+  <meta name="twitter:description" content="Lecture 10 Dual-Primal Simplex Method | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="geometry-equivalence-standard-form.html"/>
+<link rel="prev" href="strong-duality.html"/>
+
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -135,65 +135,58 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-linear-programming" class="section level1" number="1">
-<h1><span class="header-section-number">Lecture 1</span> Introduction to Linear Programming</h1>
-<p>Linear programming is a technique for the optimization of a linear objective function, subject to linear (in)equality constraints. A <strong>linear program</strong> or a <strong>linear programming problem</strong> is a problem of the following form:</p>
-<p><span class="math display" id="eq:intro-lp">\[\begin{equation}
-  \begin{aligned}
-    \mbox{optimize: } &amp;&amp; c_1 x_1 + \dots + c_n x_n &amp; \\
-    \mbox{subject to: } 
-      &amp;&amp; a_{11} x_1 + \dots + a_{1n} x_n &amp; \   b_1 \\
-      &amp;&amp; a_{21} x_1 + \dots + a_{2n} x_n &amp; \lesseqqgtr b_2 \\
-      &amp;&amp; \vdots &amp;  \\
-      &amp;&amp; a_{m1} x_1 + \dots + a_{mn} x_n &amp; \lesseqqgtr b_m,
-  \end{aligned}
-  \tag{1.1}
-\end{equation}\]</span>
-where the symbol <span class="math inline">\(\lesseqqgtr\)</span> stands for <span class="math inline">\(\leq\)</span> or <span class="math inline">\(=\)</span> or <span class="math inline">\(\geq\)</span>, <span class="math inline">\(a_{ij}, b_i, c_j\)</span> are real numbers, and <span class="math inline">\(x_j\)</span> are variables.</p>
-<p>The variables <span class="math inline">\(x_1, \dots, x_n\)</span> are called <strong>decision variables</strong>. The linear combination <span class="math inline">\(\zeta := c_1 x_1 + \dots + c_n x_n\)</span> is called the <strong>objective function</strong>. Each of the (in)equalities <span class="math inline">\(a_{i1} x_1 + \dots + a_{in} x_n \lesseqqgtr b_i\)</span> is called a <strong>(linear) constraint</strong>. Our goal is to either <em>minimize</em> or <em>maximize</em> the objective function subject to the constraints.</p>
-<p>A proposal of specific values for the decision variables is called a <strong>solution</strong>. A solution is said to be <strong>feasible</strong> if it satisfies all the constraints. A feasible solution is said to be <strong>optimal</strong> if <span class="math inline">\(\zeta\)</span> attains the optimal value at it. Thus, to solve a linear program means to <em>find an optimal solution</em> to the problem. If a problem has no feasible solutions, then the problem is called <strong>infeasible</strong>. If a problem has feasible solutions with arbitrarily large or arbitrary small objective values then the problem is called <strong>unbounded</strong>.</p>
-<div class="remark">
-<p><span id="unlabeled-div-1" class="remark"><em>Remark</em>. </span>We do not allow strict inequalities <span class="math inline">\(&lt;\)</span> or <span class="math inline">\(&gt;\)</span> in a linear program as linear functions do not always achieve maxima/minima on open sets. Consider the following simple example.</p>
-<p><span class="math display">\[\begin{align*} 
-\mbox{maximize: }&amp;&amp; 10 x_1 &amp; \\ 
- \mbox{subject to: } &amp;&amp; 10 x_1 &amp; &lt; 20 \\ 
- &amp;&amp; 5 x_1 &amp; \geq 0\end{align*}\]</span></p>
-<p>On the feasible set <span class="math inline">\([0, 2)\)</span>, the function <span class="math inline">\(\zeta(x_1) = 10x_1\)</span> never attains absolute maxima.
-Changing the inequality <span class="math inline">\(&lt;\)</span> to <span class="math inline">\(\leq\)</span> gives us an optimal feasible solution <span class="math inline">\(x_1 = 2\)</span> and <span class="math inline">\(\zeta = 20\)</span>. When all the (in)equalities are either <span class="math inline">\(\le\)</span>, <span class="math inline">\(=\)</span>, or <span class="math inline">\(\ge\)</span>, the set of feasible solutions is closed. If, in addition, the LP is bounded then the set of feasible solutions is compact. On compact sets a continuous (in particular, linear) function, always attains a maxima and a minima by a generalization of the <a href="https://en.wikipedia.org/wiki/Extreme_value_theorem">extreme value theorem</a> for <a href="https://math.stackexchange.com/a/881569">higher dimensions</a>.</p>
+<div id="dual-primal-simplex-method" class="section level1" number="10">
+<h1><span class="header-section-number">Lecture 10</span> Dual-Primal Simplex Method</h1>
+<div id="dual-simplex-method-1" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Dual Simplex Method</h2>
+<p>As we saw in the discussion on Strong Duality, the dictionary of the dual is always negative transpose of the dictionary of the primal.
+As such, we can always infer the dual dictionary from just the primal dictionary.
+More specifically, we can run the simplex algorithm to solve the dual while still using the primal dictionary.
+In this case, the <strong>dual simplex method</strong> becomes as follows.</p>
+<div class="boxed">
+<ol style="list-style-type: decimal">
+<li><em>Find the leaving variable:</em>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(L\)</span> be the set of indices <span class="math inline">\(i\)</span> such that <span class="math inline">\(b_{i}\)</span> is negative.
+<ul>
+<li><strong>If <span class="math inline">\(L\)</span> is empty, exit.</strong></li>
+</ul></li>
+<li>Set <span class="math inline">\(\ell = \min L\)</span>.</li>
+</ol></li>
+<li><em>Find the entering variable:</em>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(E\)</span> be the set of indices <span class="math inline">\(j\)</span> such that <span class="math inline">\(a_{\ell j}\)</span> is negative.
+<ul>
+<li><strong>If <span class="math inline">\(E\)</span> is empty, exit. Dual linear program is unbounded, hence the primal is infeasible.</strong></li>
+</ul></li>
+<li>Set <span class="math inline">\(e = \min \left[ \mathrm{arg}\min_{j \in E} \left(\dfrac{-c_j}{-a_{\ell j}}\right) \right]\)</span>.</li>
+</ol></li>
+<li><em>Pivot:</em>
+<ol start="2" style="list-style-type: decimal">
+<li>Add <span class="math inline">\(x_e\)</span> to the set of basic variables and remove it from the set of non-basic variables.</li>
+<li>Add <span class="math inline">\(x_\ell\)</span> to the set of non-basic variables and remove it from the set of basic variables.</li>
+<li>Rewrite the basic variables and the objective function in terms of the non-basic variables.</li>
+</ol></li>
+<li><em>Go back to step 1.</em></li>
+</ol>
 </div>
-<div id="resource-allocation-problem" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Resource allocation problem</h2>
-<p>The following is an example of a <em>resource allocation problem</em>, a very common application of linear programming.
-The decision variables <span class="math inline">\(x_j\)</span> denote the amount of a certain resource/product <span class="math inline">\(j\)</span>, the coefficients <span class="math inline">\(c_j\)</span> are the profit per unit quantity of <span class="math inline">\(j\)</span>, and the constraints are certain upper bounds on the production of the resource/quantity.</p>
-<div class="example">
-<p><span id="exm:resource-allocation-problem" class="example"><strong>Example 1.1  </strong></span>You run a company that makes two products (say, <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span>) using two machines (say, <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>). Each unit of <span class="math inline">\(P_1\)</span> that is produced requires 80 minutes processing time on machine <span class="math inline">\(M_1\)</span> and 25 minutes processing time on machine <span class="math inline">\(M_2\)</span>. Each unit of <span class="math inline">\(P_2\)</span> that is produced requires 20 minutes processing time on machine <span class="math inline">\(M_1\)</span> and 75 minutes processing time on machine <span class="math inline">\(M_2\)</span>. Both machines are available for a maximum of 200 minutes every day. The profit per unit of <span class="math inline">\(P_1\)</span> is 25 units and the profit per unit of <span class="math inline">\(P_2\)</span> is 30 units. Company policy is to determine the production quantity of each product in such a way as to maximize the total profit given that the available resources should not be exceeded.</p>
-<pre><code>   P1 P2 Upper_Bounds
-M1 80 20          200
-M2 25 75          200</code></pre>
+<p>The above dual simplex method can be used on the <em>primal</em> dictionary when it is <em>dual feasible</em> i.e. when all <span class="math inline">\(c_i \le 0\)</span>.
+The goal of the algorithm is to find the optimal dual feasible solution, i.e. to make all the <span class="math inline">\(b_i \ge 0\)</span>.
+By strong duality, this also gives us the optimal feasible primal solution.</p>
 </div>
-<p>We can formulate the above problem as the following linear program.</p>
-<p><span class="math display">\[\begin{align*} 
-\begin{array}{rrrrrrrr}
-\mbox{maximize: } &amp; 25x &amp; + &amp; 30y \\ 
-\mbox{subject to: }  &amp; 80x &amp; + &amp; 20y &amp; \le &amp; 200  \\ 
- &amp; 25x &amp; + &amp; 75y &amp; \le &amp; 200  \\ 
-\end{array}
- \\ 
-x, \: y \ge 0\end{align*}\]</span></p>
-<p>Here <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> are the units of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> produced each day. One way to attempt this problem is to assume that we’ll use both the machines as much as possible i.e. that the two inequalities are in fact equalities. We can see then that the common solution to the two is <span class="math inline">\((x_1, x_2) = (2, 2)\)</span>. For this solution the total profit is <span class="math inline">\(110\)</span> units.</p>
-<div class="figure"><span style="display:block;" id="fig:fig-resource-allocation"></span>
-<img src="Introduction-to-Optimization_files/figure-html/fig-resource-allocation-1.png" alt="The feasible region is the quadrilateral formed by the overlap of the constraints." width="672" />
-<p class="caption">
-Figure 1.1: The feasible region is the quadrilateral formed by the overlap of the constraints.
-</p>
-</div>
-<div class="exercise">
-<p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 1.1  </strong></span>Why is this the maximum profit possible? Is it possible to increase the profit by not using either of the two machines at their full capacity?</p>
-</div>
-<div class="exercise">
-<p><span id="exr:resource-allocation-problem-extra" class="exercise"><strong>Exercise 1.2  </strong></span>Consider the setup in Example <a href="introduction-to-linear-programming.html#resource-allocation-problem">1.1</a> again. Suppose in addition, you can only store a total of 3 units of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> combined each day so your production quantity should not exceed that amount. What is the new LP and the new optimal solution?
-Note that the solution <span class="math inline">\((x, y) = (2, 2)\)</span> is no longer possible. So, we cannot use both the machines to their maximum capacity.</p>
-</div>
+<div id="dual-primal-two-phase-simplex-method" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Dual-Primal Two Phase Simplex Method</h2>
+<p>The above algorithm provides a slightly faster way to run the 2 phase simplex method.</p>
+<p>If the initial dictionary is neither primal nor dual feasible then we need to run the Phase I simplex algorithm to find find one basic feasible solution.
+For this, we form an auxiliary linear program by replacing the original objective function by</p>
+<p><span class="math display">\[\begin{align}
+  \zeta&#39; = -x_1 -x_2 - \dots -x_n.
+\end{align}\]</span></p>
+<p>By construction the auxiliary linear program is dual feasible and hence can be solved using the dual simplex method.
+If no solution is found, then the initial problem is also infeasible.</p>
+<p>If we find an optimal solution, then in the end we are left with a dictionary that is primal feasible but has the wrong objective function.
+We simply plug back the original objective function and continue solving the resulting dictionary using the Phase II (primal) simplex method.</p>
+<p>The advantage of this two phase simplex method over the one studied earlier in Lecture <a href="two-phase-simplex-method.html#two-phase-simplex-method">4</a> is that at the end of Phase I we do not have to “reset” the auxiliary dictionary and start Phase II from scratch.</p>
 
 </div>
 </div>
@@ -202,8 +195,8 @@ Note that the solution <span class="math inline">\((x, y) = (2, 2)\)</span> is n
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="geometry-equivalence-standard-form.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="strong-duality.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

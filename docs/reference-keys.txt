@@ -61,3 +61,6 @@ weak-duality
 certificate-of-optimality
 strong-duality
 dual-simplex-method
+dual-primal-simplex-method
+dual-simplex-method-1
+dual-primal-two-phase-simplex-method

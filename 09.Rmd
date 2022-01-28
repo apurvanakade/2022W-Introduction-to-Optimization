@@ -1,4 +1,4 @@
-# Strong duality
+# Strong Duality
 
 ::: {.theorem name="Strong duality"}
 If a standard linear program has an optimal solution, then so does its dual. Moreover, in this case, they have the same optimal objective values.

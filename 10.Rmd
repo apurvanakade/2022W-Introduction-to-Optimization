@@ -1,0 +1,48 @@
+# Dual-Primal Simplex Method
+
+## Dual Simplex Method
+
+As we saw in the discussion on Strong Duality, the dictionary of the dual is always negative transpose of the dictionary of the primal.
+As such, we can always infer the dual dictionary from just the primal dictionary. 
+More specifically, we can run the simplex algorithm to solve the dual while still using the primal dictionary.
+In this case, the **dual simplex method** becomes as follows. 
+
+<div class="boxed">
+
+1. *Find the leaving variable:*
+    1. Let $L$ be the set of indices $i$ such that $b_{i}$ is negative. 
+        - **If $L$ is empty, exit.**
+    2. Set $\ell = \min L$.
+2. *Find the entering variable:*
+    1. Let $E$ be the set of indices $j$ such that $a_{\ell j}$ is negative.
+        - **If $E$ is empty, exit. Dual linear program is unbounded, hence the primal is infeasible.**
+    2. Set $e = \min \left[ \mathrm{arg}\min_{j \in E} \left(\dfrac{-c_j}{-a_{\ell j}}\right) \right]$.
+3. *Pivot:*
+    2. Add $x_e$ to the set of basic variables and remove it from the set of non-basic variables.
+    3. Add $x_\ell$ to the set of non-basic variables and remove it from the set of basic variables.
+    1. Rewrite the basic variables and the objective function in terms of the non-basic variables.
+4. *Go back to step 1.*
+</div>
+
+The above dual simplex method can be used on the *primal* dictionary when it is *dual feasible* i.e. when all $c_i \le 0$.
+The goal of the algorithm is to find the optimal dual feasible solution, i.e. to make all the $b_i \ge 0$. 
+By strong duality, this also gives us the optimal feasible primal solution.
+
+## Dual-Primal Two Phase Simplex Method
+
+The above algorithm provides a slightly faster way to run the 2 phase simplex method. 
+
+If the initial dictionary is neither primal nor dual feasible then we need to run the Phase I simplex algorithm to find find one basic feasible solution.
+For this, we form an auxiliary linear program by replacing the original objective function by 
+
+\begin{align}
+  \zeta' = -x_1 -x_2 - \dots -x_n.
+\end{align}
+
+By construction the auxiliary linear program is dual feasible and hence can be solved using the dual simplex method. 
+If no solution is found, then the initial problem is also infeasible. 
+
+If we find an optimal solution, then in the end we are left with a dictionary that is primal feasible but has the wrong objective function. 
+We simply plug back the original objective function and continue solving the resulting dictionary using the Phase II (primal) simplex method.
+
+The advantage of this two phase simplex method over the one studied earlier in Lecture [4][Two-Phase Simplex Method] is that at the end of Phase I we do not have to "reset" the auxiliary dictionary and start Phase II from scratch.
