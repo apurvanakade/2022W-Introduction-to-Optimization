@@ -14,6 +14,9 @@ Replace manual constraint equations with library functions.
 
 # 03.Rmd
 
-
 - Label figures
 - Rewrite summary.
+
+# Duality theory
+
+Need several improvements. Explanations and examples are lacking.

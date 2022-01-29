@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-27" />
+<meta name="date" content="2022-01-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -118,6 +118,15 @@
 <li class="chapter" data-level="10.1" data-path="dual-primal-simplex-method.html"><a href="dual-primal-simplex-method.html#dual-simplex-method-1"><i class="fa fa-check"></i><b>10.1</b> Dual Simplex Method</a></li>
 <li class="chapter" data-level="10.2" data-path="dual-primal-simplex-method.html"><a href="dual-primal-simplex-method.html#dual-primal-two-phase-simplex-method"><i class="fa fa-check"></i><b>10.2</b> Dual-Primal Two Phase Simplex Method</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html"><i class="fa fa-check"></i><b>11</b> Complimentary Slackness, General LP</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#complimentary-slackness"><i class="fa fa-check"></i><b>11.1</b> Complimentary Slackness</a></li>
+<li class="chapter" data-level="11.2" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#dual-of-general-linear-programs"><i class="fa fa-check"></i><b>11.2</b> Dual of General Linear Programs</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#lower-bound-and-negativity"><i class="fa fa-check"></i><b>11.2.1</b> Lower Bound and Negativity</a></li>
+<li class="chapter" data-level="11.2.2" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#equality-and-freeness"><i class="fa fa-check"></i><b>11.2.2</b> Equality and Freeness</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -175,7 +184,7 @@ We can standardize the dual to get the following linear program.</p>
   \xi_\min = \min_{y^*} \xi(y^*).
 \end{align}\]</span></p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-12" class="theorem"><strong>Theorem 8.2  (Weak Duality) </strong></span>For any primal feasible solution <span class="math inline">\(x^*\)</span> and dual feasible solution <span class="math inline">\(y^*\)</span>, <span class="math inline">\(\zeta(x^*) \le \xi(y^*)\)</span>. Hence,</p>
+<p><span id="thm:weak-duality" class="theorem"><strong>Theorem 8.2  (Weak Duality) </strong></span>For any primal feasible solution <span class="math inline">\(x^*\)</span> and dual feasible solution <span class="math inline">\(y^*\)</span>, <span class="math inline">\(\zeta(x^*) \le \xi(y^*)\)</span>. Hence,</p>
 <ol style="list-style-type: decimal">
 <li>If both the primal and dual have optimal solutions, then <span class="math inline">\(\zeta_\max \le \xi_\min\)</span>.</li>
 <li>If the primal is unbounded, then the dual is infeasible.</li>
@@ -183,7 +192,7 @@ We can standardize the dual to get the following linear program.</p>
 </ol>
 </div>
 <div class="proof">
-<p><span id="unlabeled-div-13" class="proof"><em>Proof</em>. </span>Let <span class="math inline">\(x^*\)</span> be a primal feasible solution and let <span class="math inline">\(y^*\)</span> be a dual feasile solution, then
+<p><span id="unlabeled-div-12" class="proof"><em>Proof</em>. </span>Let <span class="math inline">\(x^*\)</span> be a primal feasible solution and let <span class="math inline">\(y^*\)</span> be a dual feasile solution, then
 <span class="math display">\[\begin{align}
   \zeta(x^*)
   &amp; = c^T x^* \\
@@ -200,7 +209,7 @@ The rest of the results follow naturally.</p>
 <h2><span class="header-section-number">8.1</span> Certificate of Optimality</h2>
 <p>In the next class, we’ll prove the following stronger theorem.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-14" class="theorem"><strong>Theorem 8.3  </strong></span>If the primal has an optimal feasible solution then so does the dual and in this case <span class="math inline">\(\zeta_\max = \xi_\min\)</span>.</p>
+<p><span id="thm:unlabeled-div-13" class="theorem"><strong>Theorem 8.3  </strong></span>If the primal has an optimal feasible solution then so does the dual and in this case <span class="math inline">\(\zeta_\max = \xi_\min\)</span>.</p>
 </div>
 <p>Assuming this we can find an efficient way to verify the solution to our linear program. <span class="math inline">\(x^*\)</span> is the optimal primal solution and <span class="math inline">\(y^*\)</span> is the optimal dual solution if and only if the following hold:</p>
 <ol style="list-style-type: decimal">

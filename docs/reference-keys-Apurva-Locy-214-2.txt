@@ -31,14 +31,13 @@ fig:fig-dual-example
 eq:approx-shadow-price
 eq:dual-lp-matrix-form
 thm:unlabeled-div-11
-thm:weak-duality
-thm:unlabeled-div-13
+thm:unlabeled-div-12
 thm:unlabeled-div-14
+thm:unlabeled-div-15
 eq:dual-dictionary
 lem:dual-pivots
-exr:unlabeled-div-15
-exr:unlabeled-div-17
-thm:complimentary-slackness
+exr:unlabeled-div-16
+exr:unlabeled-div-18
 introduction-to-linear-programming
 resource-allocation-problem
 geometry-equivalence-standard-form
@@ -65,8 +64,3 @@ dual-simplex-method
 dual-primal-simplex-method
 dual-simplex-method-1
 dual-primal-two-phase-simplex-method
-complimentary-slackness-general-lp
-complimentary-slackness
-dual-of-general-linear-programs
-lower-bound-and-negativity
-equality-and-freeness

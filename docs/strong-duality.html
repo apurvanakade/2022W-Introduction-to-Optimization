@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-27" />
+<meta name="date" content="2022-01-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -118,6 +118,15 @@
 <li class="chapter" data-level="10.1" data-path="dual-primal-simplex-method.html"><a href="dual-primal-simplex-method.html#dual-simplex-method-1"><i class="fa fa-check"></i><b>10.1</b> Dual Simplex Method</a></li>
 <li class="chapter" data-level="10.2" data-path="dual-primal-simplex-method.html"><a href="dual-primal-simplex-method.html#dual-primal-two-phase-simplex-method"><i class="fa fa-check"></i><b>10.2</b> Dual-Primal Two Phase Simplex Method</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html"><i class="fa fa-check"></i><b>11</b> Complimentary Slackness, General LP</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#complimentary-slackness"><i class="fa fa-check"></i><b>11.1</b> Complimentary Slackness</a></li>
+<li class="chapter" data-level="11.2" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#dual-of-general-linear-programs"><i class="fa fa-check"></i><b>11.2</b> Dual of General Linear Programs</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#lower-bound-and-negativity"><i class="fa fa-check"></i><b>11.2.1</b> Lower Bound and Negativity</a></li>
+<li class="chapter" data-level="11.2.2" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#equality-and-freeness"><i class="fa fa-check"></i><b>11.2.2</b> Equality and Freeness</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -138,7 +147,7 @@
 <div id="strong-duality" class="section level1" number="9">
 <h1><span class="header-section-number">Lecture 9</span> Strong Duality</h1>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-15" class="theorem"><strong>Theorem 9.1  (Strong duality) </strong></span>If a standard linear program has an optimal solution, then so does its dual. Moreover, in this case, they have the same optimal objective values.</p>
+<p><span id="thm:unlabeled-div-14" class="theorem"><strong>Theorem 9.1  (Strong duality) </strong></span>If a standard linear program has an optimal solution, then so does its dual. Moreover, in this case, they have the same optimal objective values.</p>
 </div>
 <p>Before we start with the proof of strong duality, we need to define the dual dictionary. Recall that the dictionary of the standard linear program <a href="geometry-equivalence-standard-form.html#eq:standard-lp-matrix-form">(2.3)</a> is given by <a href="two-phase-simplex-method.html#eq:dictionary-definition">(4.1)</a>. The <strong>dual dictionary</strong> is the dictionary of the <em>standardized dual</em>. More explicitly, the dual dictionary is as follows.</p>
 <p><span class="math display" id="eq:dual-dictionary">\[\begin{equation}
@@ -160,7 +169,7 @@
 </div>
 <p>This lemma is proven by explicitly calculating the result of both the pivots and verifying that the results are negative transposes. The following is a simple example that’ll help you see the steps of the proof.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-16" class="exercise"><strong>Exercise 9.1  </strong></span>Consider a primal-dual dictionary dictionary pair:
+<p><span id="exr:unlabeled-div-15" class="exercise"><strong>Exercise 9.1  </strong></span>Consider a primal-dual dictionary dictionary pair:
 <span class="math display">\[\begin{align*}
     \begin{array}{rrrrrrrrrrr}
       \zeta &amp; = &amp; c_0 &amp; + &amp; c_1 x_1 &amp; + &amp; c_2 x_2 \\
@@ -181,12 +190,12 @@
 There is nothing special about one constraint and two variables. This proof completely generalizes to any number of equations and variables.</p>
 </div>
 <div class="proof">
-<p><span id="unlabeled-div-17" class="proof"><em>Proof</em> (Strong duality). </span>Let us first consider the case when the initial primal dictionary is feasible. We run the simplex algorithm to find the optimal solution. Every time we perform a pivot <span class="math inline">\((x_i, x_j)\)</span> we perform the dual pivot <span class="math inline">\((y_j, y_i)\)</span> on the dual. By Lemma <a href="strong-duality.html#lem:dual-pivots">9.1</a>, the resulting primal and dual dictionaries will always be negative transposes of each other.</p>
+<p><span id="unlabeled-div-16" class="proof"><em>Proof</em> (Strong duality). </span>Let us first consider the case when the initial primal dictionary is feasible. We run the simplex algorithm to find the optimal solution. Every time we perform a pivot <span class="math inline">\((x_i, x_j)\)</span> we perform the dual pivot <span class="math inline">\((y_j, y_i)\)</span> on the dual. By Lemma <a href="strong-duality.html#lem:dual-pivots">9.1</a>, the resulting primal and dual dictionaries will always be negative transposes of each other.</p>
 <p>If the primal has an optimal feasible solution, then at the end of the simplex method the final <span class="math inline">\(b \ge 0\)</span> (feasibility) and the final <span class="math inline">\(c \le 0\)</span> (optimality). But this precisely means that the dual dictionary is also optimal feasible and hence provides an optimal solution to the dual. Again because the primal and dual dictionaries stay negative transposes of each other, the dual optimal objective equals the primal optimal objective.</p>
 <p>If the initial primal dictionary is infeasible, then we can perform pivots to make it feasible (using information from the Phase I algorithm. We perform the dual pivots on the dual and then continue the proof as above.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-18" class="exercise"><strong>Exercise 9.2  </strong></span>Consider a linear program in the standard form:
+<p><span id="exr:unlabeled-div-17" class="exercise"><strong>Exercise 9.2  </strong></span>Consider a linear program in the standard form:
 <span class="math display">\[\begin{align*}
   \begin{array}{lrrllll}
   \mbox{maximize: } &amp; \zeta &amp; = &amp; c^T x &amp; \\

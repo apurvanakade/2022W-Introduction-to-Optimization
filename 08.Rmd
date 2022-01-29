@@ -46,7 +46,7 @@ We'll denote by $\zeta$ the primal objective and by $\xi$ the dual objective. Le
   \xi_\min = \min_{y^*} \xi(y^*).
 \end{align}
 
-::: {.theorem name="Weak Duality"}
+::: {.theorem name="Weak Duality" #weak-duality}
 
 For any primal feasible solution $x^*$ and dual feasible solution $y^*$, $\zeta(x^*) \le \xi(y^*)$. Hence,
 

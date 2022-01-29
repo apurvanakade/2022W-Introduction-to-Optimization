@@ -1,0 +1,71 @@
+# Complimentary Slackness, General LP
+
+## Complimentary Slackness
+
+The following theorem is sometimes useful as a test for optimality. 
+
+::: {.theorem name="Complimentary Slackness" #complimentary-slackness}
+Let $x$ and $y$ be basic feasible solutions for the primal and dual, respectively.
+Let $w$ and $z$ be the corresponding primal and dual slack variables, respectively.
+Then $x$ and $y$ are optimal if and only if 
+\begin{align}
+  z^T x = 0 && \mbox{ and } && y^T w = 0.
+\end{align}
+:::
+
+::: {.proof}
+The proofs of the two directions rely on the following algebraic properties:
+
+1. $w = b - Ax$, 
+2. $z = c - A^T y$,
+3. $\zeta(x) = c^T x$, 
+4. $\xi(y) = y^T b$,
+5. $\zeta(x) \le y^T A x \le \xi(y)$,
+where the last inequalities are true by the proof of Weak Duality (Theorem \@ref(thm:weak-duality)). 
+
+Using Strong duality and above (in)equalities, we get
+\begin{align}
+  && \mbox{$x$ and $y$ are optimal solutions} \\
+  \Leftrightarrow && \zeta(x) = y^T A x = \xi(y) \\ 
+  \Leftrightarrow && \zeta(x) - y^T A x = 0 \mbox{ and } y^T A x - \xi(y) = 0 \\
+  \Leftrightarrow && c^T x - y^T A x = 0 \mbox{ and } y^T A x - y^T b = 0 \\
+  \Leftrightarrow && c^T x - y^T A x = 0 \mbox{ and } y^T A x - y^T b = 0 \\
+  \Leftrightarrow && (c^T - y^T A) x = 0 \mbox{ and } y^T (A x - b) = 0 \\
+  \Leftrightarrow && z^T x = 0 \mbox{ and } -y^T w = 0.
+\end{align}
+
+:::
+
+
+## Dual of General Linear Programs
+
+While it is possible to standardize any linear program, it is informative to see what the dual looks like for a linear program that isn't standard. Recall from Theorem \@ref(thm:lp-to-standard-form) that there are 4 types of "errors" a non-standard linear program could have: 
+
+1. A linear constraint is a lower bound and has the form $$a_{i1} x_1 + \dots + a_{in} x_n \geq b_i.$$
+2. A linear constraint is an equality and has the form $$a_{i1} x_1 + \dots + a_{in} x_n = b_i.$$
+3. A variable $x_j$ has a *negativity constraint* $x_j \leq 0$.
+4. A variable $x_j$ is a *free* variable.
+
+### Lower Bound and Negativity
+We "fix" the lower bound constrains by multiplying both sides by $-1$ and thereby flipping the inequality: $-a_{i1} x_1 - \dots - a_{in} x_n \leq b_i.$ 
+One can check that the resulting dual problem is equivalent to dualizing $a_{i1} x_1 + \dots + a_{in} x_n \geq b_i$ but requiring the dual variable $y_i$ to satisfy the negativity constraint $y_i \le 0$.
+
+Thus the dual of the first type of error is the error of third type. Because the dual of the dual is the primal, the converse of this statement is also true.
+
+
+### Equality and Freeness
+We "fix" the equality constrains by replacing them with two inequalities: $a_{i1} x_1 + \dots + a_{in} x_n \leq b_i,$ and $-a_{i1} x_1 - \dots - a_{in} x_n \leq b_i.$ 
+One can check that the resulting dual problem is equivalent to dualizing $a_{i1} x_1 + \dots + a_{in} x_n \geq b_i$ but requiring the dual variable $y_i$ to be free.
+
+Thus the dual of the second type of error is the error of fourth type. Because the dual of the dual is the primal, the converse of this statement is also true.
+
+To summarize, we can think that the variables in the dual correspond to the constraints in the primal and the variables in the primal correspond to the constraints in the dual. The precise correspondence is as follows.
+
+| Primal | Dual | 
+| - | - | 
+| Non-negative variable | Upper bound constraint |
+| Non-positive variable | Lower bound constraint |
+| Free variable | Equality constraint |
+| Upper bound constraint | Non-negative variable |
+| Lower bound constraint | Non-positive variable |
+| Equality constraint | Free variable |
