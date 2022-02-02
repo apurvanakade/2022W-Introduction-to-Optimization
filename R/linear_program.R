@@ -31,11 +31,3 @@ str.linear_program <- function(x) {
   paste0("\\begin{array}{rrrr",paste(replicate(length(x$variables), "rr"), collapse=""),"}\n", objective, constraints, "\\end{array}\n \\\\ \n", positivity_constraints)
     
 }
-
-str_math <- function(math, inline = FALSE) {
-  if (inline) {
-    paste("$", str(math), "$", sep = "")
-  } else {
-    paste0("\\begin{align*} \n", str(math), "\\end{align*}")
-  }
-}

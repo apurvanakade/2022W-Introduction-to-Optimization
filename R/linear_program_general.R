@@ -42,13 +42,3 @@ str.linear_program_general <- function(x) {
       paste(lapply(x$constraints, str), collapse = " \\\\ \n && "), sep = "")
   }
 }
-
-#
-
-str_math <- function(math, inline = FALSE) {
-  if (inline) {
-    paste("$", str(math), "$", sep = "")
-  } else {
-    paste("\\begin{align*}", str(math), "\\end{align*}", sep = "\n")
-  }
-}

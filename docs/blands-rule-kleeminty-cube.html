@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-28" />
+<meta name="date" content="2022-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -127,6 +127,10 @@
 <li class="chapter" data-level="11.2.2" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#equality-and-freeness"><i class="fa fa-check"></i><b>11.2.2</b> Equality and Freeness</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="12" data-path="tableau-method.html"><a href="tableau-method.html"><i class="fa fa-check"></i><b>12</b> Tableau method</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="tableau-method.html"><a href="tableau-method.html#pivoting"><i class="fa fa-check"></i><b>12.1</b> Pivoting</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -154,7 +158,7 @@ Similarly, the objective value also stays constant after the pivot.
 Degenerate simplices can cause the simplex algorithm to get stuck in an infinite loop.
 In linear programming, this issue is called <strong>cycling</strong>.
 For example, the following linear program
-<span class="math display">\[\begin{align*} 
+<span class="math display">\[\begin{align} 
 \begin{array}{rrrrrrrrrrrr}
 \mbox{maximize: } &amp; 1x_1 &amp; + &amp; -2x_2 &amp; + &amp; 0x_3 &amp; + &amp; -2x_4 \\ 
 \mbox{subject to: }  &amp; 0.5x_1 &amp; + &amp; -3.5x_2 &amp; + &amp; -2x_3 &amp; + &amp; 4x_4 &amp; \le &amp; 0  \\ 
@@ -162,7 +166,7 @@ For example, the following linear program
  &amp; 1x_1 &amp; + &amp; 0x_2 &amp; + &amp; 0x_3 &amp; + &amp; 0x_4 &amp; \le &amp; 1  \\ 
 \end{array}
  \\ 
-x_1, \: x_2, \: x_3, \: x_4 \ge 0\end{align*}\]</span>
+x_1, \: x_2, \: x_3, \: x_4 \ge 0\end{align}\]</span>
 cycles for the following pivot rules:</p>
 <ul>
 <li><span class="math inline">\(x_1\)</span> enters and <span class="math inline">\(x_5\)</span> leaves,</li>

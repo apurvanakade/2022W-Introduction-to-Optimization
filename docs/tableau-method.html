@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lecture 12 Tableau method | Introduction to Optimization</title>
+  <meta name="description" content="Lecture 12 Tableau method | Introduction to Optimization." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lecture 12 Tableau method | Introduction to Optimization" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://apurvanakade.github.io/Introduction-to-optimization/" />
+  
+  <meta property="og:description" content="Lecture 12 Tableau method | Introduction to Optimization." />
+  <meta name="github-repo" content="apurvanakade/Introduction-to-optimization" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lecture 12 Tableau method | Introduction to Optimization" />
+  
+  <meta name="twitter:description" content="Lecture 12 Tableau method | Introduction to Optimization." />
+  
+
+<meta name="author" content="Apurva Nakade" />
+
+
+<meta name="date" content="2022-02-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="complimentary-slackness-general-lp.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>I The Simplex Method</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction-to-linear-programming.html"><a href="introduction-to-linear-programming.html"><i class="fa fa-check"></i><b>1</b> Introduction to Linear Programming</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-linear-programming.html"><a href="introduction-to-linear-programming.html#resource-allocation-problem"><i class="fa fa-check"></i><b>1.1</b> Resource allocation problem</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html"><i class="fa fa-check"></i><b>2</b> Geometry, Equivalence, Standard form</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#using-geometry-to-solve-linear-programs"><i class="fa fa-check"></i><b>2.1</b> Using geometry to solve linear programs</a></li>
+<li class="chapter" data-level="2.2" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#equivalence-of-linear-programs"><i class="fa fa-check"></i><b>2.2</b> Equivalence of linear programs</a></li>
+<li class="chapter" data-level="2.3" data-path="geometry-equivalence-standard-form.html"><a href="geometry-equivalence-standard-form.html#standard-form-of-linear-programs"><i class="fa fa-check"></i><b>2.3</b> Standard form of linear programs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="simplex-method---example.html"><a href="simplex-method---example.html"><i class="fa fa-check"></i><b>3</b> Simplex Method - Example</a></li>
+<li class="chapter" data-level="4" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html"><i class="fa fa-check"></i><b>4</b> Two-Phase Simplex Method</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-ii"><i class="fa fa-check"></i><b>4.1</b> Phase II</a></li>
+<li class="chapter" data-level="4.2" data-path="two-phase-simplex-method.html"><a href="two-phase-simplex-method.html#phase-i"><i class="fa fa-check"></i><b>4.2</b> Phase I</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html"><i class="fa fa-check"></i><b>5</b> Phase I - Example, Unboundedness</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html#phase-i---example"><i class="fa fa-check"></i><b>5.1</b> Phase I - Example</a></li>
+<li class="chapter" data-level="5.2" data-path="phase-i---example-unboundedness.html"><a href="phase-i---example-unboundedness.html#unboundedness"><i class="fa fa-check"></i><b>5.2</b> Unboundedness</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="blands-rule-kleeminty-cube.html"><a href="blands-rule-kleeminty-cube.html"><i class="fa fa-check"></i><b>6</b> Bland’s rule, Klee–Minty cube</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blands-rule-kleeminty-cube.html"><a href="blands-rule-kleeminty-cube.html#blands-rule"><i class="fa fa-check"></i><b>6.1</b> Bland’s rule</a></li>
+<li class="chapter" data-level="6.2" data-path="blands-rule-kleeminty-cube.html"><a href="blands-rule-kleeminty-cube.html#kleeminty-cube"><i class="fa fa-check"></i><b>6.2</b> Klee–Minty cube</a></li>
+</ul></li>
+<li class="part"><span><b>II Duality Theory</b></span></li>
+<li class="chapter" data-level="7" data-path="introduction-to-duality.html"><a href="introduction-to-duality.html"><i class="fa fa-check"></i><b>7</b> Introduction to Duality</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-duality.html"><a href="introduction-to-duality.html#dual-linear-program"><i class="fa fa-check"></i><b>7.1</b> Dual Linear Program</a></li>
+<li class="chapter" data-level="7.2" data-path="introduction-to-duality.html"><a href="introduction-to-duality.html#shadow-prices"><i class="fa fa-check"></i><b>7.2</b> Shadow Prices</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="weak-duality.html"><a href="weak-duality.html"><i class="fa fa-check"></i><b>8</b> Weak Duality</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="weak-duality.html"><a href="weak-duality.html#certificate-of-optimality"><i class="fa fa-check"></i><b>8.1</b> Certificate of Optimality</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="strong-duality.html"><a href="strong-duality.html"><i class="fa fa-check"></i><b>9</b> Strong Duality</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="strong-duality.html"><a href="strong-duality.html#dual-simplex-method"><i class="fa fa-check"></i><b>9.1</b> Dual simplex method</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="dual-primal-simplex-method.html"><a href="dual-primal-simplex-method.html"><i class="fa fa-check"></i><b>10</b> Dual-Primal Simplex Method</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="dual-primal-simplex-method.html"><a href="dual-primal-simplex-method.html#dual-simplex-method-1"><i class="fa fa-check"></i><b>10.1</b> Dual Simplex Method</a></li>
+<li class="chapter" data-level="10.2" data-path="dual-primal-simplex-method.html"><a href="dual-primal-simplex-method.html#dual-primal-two-phase-simplex-method"><i class="fa fa-check"></i><b>10.2</b> Dual-Primal Two Phase Simplex Method</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html"><i class="fa fa-check"></i><b>11</b> Complimentary Slackness, General LP</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#complimentary-slackness"><i class="fa fa-check"></i><b>11.1</b> Complimentary Slackness</a></li>
+<li class="chapter" data-level="11.2" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#dual-of-general-linear-programs"><i class="fa fa-check"></i><b>11.2</b> Dual of General Linear Programs</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#lower-bound-and-negativity"><i class="fa fa-check"></i><b>11.2.1</b> Lower Bound and Negativity</a></li>
+<li class="chapter" data-level="11.2.2" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#equality-and-freeness"><i class="fa fa-check"></i><b>11.2.2</b> Equality and Freeness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="tableau-method.html"><a href="tableau-method.html"><i class="fa fa-check"></i><b>12</b> Tableau method</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="tableau-method.html"><a href="tableau-method.html#pivoting"><i class="fa fa-check"></i><b>12.1</b> Pivoting</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Optimization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tableau-method" class="section level1" number="12">
+<h1><span class="header-section-number">Lecture 12</span> Tableau method</h1>
+<p>The <em>tableau method</em> is an alternate way of bookkeeping for the simplex method. It is NOT new method. The tableau method is easier to implement <em>on paper</em> as it reduces the pivot step to <a href="https://en.wikipedia.org/wiki/Elementary_matrix#Elementary_row_operations">elementary row operations</a>.</p>
+<p>Given the standard linear program <a href="geometry-equivalence-standard-form.html#eq:standard-lp">(2.2)</a> we rewrite the constraint equations in the dictionary <a href="two-phase-simplex-method.html#eq:dictionary-definition">(4.1)</a> with all the variables (including the slack ones) on one side.</p>
+<p><span class="math display">\[\begin{equation}
+  \begin{array}{cccccccccc}
+    a_{11} x_1 &amp; + &amp; a_{12} x_2 &amp; + &amp; \dots &amp; + &amp; a_{1n} x_n &amp; + &amp; x_{n+1} &amp; = &amp; b_1 \\
+    a_{21} x_1 &amp; + &amp; a_{22} x_2 &amp; + &amp; \dots &amp; + &amp; a_{1n} x_n &amp; + &amp; x_{n+2} &amp; = &amp; b_2 \\
+     &amp;  &amp;  &amp;  &amp; \vdots &amp; &amp; &amp; &amp; &amp; &amp;  \vdots \\
+    a_{m1} x_1 &amp; + &amp; a_{m2} x_2 &amp; + &amp; \dots &amp; + &amp; a_{1n} x_n &amp; + &amp; x_{n+m} &amp; = &amp; b_m \\
+  \end{array} 
+\end{equation}\]</span></p>
+<p>These equations can be rewritten using the matrix notation as</p>
+<p><span class="math display">\[\begin{align}
+   [A \quad I_m] x = b,
+\end{align}\]</span>
+where <span class="math inline">\(I_m\)</span> is the identity matrix of size <span class="math inline">\(m\)</span>. We create the <strong>initial tableau</strong>, which is an <span class="math inline">\((n+1) \times (m+1)\)</span> matrix, using the coefficients <span class="math inline">\(A\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(c\)</span> as follows.
+<span class="math display">\[\begin{align}
+\begin{array}{cccccccc|c}
+  -c_1 &amp;  -c_2 &amp; \dots &amp;  -c_n  &amp;  0  &amp; 0   &amp;  \dots &amp;   0  &amp; 0 \\ \hline
+  a_{11}   &amp;  a_{12}   &amp;   \dots   &amp; a_{1n}    &amp; 1   &amp; 0    &amp;   \dots  &amp;  0   &amp;  b_1 \\
+  a_{21}   &amp;  a_{22}   &amp;   \dots   &amp; a_{2n}    &amp; 0   &amp; 1    &amp;   \dots  &amp;  0   &amp;  b_2 \\
+     &amp;     &amp;   \vdots   &amp;    &amp;   &amp;    &amp;   &amp;   &amp;  \vdots \\
+  a_{m1}   &amp; a_{m2}  &amp; \dots  &amp;  a_{mn} &amp; 0   &amp; 0 &amp; \dots  &amp; 1   &amp;  b_m  \\ 
+ \end{array} \\[10pt]
+ \mathcal{B} = \{ x_{n+1}, \dots, x_{n+m} \}.
+\end{align}\]</span></p>
+<p>As we run the simplex method, the tableau gets updated. At each stage, the <span class="math inline">\(j^{th}\)</span> column corresponds to the variable <span class="math inline">\(x_j\)</span> and the <span class="math inline">\(i^{th}\)</span> row corresponds to the <span class="math inline">\(i^{th}\)</span> constraint in the current dictionary. Thus from a dictionary we can always construct a tableau using the following rules:</p>
+<ol style="list-style-type: decimal">
+<li>The <span class="math inline">\((0, j)\)</span> entry is the negative of the current coefficient <span class="math inline">\(-c_j\)</span>.</li>
+<li>The <span class="math inline">\((0, m+1)\)</span> entry is the current objective.</li>
+<li>The <span class="math inline">\((i, m+1)\)</span> entry is the current <span class="math inline">\(b_i\)</span>, for <span class="math inline">\(i &gt; 0\)</span>.</li>
+<li>The <span class="math inline">\((i, j)\)</span> entry is the current <span class="math inline">\(a_{ij}\)</span>.</li>
+</ol>
+<p>It is easy to see that the converse is also true, i.e. from a tableau one can construct a dictionary by forming an equality constraint for each row. So a tableau contains exactly the same information as a dictionary.</p>
+<div id="pivoting" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Pivoting</h2>
+<p>We perform the pivot with <span class="math inline">\(x_j\)</span> entering and <span class="math inline">\(x_i\)</span> leaving as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Normalize the coefficient: Divide the <span class="math inline">\(i^{th}\)</span> row <span class="math inline">\(R_i\)</span> by <span class="math inline">\(a_{ij}\)</span> to make the coefficient 1.</li>
+<li>Clear the column: For every other <span class="math inline">\(i&#39;\)</span>, apply the row operation <span class="math inline">\(R_{i&#39;} \leftarrow R_{i&#39;} - a_{i&#39;j} R_i\)</span>.</li>
+</ol>
+<p>As a result of these operations, the <span class="math inline">\(j^{th}\)</span> columns becomes <span class="math inline">\(e_{i}\)</span>. In the language of dictionaries, this is ensuring that <span class="math inline">\(x_i\)</span> is now a basic variable and can be written in terms of the non-basic variables.</p>
+</div>
+<div id="example" class="section level2 unnumbered unlisted">
+<h2>Example</h2>
+<p>Consider Example <a href="simplex-method---example.html#eq:simplex-example">(3.1)</a> again. The initial tableau is:</p>
+<p><span class="math display">\[\begin{align} 
+\begin{array}{ccccccc|c} 
+1 &amp; + &amp; 1.5 &amp; + &amp; 0 &amp; + &amp; 0 &amp; 0\\ \hline 
+1 &amp; + &amp; 2 &amp; + &amp; 1 &amp; + &amp; 0 &amp; 10 \\ 
+4 &amp; + &amp; 3 &amp; + &amp; 0 &amp; + &amp; 1 &amp; 20 
+\end{array} \\[10pt] 
+\mathcal{B} = \{3, 4\} 
+\end{align}\]</span></p>
+<ol style="list-style-type: decimal">
+<li><p>At the first pivot: <span class="math inline">\(x_1\)</span> enters and <span class="math inline">\(x_4\)</span> leaves the set of basic variables.
+For this, we first divide the row <span class="math inline">\(R_2\)</span> by 4.
+<span class="math display">\[\begin{align} 
+\begin{array}{ccccccc|c} 
+-1 &amp; + &amp; -1.5 &amp; + &amp; 0 &amp; + &amp; 0 &amp; 0\\ \hline 
+1 &amp; + &amp; 2 &amp; + &amp; 1 &amp; + &amp; 0 &amp; 10 \\ 
+1 &amp; + &amp; 0.75 &amp; + &amp; 0 &amp; + &amp; 0.25 &amp; 5 
+\end{array} \\[10pt] 
+\mathcal{B} = \{3, 4\} 
+\end{align}\]</span>
+And then do the elementary row operations <span class="math inline">\(R_0 \leftarrow R_0 + R_2\)</span> and <span class="math inline">\(R_1 \leftarrow R_1 - R_2\)</span> to get
+<span class="math display">\[\begin{align} 
+\begin{array}{ccccccc|c} 
+0 &amp; + &amp; -0.75 &amp; + &amp; 0 &amp; + &amp; 0.25 &amp; 5\\ \hline 
+0 &amp; + &amp; 1.25 &amp; + &amp; 1 &amp; + &amp; -0.25 &amp; 5 \\ 
+1 &amp; + &amp; 0.75 &amp; + &amp; 0 &amp; + &amp; 0.25 &amp; 5 
+\end{array} \\[10pt] 
+\mathcal{B} = \{1, 3\} 
+\end{align}\]</span></p></li>
+<li><p>At the second pivot: <span class="math inline">\(x_2\)</span> enters and <span class="math inline">\(x_3\)</span> leaves the set of basic variables.
+For this, we first divide the row <span class="math inline">\(R_1\)</span> by <span class="math inline">\(5/4\)</span>.
+<span class="math display">\[\begin{align} 
+\begin{array}{ccccccc|c} 
+0 &amp; + &amp; -0.75 &amp; + &amp; 0 &amp; + &amp; 0.25 &amp; 5\\ \hline 
+0 &amp; + &amp; 1 &amp; + &amp; 0.8 &amp; + &amp; -0.2 &amp; 4 \\ 
+1 &amp; + &amp; 0.75 &amp; + &amp; 0 &amp; + &amp; 0.25 &amp; 5 
+\end{array} \\[10pt] 
+\mathcal{B} = \{1, 3\} 
+\end{align}\]</span>
+And then do the elementary row operations <span class="math inline">\(R_0 \leftarrow R_0 + 0.75 R_1\)</span> and <span class="math inline">\(R_2 \leftarrow R_2 - 0.75 R_1\)</span> to get
+<span class="math display">\[\begin{align} 
+\begin{array}{ccccccc|c} 
+0 &amp; + &amp; 0 &amp; + &amp; 0.6 &amp; + &amp; 0.1 &amp; 8\\ \hline 
+0 &amp; + &amp; 1 &amp; + &amp; 0.8 &amp; + &amp; -0.2 &amp; 4 \\ 
+1 &amp; + &amp; 0 &amp; + &amp; -0.6 &amp; + &amp; 0.4 &amp; 2 
+\end{array} \\[10pt] 
+\mathcal{B} = \{1, 2\} 
+\end{align}\]</span></p></li>
+</ol>
+<p>You should compare this with the solution from Lecture <a href="simplex-method---example.html#simplex-method---example">3</a>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="complimentary-slackness-general-lp.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": "github"
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

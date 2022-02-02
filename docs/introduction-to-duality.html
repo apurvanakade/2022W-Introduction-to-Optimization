@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-28" />
+<meta name="date" content="2022-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -127,6 +127,10 @@
 <li class="chapter" data-level="11.2.2" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#equality-and-freeness"><i class="fa fa-check"></i><b>11.2.2</b> Equality and Freeness</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="12" data-path="tableau-method.html"><a href="tableau-method.html"><i class="fa fa-check"></i><b>12</b> Tableau method</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="tableau-method.html"><a href="tableau-method.html#pivoting"><i class="fa fa-check"></i><b>12.1</b> Pivoting</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -207,22 +211,22 @@ where <span class="math inline">\(\Delta \zeta\)</span> is increase in the optim
 We want the perturbed feasible set to be “close” to the original feasible set. No new vertices should be created and no existing vertices should be deleted by the perturbation.</p>
 </div>
 <p>For example, to calculate the shadow prices for <a href="introduction-to-duality.html#eq:simplex-example-2">(7.1)</a> we can solve the following linear programs.</p>
-<p><span class="math display">\[\begin{align*} 
+<p><span class="math display">\[\begin{align} 
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; 1x_1 &amp; + &amp; 1.5x_2 \\ 
 \mbox{subject to: }  &amp; 1x_1 &amp; + &amp; 2x_2 &amp; \le &amp; 10.1  \\ 
  &amp; 4x_1 &amp; + &amp; 3x_2 &amp; \le &amp; 20  \\ 
 \end{array}
  \\ 
-x_1, \: x_2 \ge 0\end{align*}\]</span></p>
-<p><span class="math display">\[\begin{align*} 
+x_1, \: x_2 \ge 0\end{align}\]</span></p>
+<p><span class="math display">\[\begin{align} 
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; 1x_1 &amp; + &amp; 1.5x_2 \\ 
 \mbox{subject to: }  &amp; 1x_1 &amp; + &amp; 2x_2 &amp; \le &amp; 10  \\ 
  &amp; 4x_1 &amp; + &amp; 3x_2 &amp; \le &amp; 20.1  \\ 
 \end{array}
  \\ 
-x_1, \: x_2 \ge 0\end{align*}\]</span></p>
+x_1, \: x_2 \ge 0\end{align}\]</span></p>
 <p>The optimal objective value of the first linear program is <span class="math inline">\(8.06\)</span> so the shadow price for the first constraint is <span class="math inline">\(\dfrac{8.06 - 8}{0.1} = 0.6\)</span>.
 The optimal objective value of the second linear program is <span class="math inline">\(8.01\)</span> so the shadow price for the first constraint is <span class="math inline">\(\dfrac{8.01 - 8}{0.1} = 0.1\)</span>.
 These values are precisely the optimal solutions to the dual linear program!

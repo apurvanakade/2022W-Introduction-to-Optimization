@@ -1,0 +1,120 @@
+# Tableau method
+
+The *tableau method* is an alternate way of bookkeeping for the simplex method. It is NOT new method. The tableau method is easier to implement *on paper* as it reduces the pivot step to [elementary row operations](https://en.wikipedia.org/wiki/Elementary_matrix#Elementary_row_operations).
+
+Given the standard linear program \@ref(eq:standard-lp) we rewrite the constraint equations in the dictionary \@ref(eq:dictionary-definition) with all the variables (including the slack ones) on one side.
+
+\begin{equation}
+  \begin{array}{cccccccccc}
+    a_{11} x_1 & + & a_{12} x_2 & + & \dots & + & a_{1n} x_n & + & x_{n+1} & = & b_1 \\
+    a_{21} x_1 & + & a_{22} x_2 & + & \dots & + & a_{1n} x_n & + & x_{n+2} & = & b_2 \\
+     &  &  &  & \vdots & & & & & &  \vdots \\
+    a_{m1} x_1 & + & a_{m2} x_2 & + & \dots & + & a_{1n} x_n & + & x_{n+m} & = & b_m \\
+  \end{array} 
+\end{equation}
+
+These equations can be rewritten using the matrix notation as 
+
+\begin{align}
+   [A \quad I_m] x = b,
+\end{align}
+where $I_m$ is the identity matrix of size $m$. We create the **initial tableau**, which is an $(n+1) \times (m+1)$ matrix, using the coefficients $A$, $b$, and $c$ as follows.
+\begin{align}
+\begin{array}{cccccccc|c}
+  -c_1 &  -c_2 & \dots &  -c_n  &  0  & 0   &  \dots &   0  & 0 \\ \hline
+  a_{11}   &  a_{12}   &   \dots   & a_{1n}    & 1   & 0    &   \dots  &  0   &  b_1 \\
+  a_{21}   &  a_{22}   &   \dots   & a_{2n}    & 0   & 1    &   \dots  &  0   &  b_2 \\
+     &     &   \vdots   &    &   &    &   &   &  \vdots \\
+  a_{m1}   & a_{m2}  & \dots  &  a_{mn} & 0   & 0 & \dots  & 1   &  b_m  \\ 
+ \end{array} \\[10pt]
+ \mathcal{B} = \{ x_{n+1}, \dots, x_{n+m} \}.
+\end{align}
+
+As we run the simplex method, the tableau gets updated. At each stage, the $j^{th}$ column corresponds to the variable $x_j$ and the $i^{th}$ row corresponds to the $i^{th}$ constraint in the current dictionary. Thus from a dictionary we can always construct a tableau using the following rules:
+
+1. The $(0, j)$ entry is the negative of the current coefficient $-c_j$.
+1. The $(0, m+1)$ entry is the current objective.
+1. The $(i, m+1)$ entry is the current $b_i$, for $i > 0$.
+1. The $(i, j)$ entry is the current $a_{ij}$.
+
+It is easy to see that the converse is also true, i.e. from a tableau one can construct a dictionary by forming an equality constraint for each row. So a tableau contains exactly the same information as a dictionary.
+
+## Pivoting
+
+We perform the pivot with $x_j$ entering and $x_i$ leaving as follows:
+
+1. Normalize the coefficient: Divide the $i^{th}$ row $R_i$ by $a_{ij}$ to make the coefficient 1.
+2. Clear the column: For every other $i'$, apply the row operation $R_{i'} \leftarrow R_{i'} - a_{i'j} R_i$.
+
+As a result of these operations, the $j^{th}$ columns becomes $e_{i}$. In the language of dictionaries, this is ensuring that $x_i$ is now a basic variable and can be written in terms of the non-basic variables.
+
+## Example {.unnumbered .unlisted}
+
+Consider Example \@ref(eq:simplex-example) again. The initial tableau is:
+
+```{r tableau-0, results = "asis"}
+t0 <- new_tableau(
+  obj_val = 0,
+  obj_coeffs = c(1, 1.5, 0, 0),
+  coefficients = matrix(c(1, 2, 1, 0, 4, 3, 0, 1), nrow = 2, byrow = TRUE),
+  constants = c(10, 20),
+  basic = c(3, 4)
+)
+
+cat(str_math(t0))
+```
+
+1. At the first pivot: $x_1$ enters and $x_4$ leaves the set of basic variables.
+For this, we first divide the row $R_2$ by 4.
+```{r tableau-1, results = "asis"}
+t1 <- new_tableau(
+  obj_val = 0,
+  obj_coeffs = c(-1, -1.5, 0, 0),
+  coefficients = matrix(c(1, 2, 1, 0, 1, 3/4, 0, 1/4), nrow = 2, byrow = TRUE),
+  constants = c(10, 5),
+  basic = c(3, 4)
+)
+
+cat(str_math(t1))
+```
+And then do the elementary row operations $R_0 \leftarrow R_0 + R_2$ and $R_1 \leftarrow R_1 - R_2$ to get 
+```{r tableau-2, results = "asis"}
+t2 <- new_tableau(
+  obj_val = 5,
+  obj_coeffs = c(0, -3/4, 0, 1/4),
+  coefficients = matrix(c(0, 5/4, 1, -1/4, 1, 3/4, 0, 1/4), nrow = 2, byrow = TRUE),
+  constants = c(5, 5),
+  basic = c(1, 3)
+)
+
+cat(str_math(t2))
+```
+
+
+1. At the second pivot: $x_2$ enters and $x_3$ leaves the set of basic variables.
+For this, we first divide the row $R_1$ by $5/4$.
+```{r tableau-3, results = "asis"}
+t3 <- new_tableau(
+  obj_val = 5,
+  obj_coeffs = c(0, -3/4, 0, 1/4),
+  coefficients = matrix(c(0, 1, 0.8, -1/5, 1, 3/4, 0, 1/4), nrow = 2, byrow = TRUE),
+  constants = c(4, 5),
+  basic = c(1, 3)
+)
+
+cat(str_math(t3))
+```
+And then do the elementary row operations $R_0 \leftarrow R_0 + 0.75 R_1$ and $R_2 \leftarrow R_2 - 0.75 R_1$ to get 
+```{r tableau-4, results = "asis"}
+t4 <- new_tableau(
+  obj_val = 8,
+  obj_coeffs = c(0, 0, 3/5, 0.1),
+  coefficients = matrix(c(0, 1, 4/5, -1/5, 1, 0, -0.6, 0.4), nrow = 2, byrow = TRUE),
+  constants = c(4, 2),
+  basic = c(1, 2)
+)
+
+cat(str_math(t4))
+```
+
+You should compare this with the solution from Lecture [3][Simplex Method - Example].

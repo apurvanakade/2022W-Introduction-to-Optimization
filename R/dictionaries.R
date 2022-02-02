@@ -34,11 +34,3 @@ str.dictionary <- function(x) {
 
   # coefficients
 }
-
-str_math <- function(math, inline = FALSE) {
-  if (inline) {
-    paste("$", str(math), "$", sep = "")
-  } else {
-    paste0("\\begin{align} \n", str(math), "\\end{align}\n")
-  }
-}

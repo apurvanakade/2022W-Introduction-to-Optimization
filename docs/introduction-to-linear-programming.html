@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-28" />
+<meta name="date" content="2022-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -127,6 +127,10 @@
 <li class="chapter" data-level="11.2.2" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#equality-and-freeness"><i class="fa fa-check"></i><b>11.2.2</b> Equality and Freeness</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="12" data-path="tableau-method.html"><a href="tableau-method.html"><i class="fa fa-check"></i><b>12</b> Tableau method</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="tableau-method.html"><a href="tableau-method.html#pivoting"><i class="fa fa-check"></i><b>12.1</b> Pivoting</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -163,10 +167,10 @@ where the symbol <span class="math inline">\(\lesseqqgtr\)</span> stands for <sp
 <p>A proposal of specific values for the decision variables is called a <strong>solution</strong>. A solution is said to be <strong>feasible</strong> if it satisfies all the constraints. A feasible solution is said to be <strong>optimal</strong> if <span class="math inline">\(\zeta\)</span> attains the optimal value at it. Thus, to solve a linear program means to <em>find an optimal solution</em> to the problem. If a problem has no feasible solutions, then the problem is called <strong>infeasible</strong>. If a problem has feasible solutions with arbitrarily large or arbitrary small objective values then the problem is called <strong>unbounded</strong>.</p>
 <div class="remark">
 <p><span id="unlabeled-div-1" class="remark"><em>Remark</em>. </span>We do not allow strict inequalities <span class="math inline">\(&lt;\)</span> or <span class="math inline">\(&gt;\)</span> in a linear program as linear functions do not always achieve maxima/minima on open sets. Consider the following simple example.</p>
-<p><span class="math display">\[\begin{align*} 
+<p><span class="math display">\[\begin{align} 
 \mbox{maximize: }&amp;&amp; 10 x_1 &amp; \\ 
  \mbox{subject to: } &amp;&amp; 10 x_1 &amp; &lt; 20 \\ 
- &amp;&amp; 5 x_1 &amp; \geq 0\end{align*}\]</span></p>
+ &amp;&amp; 5 x_1 &amp; \geq 0\end{align}\]</span></p>
 <p>On the feasible set <span class="math inline">\([0, 2)\)</span>, the function <span class="math inline">\(\zeta(x_1) = 10x_1\)</span> never attains absolute maxima.
 Changing the inequality <span class="math inline">\(&lt;\)</span> to <span class="math inline">\(\leq\)</span> gives us an optimal feasible solution <span class="math inline">\(x_1 = 2\)</span> and <span class="math inline">\(\zeta = 20\)</span>. When all the (in)equalities are either <span class="math inline">\(\le\)</span>, <span class="math inline">\(=\)</span>, or <span class="math inline">\(\ge\)</span>, the set of feasible solutions is closed. If, in addition, the LP is bounded then the set of feasible solutions is compact. On compact sets a continuous (in particular, linear) function, always attains a maxima and a minima by a generalization of the <a href="https://en.wikipedia.org/wiki/Extreme_value_theorem">extreme value theorem</a> for <a href="https://math.stackexchange.com/a/881569">higher dimensions</a>.</p>
 </div>
@@ -181,14 +185,14 @@ M1 80 20          200
 M2 25 75          200</code></pre>
 </div>
 <p>We can formulate the above problem as the following linear program.</p>
-<p><span class="math display">\[\begin{align*} 
+<p><span class="math display">\[\begin{align} 
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; 25x &amp; + &amp; 30y \\ 
 \mbox{subject to: }  &amp; 80x &amp; + &amp; 20y &amp; \le &amp; 200  \\ 
  &amp; 25x &amp; + &amp; 75y &amp; \le &amp; 200  \\ 
 \end{array}
  \\ 
-x, \: y \ge 0\end{align*}\]</span></p>
+x, \: y \ge 0\end{align}\]</span></p>
 <p>Here <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> are the units of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> produced each day. One way to attempt this problem is to assume that we’ll use both the machines as much as possible i.e. that the two inequalities are in fact equalities. We can see then that the common solution to the two is <span class="math inline">\((x_1, x_2) = (2, 2)\)</span>. For this solution the total profit is <span class="math inline">\(110\)</span> units.</p>
 <div class="figure"><span style="display:block;" id="fig:fig-resource-allocation"></span>
 <img src="Introduction-to-Optimization_files/figure-html/fig-resource-allocation-1.png" alt="The feasible region is the quadrilateral formed by the overlap of the constraints." width="672" />

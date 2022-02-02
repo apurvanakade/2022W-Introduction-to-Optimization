@@ -70,3 +70,5 @@ complimentary-slackness
 dual-of-general-linear-programs
 lower-bound-and-negativity
 equality-and-freeness
+tableau-method
+pivoting

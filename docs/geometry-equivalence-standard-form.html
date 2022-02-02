@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-01-28" />
+<meta name="date" content="2022-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -127,6 +127,10 @@
 <li class="chapter" data-level="11.2.2" data-path="complimentary-slackness-general-lp.html"><a href="complimentary-slackness-general-lp.html#equality-and-freeness"><i class="fa fa-check"></i><b>11.2.2</b> Equality and Freeness</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="12" data-path="tableau-method.html"><a href="tableau-method.html"><i class="fa fa-check"></i><b>12</b> Tableau method</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="tableau-method.html"><a href="tableau-method.html#pivoting"><i class="fa fa-check"></i><b>12.1</b> Pivoting</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -164,7 +168,7 @@ Figure 2.1: The feasible region lies below the line <span class="math inline">\(
 <p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 2.1  </strong></span>Find an objective function <span class="math inline">\(\zeta\)</span> for which the point <span class="math inline">\((2, 2)\)</span> is no longer an optimal solution.</p>
 </div>
 <p>We can use the same reasoning to solve Exercise <a href="introduction-to-linear-programming.html#exr:resource-allocation-problem-extra">1.2</a>, which is modelled by the following linear program.</p>
-<p><span class="math display">\[\begin{align*} 
+<p><span class="math display">\[\begin{align} 
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; 25x &amp; + &amp; 30y \\ 
 \mbox{subject to: }  &amp; 80x &amp; + &amp; 20y &amp; \le &amp; 200  \\ 
@@ -172,7 +176,7 @@ Figure 2.1: The feasible region lies below the line <span class="math inline">\(
  &amp; 1x &amp; + &amp; 1y &amp; \le &amp; 3  \\ 
 \end{array}
  \\ 
-x, \: y \ge 0\end{align*}\]</span></p>
+x, \: y \ge 0\end{align}\]</span></p>
 <p>The line of the form <a href="geometry-equivalence-standard-form.html#eq:objective-function">(2.1)</a> for which the entire feasible region lies below it and which intersects the feasible region is <span class="math inline">\(87.5 = 25x + 30y\)</span> and it passes through <span class="math inline">\((0.5, 2.5)\)</span>. Here, instead of maximizing the time spend on each machine, we’re maximizing the amount of resources produced and the time spent on the second machine <span class="math inline">\(M_2\)</span>. As a result, our profit dropped from <span class="math inline">\(110\)</span> to <span class="math inline">\(87.5\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:fig-resource-allocation-extra-line"></span>
 <img src="Introduction-to-Optimization_files/figure-html/fig-resource-allocation-extra-line-1.png" alt="The feasible region lies below the line $87.5 = 25x + 30y$ and intersects it at $(0.5, 2.5)$." width="672" />
@@ -235,21 +239,23 @@ Conclude that if <span class="math inline">\(P\)</span> and <span class="math in
 </div>
 <div class="example">
 <p><span id="exm:unlabeled-div-5" class="example"><strong>Example 2.1  </strong></span>The following linear programs are all equivalent to the linear program in Example <a href="introduction-to-linear-programming.html#resource-allocation-problem">1.1</a>.</p>
-<p><span class="math display">\[\begin{align*} 
+<p><span class="math display">\[\begin{align} 
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; 250x &amp; + &amp; 300y \\ 
 \mbox{subject to: }  &amp; 80x &amp; + &amp; 20y &amp; \le &amp; 20  \\ 
  &amp; 25x &amp; + &amp; 75y &amp; \le &amp; 20  \\ 
 \end{array}
  \\ 
-x, \: y \ge 0\end{align*}\]</span><span class="math display">\[\begin{align*} 
+x, \: y \ge 0\end{align}\]</span>
+<span class="math display">\[\begin{align} 
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; 25x &amp; + &amp; 30y \\ 
 \mbox{subject to: }  &amp; 800x &amp; + &amp; 200y &amp; \le &amp; 2000  \\ 
  &amp; 25x &amp; + &amp; 75y &amp; \le &amp; 200  \\ 
 \end{array}
  \\ 
-x, \: y \ge 0\end{align*}\]</span><span class="math display">\[\begin{align*} 
+x, \: y \ge 0\end{align}\]</span>
+<span class="math display">\[\begin{align} 
 \begin{array}{rrrrrrrr}
 \mbox{maximize: } &amp; 25x &amp; + &amp; 30y \\ 
 \mbox{subject to: }  &amp; 80x &amp; + &amp; 20y &amp; \le &amp; 200  \\ 
@@ -257,7 +263,7 @@ x, \: y \ge 0\end{align*}\]</span><span class="math display">\[\begin{align*}
  &amp; 2x &amp; + &amp; 2y &amp; \le &amp; 200  \\ 
 \end{array}
  \\ 
-x, \: y \ge 0\end{align*}\]</span></p>
+x, \: y \ge 0\end{align}\]</span></p>
 </div>
 <div class="example">
 <p><span id="exm:unlabeled-div-6" class="example"><strong>Example 2.2  </strong></span>The following two linear programs are equivalent to each other
