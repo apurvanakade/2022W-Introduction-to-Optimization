@@ -24,7 +24,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-02-02" />
+<meta name="date" content="2022-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,7 +203,7 @@ One can check that the resulting dual problem is equivalent to dualizing <span c
 <p>We “fix” the equality constrains by replacing them with two inequalities: <span class="math inline">\(a_{i1} x_1 + \dots + a_{in} x_n \leq b_i,\)</span> and <span class="math inline">\(-a_{i1} x_1 - \dots - a_{in} x_n \leq b_i.\)</span>
 One can check that the resulting dual problem is equivalent to dualizing <span class="math inline">\(a_{i1} x_1 + \dots + a_{in} x_n \geq b_i\)</span> but requiring the dual variable <span class="math inline">\(y_i\)</span> to be free.</p>
 <p>Thus the dual of the second type of error is the error of fourth type. Because the dual of the dual is the primal, the converse of this statement is also true.</p>
-<p>To summarize, we can think that the variables in the dual correspond to the constraints in the primal and the variables in the primal correspond to the constraints in the dual. The precise correspondence is as follows.</p>
+<p>To summarize, we can think of the variables in the dual as corresponding to the constraints in the primal and the variables in the primal correspond to the constraints in the dual. The precise correspondence is as follows.</p>
 <table>
 <thead>
 <tr class="header">
@@ -214,11 +214,11 @@ One can check that the resulting dual problem is equivalent to dualizing <span c
 <tbody>
 <tr class="odd">
 <td>Non-negative variable</td>
-<td>Upper bound constraint</td>
+<td>Lower bound constraint</td>
 </tr>
 <tr class="even">
 <td>Non-positive variable</td>
-<td>Lower bound constraint</td>
+<td>Upper bound constraint</td>
 </tr>
 <tr class="odd">
 <td>Free variable</td>
@@ -226,11 +226,11 @@ One can check that the resulting dual problem is equivalent to dualizing <span c
 </tr>
 <tr class="even">
 <td>Upper bound constraint</td>
-<td>Non-negative variable</td>
+<td>Non-positive variable</td>
 </tr>
 <tr class="odd">
 <td>Lower bound constraint</td>
-<td>Non-positive variable</td>
+<td>Non-negative variable</td>
 </tr>
 <tr class="even">
 <td>Equality constraint</td>

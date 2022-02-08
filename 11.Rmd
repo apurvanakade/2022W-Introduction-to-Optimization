@@ -59,13 +59,13 @@ One can check that the resulting dual problem is equivalent to dualizing $a_{i1}
 
 Thus the dual of the second type of error is the error of fourth type. Because the dual of the dual is the primal, the converse of this statement is also true.
 
-To summarize, we can think that the variables in the dual correspond to the constraints in the primal and the variables in the primal correspond to the constraints in the dual. The precise correspondence is as follows.
+To summarize, we can think of the variables in the dual as corresponding to the constraints in the primal and the variables in the primal correspond to the constraints in the dual. The precise correspondence is as follows.
 
 | Primal | Dual | 
 | - | - | 
-| Non-negative variable | Upper bound constraint |
-| Non-positive variable | Lower bound constraint |
+| Non-negative variable | Lower bound constraint |
+| Non-positive variable | Upper bound constraint |
 | Free variable | Equality constraint |
-| Upper bound constraint | Non-negative variable |
-| Lower bound constraint | Non-positive variable |
+| Upper bound constraint | Non-positive variable |
+| Lower bound constraint | Non-negative variable |
 | Equality constraint | Free variable |
